@@ -1,0 +1,98 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+html, body {
+	font-size:12px; 
+	line-height:18px;
+	height: 100%;
+ }
+body {background: #f9f9f9 url(assets/img/page-bg-1.jpg);}
+
+.main-container {
+	height:auto; 
+	height: 100%;
+    min-height: 100%;
+}
+
+  
+  /***** Titles and Headings *****/
+  h1, h2, h3, h4 , h5, h6 {
+      font-family: "Oswald", sans-serif; 
+      font-weight: normal;
+      text-transform:uppercase; 
+  }	
+  h1, h2, h3, h4, h5, #frigolo {text-shadow: 1px 1px 0 #fdfdfd, 2px 2px 0 rgba(81, 81, 81, 0.5), 0 0 1px #fdfdfd;}
+  h1.title-bg, h2.title-bg, h3.title-bg, h4.title-bg , h5.title-bg, h6.title-bg {
+      background:#f8f8f8; 
+      padding:10px 5px;
+      margin: 0px 0px 5px 0px;
+      //border-bottom: 1px dotted #a9a9a9;
+      border-top: 1px dotted #a9a9a9;
+  }
+  h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {color:#7f7f7f;}
+  h2 small {font-size: 30px;}
+  h5 small {font-size: 14px;}
+  h6 small {font-size: 12px;}
+  
+  h5.title-bg button {
+      //float: right; 
+      text-transform: none;
+      margin-top:5px;
+  }
+  
+  /***** Links *****/
+  a, a:hover { color:#d8450b; }
+  
+  /***** Misc *****/
+  i {margin-right: 3px;}
+  p {margin-bottom: 20px;}
+  blockquote {
+      font-size:16px; 
+      line-height:24px; 
+      font-family:Georgia, "Times New Roman", Times, serif; 
+      font-style:italic;
+      border-left: 5px solid #999;
+  }
+  blockquote.pull-right {border-right: 5px solid #999;}
+  
+
+  .color-bg { background:#d8450b; }
+  .color { color:#d8450b; }
+  .color-bar-1, .color-bar-2 { width:100% }
+  .color-bar-1 { background:#414141; height:5px; }
+  .color-bar-2 { height:3px; }
+  
+  img.petiteThumb:hover + div.photoAliment {
+    visibility: visible;
+}
+
+img.petiteThumb {
+    height: 40px;
+    width: 40px;
+    position: relative;
+
+}
+div.photoAliment {
+    visibility: hidden;
+    position: absolute;
+    left: 80px;
+    top: 100px;
+}
+
+.imagePhoto{
+    display: block;
+    width: 100px;
+}
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+
+
+
+
+@media print {
+    app-root > * { display: none; }
+    app-root app-print-Recette { display: block; }
+}

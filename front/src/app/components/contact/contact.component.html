@@ -1,0 +1,20 @@
+<div id="formulaireContact">
+    <h1>Formulaire de contact</h1>
+    
+    <p>N'hesitez pas, vous pouvez m'envoyer tout ce qui vous passe par la tête.<br>
+    Me signaler un bug, me donner une nouvelle recette, etc.</p>
+
+<h3 class="h3Contact">C'est à vous</h3>
+<form class="contact" [formGroup]="formContact">
+      <input type="text" class="nom form-control" formControlName="name" name="name" id="name" placeholder="Pseudo ou nom" size="40">
+      <input type="email" class="form-control" formControlName="email" name="email" id="email" placeholder="Email">
+      <textarea class="text form-control" formControlName="text" name="text" id="text" placeholder="Message"></textarea>
+      <div>
+            <div *ngIf="formErrors.name" class="help-block">{{formErrors.name}}</div>
+            <div *ngIf="formErrors.email" class="help-block">{{formErrors.email}}</div>
+            <div *ngIf="formErrors.text" class="help-block">{{formErrors.text}}</div>
+            &nbsp;
+      </div>
+      <button class="btn btn-outline-dark" type="button" (click)="envoie()">Envoyer</button>
+</form>
+</div>

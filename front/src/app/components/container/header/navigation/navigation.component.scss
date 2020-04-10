@@ -1,0 +1,106 @@
+
+nav {
+	position: absolute;
+	right:10px;
+}
+
+nav > ul {
+	margin-top: 9px;
+	position: relative;
+
+}
+
+nav > ul > li{
+	background:#f8f8f8;
+	border-bottom: 1px dotted #a9a9a9;
+	border-top: 1px dotted #a9a9a9;	 
+  list-style: none;
+	float:left; 
+}
+
+nav > ul > li > a { 
+	font-family: "Oswald", sans-serif; 
+	font-weight: normal;
+	text-shadow: none; 
+	text-transform:uppercase; 
+	font-size:12px; 
+	padding: 10px;
+}
+
+nav > ul > .active > a,
+nav > ul > .active > a:hover,
+nav > ul > .active > a:focus {
+	color:#FFF; 
+	background-color:#d8450b;
+	-webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;  
+}
+
+nav > ul li.dropdown.open > .dropdown-toggle,
+nav > ul li.dropdown.active > .dropdown-toggle,
+nav > ul li.dropdown.open.active > .dropdown-toggle {
+  	color:#FFF; 
+    background-color:#d8450b;
+}
+
+.dropdown-menu{
+	display: block;
+	font-family: "Oswald", sans-serif; 
+	font-weight: normal;
+	text-transform:uppercase; 
+	font-size:10px;
+	padding: 8px 0;
+	margin: 8px 0;
+	background-color: #383838;
+	border: none;
+	*border-right-width: none;
+	*border-bottom-width: none;
+	-webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
+	-webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+	-webkit-background-clip: none;
+     -moz-background-clip: none;
+          background-clip: none;
+}
+
+nav > ul > li > .dropdown-menu:before {
+  border-right: 0px;
+  border-bottom: 0px;
+  border-left: 0px;
+  border-bottom-color: none;
+}
+
+.dropdown-menu a {
+	color: #ababab; 
+	border-bottom:1px solid #aaa9a9;
+	padding: 0;
+	margin:0 10px;
+	line-height: 20px;
+	width: 100%;
+}
+
+.dropdown-menu li > a:hover,
+.dropdown-menu li > a:focus,
+.dropdown-submenu:hover > a {
+  color: #f9f9f9;
+  text-decoration: none;
+  background-color: #383838;
+  background-image: none;
+  filter: none;
+}
+
+nav > ul li.dropdown.open > .dropdown-toggle .caret,
+nav > ul li.dropdown.active > .dropdown-toggle .caret,
+nav > ul li.dropdown.open.active > .dropdown-toggle .caret {
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+}
+
+li.dropdown > a {
+  color: #383838;
+}
+

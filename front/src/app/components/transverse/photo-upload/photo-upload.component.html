@@ -1,0 +1,17 @@
+<div class="ml-4">
+    <div class="imagePhoto ml-4">
+        <img [src]="photoThumbPath" />
+        <div class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                attr.aria-valuenow="{{progress.percentage}}" aria-valuemin="0" aria-valuemax="100"
+                [ngStyle]="{width:progress.percentage+'%'}">
+                {{progress.percentage}}%
+            </div>
+        </div>
+    </div>
+    <input type="file" (change)="selectPhoto($event)">
+    <br><br>
+    <button class="btn btn-warning" [disabled]="!selectedFiles" (click)="uploadPhoto()" type="button">Enregistrer la photo</button>
+    &nbsp;
+    <button class="btn btn-danger" *ngIf="!defaultPhoto" (click)="deletePhoto()" type="button">Supprimer la photo</button>
+</div>

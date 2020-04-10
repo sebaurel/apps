@@ -1,0 +1,105 @@
+<h1>{{nbRecette}} Recettes</h1>
+<div class="col-md-3 col-sm-12 sidebar float-md-right mx-auto">
+  <!--<h5 class="title-bg">Recherche</h5>
+    
+  <input formControlName="search" placeholder="Search by name">-->
+
+  <!--Categories-->
+  <h5 class="title-bg">Categories</h5>
+  <ng-select [items]="categories$ | async" [(ngModel)]="categoriesSelected" bindLabel="nom" bindValue="id" placeholder="Choisir des catégories" [multiple]="true" [hideSelected]="true" name="categorieSelecteur" (change)="categorieChanged()"> </ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
+
+  <!--Frigo-->
+  <h5 class="title-bg">
+    <label class="switch" >
+      <input type="checkbox" [ngModel]="utiliserFrigo" (click)="FrigoSwitch()">
+      <span class="slider round"></span>
+    </label>
+    Mon frigo <app-modal-frigo (change)="FrigoChanged($event)" (close)="FrigoModalClose($event)" [(alimentsSelectedModal)]="alimentsSelected" [loggedIn]="loggedIn" [aliments]="aliments"></app-modal-frigo>
+  </h5>
+  <div id="frigo" [className]="frigoActifOk">
+    <table style="width:100%">
+              
+      <tr *ngFor="let alimentSelected of alimentsSelected">
+        <td *ngIf="alimentSelected.photo != null else elseBlock"><img class="petiteThumb" [src]="pathUpload+alimentSelected.photo.id+'-thumb.png'"/><div class="photoAliment"><img [src]="pathUpload+alimentSelected.photo.nomThumb"/></div></td>
+        <ng-template #elseBlock ><td><img [src]="photoThumbPathFrigo" class="petiteThumb"/></td></ng-template>
+        <td>{{alimentSelected.nom}}</td>
+        <td><button class="btn btn-outline-dark font-weight-medium" (click)="spliceAliment(alimentSelected)" type="button">-</button></td>
+      </tr>
+    </table> 
+    <!--<div (click)="seulementLesAlimentsChanged()">
+      <input type="checkbox" id="seulementLesAliments" name="seulementLesAliments" [(ngModel)]="seulementLesAliments"> 
+      <label for="seulementLesAliments">Cuisiner seulement ces aliments ?</label>
+    </div>-->
+    
+  </div>
+  <!--<div>
+    Recettes par pages<br>
+    <a href="javascript:void(0);" (click)="onPageSizeChanged('5')">5</a>,
+    <a href="javascript:void(0);" (click)="onPageSizeChanged('10')">10</a>,
+    <a href="javascript:void(0);" (click)="onPageSizeChanged('25')">25</a>,
+    <a href="javascript:void(0);" (click)="onPageSizeChanged('50')">50</a>,
+    <a href="javascript:void(0);" (click)="onPageSizeChanged('100')">100</a>
+  </div>-->
+</div>
+
+<div class="container main-container-recette">
+  <div class="row">
+
+    <div class="col-md-11 col-sm-12 mx-auto">
+      <app-spinner [isLoading]="isLoading"></app-spinner>
+      <div *ngIf="(pages | async)?.content == 0">Pas de recette, il est temps de faire les courses</div>
+      <div *ngFor="let recette of (pages | async)?.content" [ngClass]="row" >
+        <div class="offset-md-1 col-md-10 blog">
+
+          <article>
+            <div class="row">
+              <div class="col-md-2 col-sm-12 blog-style-2">
+                <h4 class="title-categorie d-lg-inline-block">{{recette.categorie.nom}}</h4>
+                <ul class="post-data">
+                  <li>
+                    <div *ngIf="recette.utilisateur.photo != null else pasDePhotoAuteur" class="float-left mr-3">
+                      <img [src]="pathUpload+recette.utilisateur.photo.id+'-thumb.png'" alt="Photo de l'auteur" class="petiteThumb" />
+                    </div>
+                    <ng-template #pasDePhotoAuteur><div class="float-left mr-3">
+                      <img [src]="pathUpload+'/default-utilisateur-thumb.png'" alt="Pas de photo" class="petiteThumb" /></div>
+                    </ng-template>
+                    <h6><fa name="user"></fa> {{recette.utilisateur.pseudo}}</h6><a href="#"></a>
+                  </li>
+                  <li>
+                    <button *ngIf="recette.utilisateur.email == currentUserMailEditRecette || admin" routerLink="/recette/edit/{{recette.id}}"><fa-icon [icon]="faEdit"></fa-icon>&nbsp;<span class="d-none d-md-none d-lg-inline-block">edit.&nbsp;&nbsp;</span></button>
+                    <button *ngIf="loggedIn" (click)="addDeleteFavori(recette)" [className]="recette.favori" ><fa-icon [icon]="faHeart"></fa-icon>&nbsp;<span class="d-none d-md-none d-lg-inline-block">favori</span></button>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-10">
+                <div routerLink="/recette/{{recette.id}}">
+                  <div *ngIf="recette.photo != null else pasDePhotoRecette" class="float-left mr-3 mb-3">
+                    <img [src]="pathUpload+recette.photo.id+'-thumb.png'" alt="Photo principale de la recette" />
+                  </div>
+                  <ng-template #pasDePhotoRecette><div class="float-left mr-3 mb-3">
+                    <img [src]="pathUpload+'/default-thumb.png'" alt="Pas de photo" /></div>
+                  </ng-template>
+                  <h3 class="title-bg">
+                    {{ recette.titre }}
+                    <ng-container *ngIf="!recette.publier">
+                        <span style="color: red;">(Brouillon)</span>
+                    </ng-container>
+                  </h3>
+                </div>
+                <div *ngFor="let ingredient of recette.ingredients" class="float-left p-0 ml-1 mb-1">
+                  <app-modal-aliment-view [aliment]="ingredient.aliment"></app-modal-aliment-view>
+                </div>
+                <div class="clearfix"></div>
+                <p [innerText]="recette.descriptif" routerLink="/recette/{{recette.id}}"></p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<div class="col-12 mx-auto" align="center">
+  <app-paginator [pages]="pages | async" (pageChange)="onPageChanged($event)"></app-paginator>
+</div>

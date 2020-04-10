@@ -1,0 +1,46 @@
+<ng-template #content let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title">Ajouter des étapes</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <form [formGroup]="formEtape">
+        <label for="file">Photo de l'etape</label>
+        <div class="row">
+          <div id="photoEtape">
+            <app-photo-upload [(photo)]="photo" [(photoThumbPath)]="photoThumbPath" [width]="200" [height]="200" [progress]="progress" (photoUpload)="photo=$event"></app-photo-upload>
+          </div>
+          <div class="col-12 mx-auto">
+            <div class="form-group">
+              <label for="titreEtape">Titre</label>
+              <input type="text" class="form-control" name="titreEtape" id="titreEtape" formControlName="titreEtape"  maxlength="40" />
+              <div *ngIf="submittedEtape && formEtape.controls.titreEtape.errors">
+                <div *ngIf="formEtape.controls.titreEtape.errors.required">Merci de renseigner un titre</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descriptifEtape">Description</label>
+              <textarea rows="5" cols="50" class="form-control pre-wrap" name="descriptifEtape" id="descriptifEtape" formControlName="descriptifEtape"></textarea>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-6 col-md-11 mx-auto">
+      <button class="btn btn-outline-dark" (click)="addEtape(); c()">
+        <span *ngIf="editEtape else elseBlock">Modifier l'étape</span>
+        <ng-template #elseBlock>Enregistrer l'étape</ng-template>
+      </button>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c()">Fermer</button>
+    </div>
+  </div>
+</ng-template>
+<button class="btn btn-outline-dark mt-3 mb-3" (click)="open(content)">
+  <span *ngIf="editEtape else elseBlock">Modifier</span>
+  <ng-template #elseBlock>Ajouter une étape</ng-template>
+</button>

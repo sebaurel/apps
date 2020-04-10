@@ -1,0 +1,26 @@
+<button class="btn btn-outline-dark" (click)="open(content)">{{aliment.nom}}</button>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">{{aliment.nom}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="container-scroller background-picture">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+          <div class="content-wrapper d-flex  auth login-full-bg">
+            <div class="col-12 mx-auto align-items-center">
+              <img [src]="photoThumbPath"/>
+              <div class="auth-form-dark text-left p-5">
+                <p >{{aliment.descriptif}}</p>
+              </div>   
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

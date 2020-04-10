@@ -1,0 +1,21 @@
+
+.sidebar input{margin-right: 5px;}
+.sidebar h5 {margin-top: 40px;}
+.sidebar ul.post-category-list,
+.sidebar .tab-content .tab-pane ul {margin:0px;}
+.sidebar ul.post-category-list li,
+.sidebar .tab-content .tab-pane ul li {
+	list-style: none; 
+	border-bottom: 1px dashed #a9a9a9;
+	padding:10px 5px;
+	float: left;
+}
+.sidebar ul.post-category-list li a{
+	font-family: "Oswald", sans-serif; 
+	font-weight: normal;
+	text-transform:uppercase; 
+}
+.sidebar ul.post-category-list li:first-child,
+.sidebar ul.post-category-list li i {padding-right: 5px; background-position: 0 -95px;}
+.sidebar .tab-content .tab-pane ul li i {padding-right: 5px;}
+

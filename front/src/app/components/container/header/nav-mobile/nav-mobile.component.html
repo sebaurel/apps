@@ -1,0 +1,5 @@
+<div class="fixed-top burger" (click)="closeNavigationMobile()" [hidden]="!activateMenu"><i class="fa fa-angle-double-left" style="font-size: 20px"></i></div> 
+<div class="fixed-top burger" (click)="openNavigationMobile()" [hidden]="activateMenu"><i class="fa fa-bars" style="font-size: 20px"></i></div>
+<div id="navigationMobile" class="fixed-top pt-5" [class.navigationMobileActivated]="activateMenu" [class.navigationMobileDesactivated]="!activateMenu" >
+    <app-navigation [loggedIn]="loggedIn"></app-navigation>
+</div>

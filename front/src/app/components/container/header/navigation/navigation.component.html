@@ -1,0 +1,37 @@
+    
+  <nav>
+    <ul>
+        <li [className]="home" on-mouseover="activate('home')" on-mouseleave="deActivate('home')">
+            <a class="dropdown" routerLink="/home">Accueil</a>
+        </li>
+        <li *ngIf="loggedIn else recetteBlock" [className]="ongletRecettes" on-mouseover="activate('recettes')" on-mouseleave="deActivate('recettes')">
+            <a class="dropdown-toggle" routerLink="/recettes">Recettes</a>
+            <ul class="dropdown-menu" [hidden]="!menuRecettes">
+                <li><a routerLink="/recette/new">Déposer</a></li>
+            </ul>
+        </li>
+        <ng-template #recetteBlock>
+            <li  [className]="ongletRecettes" on-mouseover="activate('recettes')" on-mouseleave="deActivate('recettes')">
+                <a class="dropdown" routerLink="/recettes">Recettes</a>
+            </li>
+        </ng-template>
+        <li [className]="contact" on-mouseover="activate('contact')" on-mouseleave="deActivate('contact')">
+            <a class="dropdown" routerLink="/contact">Contact</a>
+        </li>
+        <li *ngIf="loggedIn else loginBlock" [className]="ongletCompte" on-mouseover="activate('compte')" on-mouseleave="deActivate('compte')">
+            <a class="dropdown-toggle" routerLink="/compte"><fa-icon [icon]="faUser"></fa-icon>&nbsp;Compte</a>
+            <ul class="dropdown-menu" [hidden]="!menuCompte">
+                <li *ngIf="loggedIn"><a routerLink="/mesrecettes">Mes recettes</a></li>
+                <li *ngIf="loggedIn"><a routerLink="/mesfavoris">Mes favoris</a></li>
+                <li *ngIf="admin"><a routerLink="/recette/aliment">Aliments</a></li>
+                <li><a href="#" (click)="logOut()">Déconnexion</a></li>
+            </ul>
+        </li>
+        <ng-template #loginBlock>
+            <li [className]="ongletCompte" on-mouseover="activate('compte')" on-mouseleave="deActivate('compte')">
+                <a routerLink="/login" class="dropdown" >&nbsp;connexion</a>
+            </li>
+        </ng-template>
+    </ul>
+  </nav>
+

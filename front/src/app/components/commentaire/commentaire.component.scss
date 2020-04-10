@@ -1,0 +1,38 @@
+/*** Comments ***/
+.comments ul {margin:0px;}
+.comments ul li {
+	list-style: none;
+	padding: 10px;
+	background: #f8f8f8;
+	margin-bottom: 10px;
+	border-bottom: 1px dotted #a9a9a9;
+	//border-top: 1px dotted #a9a9a9;
+}
+.comments ul li ul {margin-left:40px; padding-top: 20px;}
+.comments ul li ul li {
+	border-top: 1px dotted #a9a9a9;
+	border-bottom: none;
+	padding: 20px 20px;
+	margin-bottom:0px;
+}
+.comments ul li ul li:last-child {padding-bottom: 0px;}
+
+.comments ul li img {margin:0px 10px 10px 0px;}
+.comment-name {
+	font-family: "Oswald", sans-serif; 
+	font-weight: normal;
+	text-transform:uppercase; 
+}
+.comment-date {
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-style: italic;
+	clear: both;
+}
+.comment-content { clear:both; padding-top:10px; }
+.comment-form-container input,
+#contact-form input {margin-bottom: 12px;}
+.comment-form-container textarea,
+#contact-form textarea {height: 150px;}
+.comment-form-container .btn,
+#contact-form .btn {margin-top: 12px;}
+

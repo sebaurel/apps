@@ -1,0 +1,8 @@
+
+<div *ngIf="pages">
+  <button (click)="pageChange.emit(pages.number-1)" [hidden]="pages.first">&lsaquo;</button>
+  <span>
+    {{pages.number + 1}} sur {{ pages.totalPages }} page<span *ngIf=" pages.totalPages > 1">s</span>
+  </span>
+  <button (click)="pageChange.emit(pages.number+1)" [hidden]="pages.last">&rsaquo;</button>
+</div>

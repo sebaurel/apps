@@ -1,0 +1,27 @@
+.header, .header-space, .footer, .footer-space { height: 100px;}
+.header { position: fixed; top: 0; }
+.footer { position: fixed; bottom: 0; }
+.content {height: 80%;}
+.titre {font-size: xx-large;}
+.ingredients{font-size: large;}
+table {margin: 0px; padding: 0px;}
+.popular-posts{ margin: 0px; font-size: large;}
+.popular-posts li {
+	list-style: none; 
+	margin-bottom: 20px;
+	padding-left: 20px;
+	clear: both;
+	display: block;
+	//min-height: 103px;
+	border-top: 1px dotted grey;
+	margin-bottom: 5px;
+	padding-top: 2px;
+	background-color: #ebebeb;}
+.popular-posts li em {font-family:Georgia, "Times New Roman", Times, serif;}
+
+
+@media screen {
+  :host {
+    display: none;
+  }
+}

@@ -1,0 +1,29 @@
+div#formulaireContact {
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+div#formulaireContact h1 {
+    margin-bottom: 20px;
+}
+
+div#formulaireContact p{
+    text-align: left;
+}
+
+input.nom {
+    width: 50% !important;
+    size: 40;
+}
+
+h3.h3Contact, form.contact{
+    text-align: left;
+}
+
+h3.h3Contact {
+    margin-top: 50px;
+}
+
+form.contact {
+    margin-bottom: 100px;
+}

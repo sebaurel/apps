@@ -1,0 +1,34 @@
+
+<div class="container-scroller background-picture">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth login-full-bg">
+        <div class="row w-100">
+          <div class="col-lg-6 mx-auto">
+            <div class="auth-form-dark text-left p-5">
+                <h2>Login</h2>
+                <form name="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+                    <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+                  <span id="reauth-email" class="reauth-email"></span>
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+                    <label for="email">Email</label>
+                    <input formControlName="email" type="text" class="form-control" id="email" name="email" required />
+                    <div *ngIf="f.submitted && !email.valid" class="help-block">Un email valide est requis !</div>
+                  </div>
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                    <label for="password">Mot de passe</label>
+                    <input formControlName="password" type="password" class="form-control" id="password" name="password" required />
+                    <div *ngIf="f.submitted && !password.valid" class="help-block">Mot de passe requis !</div>
+                  </div>
+                  <div class="mt-5">
+                    <button class="btn btn-lg btn-warning btn-block btn-signin font-weight-medium" type="submit">Connexion</button>
+                  </div>
+                </form>
+                <div class="mt-3 text-center" style="margin-top:15px">
+                  <a routerLink="/register" class="auth-link">Créér un nouveau compte</a>
+                </div>    
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

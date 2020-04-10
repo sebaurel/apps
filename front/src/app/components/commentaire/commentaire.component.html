@@ -1,0 +1,26 @@
+<section class="comments">
+    <div class="col-5">
+        <h4><span [innerText]="commentaires.length"></span>&nbsp;commentaires</h4>
+
+        <app-modal-commentaire [(commentaires)]="commentaires" [idUtilisateur]="idUtilisateur" [idRecette]="idRecette"></app-modal-commentaire>
+
+    </div>
+    <ul>
+        <li *ngFor="let commentaire of commentaires">
+            <div *ngIf="commentaire.redacteur.idPhoto else pasDePhoto" class="float-left">
+                <img [src]="pathUpload+commentaire.redacteur.idPhoto+'.png'" alt="Photo" width="50px"/>
+            </div>
+            <ng-template #pasDePhoto>
+                <div class="float-left">
+                    <img [src]="pathUpload+'/avatar.png'" alt="Pas de photo" width="50px"/>
+                </div>
+            </ng-template>
+            <span class="comment-name">{{commentaire.redacteur.pseudo}}&nbsp;</span>
+            <span class="comment-date">{{commentaire.date | date :'longDate'}}</span>
+            <span class="comment-content">
+                <h5>{{commentaire.title}}</h5>
+                <p>{{commentaire.body}}</p>
+            </span>
+        </li>
+    </ul>
+</section>
