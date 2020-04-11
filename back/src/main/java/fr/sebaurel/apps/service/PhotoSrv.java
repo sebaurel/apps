@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +25,11 @@ import fr.sebaurel.apps.repository.PhotoRepo;
 @Service
 public class PhotoSrv {
 	private final Path rootLocation = Paths.get("/home/sebapps/images/");
+	
+	
+	/*@Value("${photosPath}")
+    private String photosPath;
+	//private Path rootLocation = Paths.get(photosPath);*/
 
 	@Autowired
 	PhotoRepo photoRepo;

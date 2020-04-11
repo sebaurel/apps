@@ -50,7 +50,6 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
         return new BCryptPasswordEncoder();
     }
 
-	
     @Override
     protected void configure(HttpSecurity https) throws Exception {
 
