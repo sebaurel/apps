@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Categorie } from 'src/app/model/categorie.model';
-import { Observable, Subject } from 'rxjs';
-import { Aliment } from 'src/app/model/aliment.model';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { faEdit, faHeart } from '@fortawesome/free-solid-svg-icons';
+
+
+import { environment } from "../../../../environments/environment";
 import { EnumService } from 'src/app/services/enum.service';
+import { Categorie } from 'src/app/model/categorie.model';
+import { Aliment } from 'src/app/model/aliment.model';
 import { AlimentService } from 'src/app/services/aliment.service';
-import { PageableService } from 'src/app/services/pageable.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,81 +15,69 @@ import { PageableService } from 'src/app/services/pageable.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  filtreSelecteds: number[] = [];
-  categories$: Observable<Categorie>;
-  loggedIn: boolean;
+  faEdit = faEdit;
+  faHeart = faHeart;
+  pathUpload: string = environment.PATH_UPLOAD;
+  photoPath: string = environment.PATH_UPLOAD + "default.png";
+  @Input() loggedIn: boolean;
 
-  isLoading: boolean = false;
-  pageUrl = new Subject<string>();
-  pageSize: string = "5";
+  @Input() categoriesSelected: number[];
+  @Output() categoriesSelectedChange: EventEmitter<number[]> = new EventEmitter<number[]>()
+
+  categories$: Observable<Categorie>;// on recupere toutes les categories en base
 
   alimentsSelected : Aliment[] = new Array<Aliment>();
-  aliments: Aliment[] = new Array<Aliment>(); // on recupere tous les aliments en base
-  alimentsId: number[] = [];
-  seulementLesAliments: boolean = false;
+  aliments: Aliment[] = []; // on recupere tout les aliments en base trier
+  @Input() alimentsId: number[];
+  @Output() alimentsIdChange: EventEmitter<number[]> = new EventEmitter<number[]>()
+  @Input() seulementLesAliments: boolean = false;
+  @Output() seulementLesAlimentsChange:  EventEmitter<boolean> = new EventEmitter<boolean>();
   utiliserFrigo: boolean = false;
   frigoActifOk: string = "frigoNonActif";
   photoThumbPathFrigo: String = environment.PATH_UPLOAD + "default-aliment.png";
 
+  
   constructor(
-    private categorieService: EnumService,
     private alimentService: AlimentService,
-    private pageableService: PageableService
+    private categorieService: EnumService
+  ) {
 
-  ) { 
     this.categories$ = this.categorieService.getCategories();
-
-  }
-
-  ngOnInit() {
-  }
-  filtreChanged(filtre: Categorie){
-    this.isLoading = true;
-    /*if (this.filtreSelecteds.includes("TOUTE")){
-      let indexToute = this.filtreSelecteds.indexOf("TOUTE");
-      this.filtreSelecteds.splice(indexToute, 1);
-    }*/
-    
-    if (this.filtreSelecteds.includes(filtre.id)){
-      filtre.actif="";
-      let index = this.filtreSelecteds.indexOf(filtre.id);
-      this.filtreSelecteds.splice(index, 1);
-    }else{
-      filtre.actif="actif";
-      this.filtreSelecteds.push(filtre.id);
-    }
-    //if (this.filtreSelecteds.length == 0) this.filtreSelecteds.push("TOUTE");
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
 
     this.alimentService.getAliments().subscribe(aliments => {
       aliments.forEach(aliment => {
         this.alimentService.pushAliment(aliment, this.aliments)
       });
-    });
-
+    });  
   }
 
-  FrigoChanged(){
-    console.log("changed");
-    this.isLoading = true;
+  ngOnInit() { }
+
+  categorieChanged(){
+    this.categoriesSelectedChange.emit(this.categoriesSelected);
+  }
+
+  FrigoChanged(aliments: Aliment[]){
+    this.alimentsSelected = aliments;
+  }
+
+  FrigoModalClose(){
     this.frigoActifOk = "frigoActif";
     this.alimentsId = [];
     this.alimentsSelected.forEach(aliment => {
       this.alimentsId.push(aliment.id);
     });
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
+    this.alimentsIdChange.emit(this.alimentsId);
     this.utiliserFrigo = true;
   }
 
   seulementLesAlimentsChanged(){
-    this.isLoading = true;
     if (this.seulementLesAliments) this.seulementLesAliments=false;
     else this.seulementLesAliments=true; //permet de ne pas inverser la selection des le premier click
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
+    this.seulementLesAlimentsChange.emit(this.seulementLesAliments);
   };
 
   FrigoSwitch(){
-    this.isLoading = true;
     console.log("switch");
     this.alimentsId = [];
     if(!this.utiliserFrigo){//lorsque l'on click sur la fonction, le frigo est à actif, il faut donc l'inverser
@@ -100,14 +90,14 @@ export class SidebarComponent implements OnInit {
       this.utiliserFrigo = false;
       this.frigoActifOk = "frigoNonActif";
     }
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
+    this.alimentsIdChange.emit(this.alimentsId);
   }
 
   spliceAliment(aliment: Aliment){
-    this.isLoading = true;
-    this.alimentService.pushAliment(aliment, this.aliments);
-
     this.alimentService.spliceAliment(aliment, this.alimentsSelected);
-    this.FrigoChanged();
+    this.FrigoModalClose();
   }
+
 }
+
+

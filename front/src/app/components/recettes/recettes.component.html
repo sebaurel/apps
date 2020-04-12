@@ -1,45 +1,7 @@
 <h1>{{nbRecette}} Recettes</h1>
-<div class="col-md-3 col-sm-12 sidebar float-md-right mx-auto">
-  <!--<h5 class="title-bg">Recherche</h5>
-    
-  <input formControlName="search" placeholder="Search by name">-->
 
-  <!--Categories-->
-  <h5 class="title-bg">Categories</h5>
-  <ng-select [items]="categories$ | async" [(ngModel)]="categoriesSelected" bindLabel="nom" bindValue="id" placeholder="Choisir des catégories" [multiple]="true" [hideSelected]="true" name="categorieSelecteur" (change)="categorieChanged()"> </ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
-
-  <!--Frigo-->
-  <h5 class="title-bg">
-    <label class="switch" >
-      <input type="checkbox" [ngModel]="utiliserFrigo" (click)="FrigoSwitch()">
-      <span class="slider round"></span>
-    </label>
-    Mon frigo <app-modal-frigo (change)="FrigoChanged($event)" (close)="FrigoModalClose($event)" [(alimentsSelectedModal)]="alimentsSelected" [loggedIn]="loggedIn" [aliments]="aliments"></app-modal-frigo>
-  </h5>
-  <div id="frigo" [className]="frigoActifOk">
-    <table style="width:100%">
-              
-      <tr *ngFor="let alimentSelected of alimentsSelected">
-        <td *ngIf="alimentSelected.photo != null else elseBlock"><img class="petiteThumb" [src]="pathUpload+alimentSelected.photo.id+'-thumb.png'"/><div class="photoAliment"><img [src]="pathUpload+alimentSelected.photo.nomThumb"/></div></td>
-        <ng-template #elseBlock ><td><img [src]="photoThumbPathFrigo" class="petiteThumb"/></td></ng-template>
-        <td>{{alimentSelected.nom}}</td>
-        <td><button class="btn btn-outline-dark font-weight-medium" (click)="spliceAliment(alimentSelected)" type="button">-</button></td>
-      </tr>
-    </table> 
-    <!--<div (click)="seulementLesAlimentsChanged()">
-      <input type="checkbox" id="seulementLesAliments" name="seulementLesAliments" [(ngModel)]="seulementLesAliments"> 
-      <label for="seulementLesAliments">Cuisiner seulement ces aliments ?</label>
-    </div>-->
-    
-  </div>
-  <!--<div>
-    Recettes par pages<br>
-    <a href="javascript:void(0);" (click)="onPageSizeChanged('5')">5</a>,
-    <a href="javascript:void(0);" (click)="onPageSizeChanged('10')">10</a>,
-    <a href="javascript:void(0);" (click)="onPageSizeChanged('25')">25</a>,
-    <a href="javascript:void(0);" (click)="onPageSizeChanged('50')">50</a>,
-    <a href="javascript:void(0);" (click)="onPageSizeChanged('100')">100</a>
-  </div>-->
+<div class="col-md-3 col-sm-12 float-md-right mx-auto">
+  <app-sidebar (alimentsIdChange)="alimentsIdChange($event)" (categoriesSelectedChange)="categoriesSelectedChange($event)" (seulementLesAlimentsChange)="seulementLesAlimentsChange($event)" [(categoriesSelected)]="categoriesSelected" [loggedIn]="loggedIn" [(alimentsId)]="alimentsId"></app-sidebar>
 </div>
 
 <div class="container main-container-recette">
@@ -102,4 +64,12 @@
 </div>
 <div class="col-12 mx-auto" align="center">
   <app-paginator [pages]="pages | async" (pageChange)="onPageChanged($event)"></app-paginator>
+  <div>
+    Recettes par pages&nbsp;
+    <a href="javascript:void(0);" (click)="onPageSizeChanged('5')">5</a>,
+    <a href="javascript:void(0);" (click)="onPageSizeChanged('10')">10</a>,
+    <a href="javascript:void(0);" (click)="onPageSizeChanged('25')">25</a>,
+    <a href="javascript:void(0);" (click)="onPageSizeChanged('50')">50</a>,
+    <a href="javascript:void(0);" (click)="onPageSizeChanged('100')">100</a>
+  </div>
 </div>

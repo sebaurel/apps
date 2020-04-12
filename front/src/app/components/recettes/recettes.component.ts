@@ -16,7 +16,6 @@ import { Categorie } from 'src/app/model/categorie.model';
 import { Utilisateur } from 'src/app/model/utilisateur.model';
 import { Aliment } from 'src/app/model/aliment.model';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
-import { AlimentService } from 'src/app/services/aliment.service';
 
 @Component({
   selector: 'app-recettes',
@@ -52,18 +51,13 @@ export class RecettesComponent implements OnInit {
   isLoading: boolean = false;
 
   alimentsSelected : Aliment[] = new Array<Aliment>();
-  aliments: Aliment[] = []; // on recupere tout les aliments en base trier
   alimentsId: number[] = [];
   seulementLesAliments: boolean = false;
-  utiliserFrigo: boolean = false;
-  frigoActifOk: string = "frigoNonActif";
-  photoThumbPathFrigo: String = environment.PATH_UPLOAD + "default-aliment.png";
 
   constructor(
     private route: ActivatedRoute,
     private recetteService: RecetteService,
     private utilisateurService: UtilisateurService,
-    private alimentService: AlimentService,
     private pageableService: PageableService,
     private categorieService: EnumService
   ) {
@@ -82,7 +76,6 @@ export class RecettesComponent implements OnInit {
     );    
   }
 
-
   ngOnInit() {
 
     this.urls = this.route.parent.snapshot.url;
@@ -96,9 +89,6 @@ export class RecettesComponent implements OnInit {
       this.currentUserEmail = this.currentUser.email;
       this.favori = "true"
     }
-
-      
-
 
     if (this.currentUser != null){
       this.loggedIn = true;
@@ -126,11 +116,6 @@ export class RecettesComponent implements OnInit {
       this.loggedIn = false;
     }
 
-    this.alimentService.getAliments().subscribe(aliments => {
-      aliments.forEach(aliment => {
-        this.alimentService.pushAliment(aliment, this.aliments)
-      });
-    });
   }
 
   onPageChanged(pageSelected: string) {
@@ -143,57 +128,6 @@ export class RecettesComponent implements OnInit {
     this.isLoading = true;
     this.pageSize = pageSizeSelected;
     this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
-  }
-
-  categorieChanged(){
-    this.isLoading = true;
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
-  }
-
-  FrigoChanged(aliments: Aliment[]){
-    this.alimentsSelected = aliments;
-  }
-
-  FrigoModalClose(aliments: Aliment[]){
-    this.isLoading = true;
-    this.frigoActifOk = "frigoActif";
-    this.alimentsId = [];
-    this.alimentsSelected.forEach(aliment => {
-      this.alimentsId.push(aliment.id);
-    });
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
-    this.utiliserFrigo = true;
-  }
-
-  seulementLesAlimentsChanged(){
-    this.isLoading = true;
-    if (this.seulementLesAliments) this.seulementLesAliments=false;
-    else this.seulementLesAliments=true; //permet de ne pas inverser la selection des le premier click
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
-  };
-
-  FrigoSwitch(){
-    this.isLoading = true;
-    console.log("switch");
-    this.alimentsId = [];
-    if(!this.utiliserFrigo){//lorsque l'on click sur la fonction, le frigo est à actif, il faut donc l'inverser
-      this.utiliserFrigo = true;
-      this.frigoActifOk = "frigoActif";
-      this.alimentsSelected.forEach(aliment => {
-        this.alimentsId.push(aliment.id);
-      });
-    }else{
-      this.utiliserFrigo = false;
-      this.frigoActifOk = "frigoNonActif";
-    }
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
-  }
-
-  spliceAliment(aliment: Aliment){
-    this.isLoading = true;
-
-    this.alimentService.spliceAliment(aliment, this.alimentsSelected);
-    this.FrigoModalClose(this.alimentsSelected);
   }
 
   addDeleteFavori(recette: Recette){
@@ -212,6 +146,22 @@ export class RecettesComponent implements OnInit {
       });
     }
   }
+
+  alimentsIdChange(alimentsid: number[]){
+    this.alimentsId = alimentsid;
+    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
+  }
+
+  categoriesSelectedChange(categoriesSelected: number[]){
+    this.categoriesSelected = categoriesSelected;
+    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
+  }
+
+  seulementLesAlimentsChange(seulementLesAliments: boolean){
+    this.seulementLesAliments = seulementLesAliments;
+    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
+  }
+  
 }
 
 

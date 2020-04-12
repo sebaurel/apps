@@ -134,27 +134,6 @@ ul.post-data li:last-child {padding-right: 0px;}
 .comment-form-container .btn,
 #contact-form .btn {margin-top: 12px;}
 
-.sidebar input{margin-right: 5px;}
-.sidebar h5 {margin-top: 40px;}
-.sidebar ul.post-category-list,
-.sidebar .tab-content .tab-pane ul {margin:0px;}
-.sidebar ul.post-category-list li,
-.sidebar .tab-content .tab-pane ul li {
-	list-style: none; 
-	border-bottom: 1px dashed #a9a9a9;
-	padding:10px 5px;
-	float: left;
-}
-.sidebar ul.post-category-list li a{
-	font-family: "Oswald", sans-serif; 
-	font-weight: normal;
-	text-transform:uppercase; 
-}
-.sidebar ul.post-category-list li:first-child,
-.sidebar ul.post-category-list li i {padding-right: 5px; background-position: 0 -95px;}
-.sidebar .tab-content .tab-pane ul li i {padding-right: 5px;}
-
-
 
 .post-category-list li > button.actif, .post-data li > button.actif {
 	color:#FFF; 
@@ -165,81 +144,6 @@ ul.post-data li:last-child {padding-right: 0px;}
 }
 
 
-/* The switch - the box around the slider */
-.switch {
-	position: relative;
-	display: inline-block;
-	width: 40px;
-	height: 18px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
-	opacity: 0;
-	width: 0;
-	height: 0;
-  }
-  
-  /* The slider */
-  .slider {
-	position: absolute;
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: #ccc;
-	-webkit-transition: .4s;
-	transition: .4s;
-  }
-  
-  .slider:before {
-	position: absolute;
-	content: "";
-	height: 16px;
-	width: 16px;
-	left: 1px;
-	bottom: 1px;
-	background-color: white;
-	-webkit-transition: .4s;
--ms-scroll-translation: .4s;
-	transition: .4s;
-  }
-  
-  input:checked + .slider {
-	background-color: #2196F3;
-  }
-  
-  input:focus + .slider {
-	box-shadow: 0 0 1px #2196F3;
-  }
-  
-  input:checked + .slider:before {
-	-webkit-transform: translateX(21px);
-	-ms-transform: translateX(21px);
-	transform: translateX(21px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-	border-radius: 16px;
-  }
-  
-  .slider.round:before {
-	border-radius: 50%;
-  }
 
-  #frigo {
-	  background-color: whitesmoke;
-  }
-  div#frigo table tr td {
-	  margin-bottom: 2px;
-	  border-bottom: 1px dotted grey;
-  }
-  .frigoActif {
-	  opacity: 1;
-  }
-
-  .frigoNonActif {
-	  opacity: 0.5;
-  }
+  
+  

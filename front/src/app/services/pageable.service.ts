@@ -10,6 +10,6 @@ export class PageableService {
   constructor() { }
 
   rechargement(pageUrl: Subject<string>, pageNavigate: string, pageSize: string){
-    pageUrl.next(environment.API_URL + 'rest/recette/list/?page=' + pageNavigate + "&" + "size" + pageSize);
+    pageUrl.next(environment.API_URL + 'rest/recette/list/?page=' + pageNavigate + "&" + "size=" + pageSize);
   }
 }

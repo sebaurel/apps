@@ -98,7 +98,7 @@ public class UtilisateurCtrlTests {
 		this.mockMvc =  webAppContextSetup(this.wac).build();
 	}
 	
-	@Test
+	/*@Test
 	//@WithMockUser(roles = "USER")
 	public void getUtilisateurConnecteTest() throws Exception {
 		
@@ -113,7 +113,7 @@ public class UtilisateurCtrlTests {
         	.andExpect(status().isOk())
         	.andExpect(content().string("{\"id\":2,\"firstName\":\"Prenom2\",\"lastName\":\"Nom2\",\"pseudo\":\"Pseudo2\",\"birthday\":null,\"password\":\"1234567890\",\"enabled\":false,\"email\":\"email2@email.fr\",\"recettes\":null,\"descriptif\":null,\"photo\":null,\"favoris\":null,\"frigo\":null,\"commentaires\":null,\"role\":null}"));
 
-	}
+	}*/
 	
 	/*@Test
 	//@WithMockUser(roles = "USER")
