@@ -2,8 +2,8 @@ package fr.sebaurel.apps.controller;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +19,7 @@ import fr.sebaurel.apps.util.CustomException;
 @RequestMapping("rest")
 public class AccountCtrl {
 	
-    public static final Logger logger = LoggerFactory.getLogger(AccountCtrl.class);
+    //public static final Logger logger = LoggerFactory.getLogger(AccountCtrl.class);
     
     @Autowired(required=false)
     UtilisateurSrv utilisateurSrv;
@@ -30,7 +30,8 @@ public class AccountCtrl {
     }
       
     @PostMapping("/regitrationConfirm")
-    public  @ResponseBody Utilisateur confirmRegistration (@RequestBody String token) throws CustomException {
+    public @ResponseBody Utilisateur confirmRegistration (@RequestBody String token) throws CustomException {
         return utilisateurSrv.confirmToken(token);
     }
+    
 }

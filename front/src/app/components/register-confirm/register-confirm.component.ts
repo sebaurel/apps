@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -10,10 +10,10 @@ import { AccountService } from 'src/app/services/account.service';
 export class RegisterConfirmComponent implements OnInit {
 
   tokenConfirmation: string;
-  regitered: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private accountService: AccountService,
   ) {
     this.route.params.subscribe(params => {
@@ -23,7 +23,7 @@ export class RegisterConfirmComponent implements OnInit {
   }
   ngOnInit() {
     this.accountService.confirmAccount(this.tokenConfirmation).subscribe(() => {
-      this.regitered = true;
+      this.router.navigate(['/login']);
     },
       err=>{
         //alert('Email ou mot de passe invalide !');

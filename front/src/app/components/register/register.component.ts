@@ -5,6 +5,8 @@ import { Utilisateur } from "../../model/utilisateur.model";
 import { AccountService } from "../../services/account.service";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormValidator } from '../../util/form.util'
+declare var grecaptcha: any;
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -14,7 +16,7 @@ import { FormValidator } from '../../util/form.util'
 export class RegisterComponent implements OnInit {
 
   utilisateur: Utilisateur = new Utilisateur();
-
+  captchaError: boolean = false;
   formRegister: FormGroup;
 
   validationMessage = {
@@ -29,8 +31,8 @@ export class RegisterComponent implements OnInit {
       'email': 'L\'email doit être valide'
     },
     'passwordConfirm':{
-      'required': 'Le mot de passe est obligatoire',
-      'mustMatch': 'Les mots de passe ne sont pas identique'
+      'required': 'Le mot de passe de vérification est obligatoire',
+      'mustMatch': 'Les mots de passe ne sont pas identiques'
     } 
   };
 
@@ -64,16 +66,31 @@ export class RegisterComponent implements OnInit {
    }
 
   ngOnInit() {
+    grecaptcha.ready(function() {
+      grecaptcha.render("recaptcha-container", {
+        "sitekey": "6Lf4wegUAAAAABUsbBkqsQl6i3ASXjgef8CI3Gfk"
+      });
+    });
   }
 
+  
   onRegister(formRegister){
     this.utilisateur.pseudo = formRegister.get('pseudo').value;
     this.utilisateur.email = formRegister.get('email').value;
     this.utilisateur.password = formRegister.get('password').value;
+
+    if (grecaptcha.getResponse().length === 0) {
+      this.captchaError = true;
+      alert("Serais-tu un robot ?");
+      return;
+    } else {
+      this.utilisateur.reCaptcha = grecaptcha.getResponse();
+    }
+
     this.accountService.createAccount(this.utilisateur).subscribe(data => {
-      this.router.navigate(['/login']);
+      alert("Votre compte a bien été créé.\nVous allez recevoir un mail avec un lien pour l'activer.");
+      this.router.navigate(['/home']);
     }, (err: any) => {
-        //alert(err.error);
         alert(err);
     }
   )

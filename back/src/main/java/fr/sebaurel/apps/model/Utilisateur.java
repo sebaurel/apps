@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -89,6 +90,9 @@ public class Utilisateur implements UserDetails{
 	@OneToMany(cascade = CascadeType.DETACH, mappedBy = "id", fetch = FetchType.LAZY)
 	private Collection<Commentaire> commentaires;
 	
+	@Transient
+    private String reCaptcha;
+    
 	public Utilisateur() {
 	}
 	
@@ -252,6 +256,14 @@ public class Utilisateur implements UserDetails{
 
 	public void setCommentaires(Collection<Commentaire> commentaires) {
 		this.commentaires = commentaires;
+	}
+	
+	public String getReCaptcha() {
+		return reCaptcha;
+	}
+
+	public void setReCaptcha(String reCaptcha) {
+		this.reCaptcha = reCaptcha;
 	}
 	
 }

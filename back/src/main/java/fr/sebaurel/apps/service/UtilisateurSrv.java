@@ -47,13 +47,16 @@ public class UtilisateurSrv implements UserDetailsService {
     private PhotoSrv photoSrv;
 	
 	@Autowired
-	RecetteSrv recetteSrv;
+	private RecetteSrv recetteSrv;
 	
 	@Autowired
-    AlimentSrv alimentSrv;
+	private AlimentSrv alimentSrv;
 	
 	@Autowired
-    MailSrv mailSrv;
+	private MailSrv mailSrv;
+	
+	@Autowired
+	private CaptchaSrv captchasrv;
 	
     @Override
     public UserDetails loadUserByUsername(String lastName) throws UsernameNotFoundException {
@@ -89,6 +92,8 @@ public class UtilisateurSrv implements UserDetailsService {
     }
     
     public Utilisateur createUserAccount(Utilisateur utilisateur) throws CustomException {
+    	utilisateur = captchasrv.captchaVerify(utilisateur);
+    	
     	Utilisateur newUtilisateur = new Utilisateur();
     	
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
@@ -113,7 +118,7 @@ public class UtilisateurSrv implements UserDetailsService {
 		} catch (Exception e) {
 			throw new CustomException("L'email de confirmation n'a pas pu être envoyé, merci d'essayer plus tard.",HttpStatus.SERVICE_UNAVAILABLE);
 		}
-        
+		
         return newUtilisateur;
     }    
     
@@ -194,7 +199,7 @@ public class UtilisateurSrv implements UserDetailsService {
 	public void sendMail(String email, String name, String text) throws MessagingException {
 		mailSrv.EmailContact(email, name, text);
 	}
-	
+
 }
 
 	

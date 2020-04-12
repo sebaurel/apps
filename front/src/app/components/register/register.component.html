@@ -28,6 +28,10 @@
                 <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" formControlName="passwordConfirm"/>
                 <div *ngIf="formErrors.passwordConfirm" class="help-block">{{formErrors.passwordConfirm}}</div>
               </div>
+              <div class="form-group">
+                <div id="recaptcha-container"></div>
+                <div *ngIf="captchaError" class="error">Recaptcha non vérifié.</div>
+              </div>
 
               <div class="mt-5">
                 <button class="btn btn-lg btn-warning btn-block btn-signin font-weight-medium" [disabled]="formRegister.invalid" type="submit">Créér un compte</button>

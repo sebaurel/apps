@@ -15,4 +15,5 @@ export class Utilisateur {
     favoris: Recette[];
     frigo:Aliment[];
     role: String;
+    reCaptcha: String;
   }
