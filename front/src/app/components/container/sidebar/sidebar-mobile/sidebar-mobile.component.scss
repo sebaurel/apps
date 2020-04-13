@@ -1,0 +1,40 @@
+#sidebarMobile {
+    margin-top: 10px;
+	//width: 95%;
+	background: gray;
+    opacity: 0.9;
+    z-index: 100;
+}
+
+#open {
+    background: gray;
+    color: blanchedalmond;
+    position: absolute;
+    text-align: center;
+    right: 100%;
+    top: 0px;
+    padding: 2px 4px 2px 3px;
+    opacity: 0.75;
+}
+
+#close{
+    color: blanchedalmond;
+    position: absolute;
+    text-align: right;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    padding: 2px 3px 2px 2px;
+    opacity: 1;
+}
+.sidebarMobileDesactivated{
+    left: 100%;
+	transition: ease-in-out;
+	transition-duration: 1s;
+}
+.sidebarMobileActivated{
+	left: 0;
+	transition: ease-in-out;
+	transition-duration: 1s;
+}
+

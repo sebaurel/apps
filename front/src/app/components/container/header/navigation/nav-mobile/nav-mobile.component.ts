@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { faAngleDoubleLeft, faBars} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nav-mobile',
@@ -6,17 +7,13 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./nav-mobile.component.scss']
 })
 
-export class NavMobileComponent implements OnInit {
-  
-  @Input()
-  activateMenu: boolean;
-
-  @Input()
-  loggedIn:boolean;
+export class NavMobileComponent {
+  faAngleDoubleLeft = faAngleDoubleLeft;
+  faBars = faBars;
+  @Input() activateMenu: boolean;
+  @Input() loggedIn:boolean;
 
   constructor() { }
-
-  ngOnInit() { }
 
   openNavigationMobile() {
     this.activateMenu = true;

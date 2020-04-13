@@ -1,18 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-nav-desktop',
   templateUrl: './nav-desktop.component.html',
   styleUrls: ['./nav-desktop.component.scss']
 })
-export class NavDesktopComponent implements OnInit {
+export class NavDesktopComponent {
 
-  @Input()
-  loggedIn:boolean;
+  @Input() loggedIn:boolean;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
   @Input() alimentsId: number[];
   @Output() alimentsIdChange: EventEmitter<number[]> = new EventEmitter<number[]>()
   @Input() seulementLesAliments: boolean = false;
-  @Output() seulementLesAlimentsChange:  EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() seulementLesAlimentsChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   utiliserFrigo: boolean = false;
   frigoActifOk: string = "frigoNonActif";
   photoThumbPathFrigo: String = environment.PATH_UPLOAD + "default-aliment.png";

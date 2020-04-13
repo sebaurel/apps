@@ -1,8 +1,7 @@
 <h1>{{nbRecette}} Recettes</h1>
 
-<div class="col-md-3 col-sm-12 float-md-right mx-auto">
-  <app-sidebar (alimentsIdChange)="alimentsIdChange($event)" (categoriesSelectedChange)="categoriesSelectedChange($event)" (seulementLesAlimentsChange)="seulementLesAlimentsChange($event)" [(categoriesSelected)]="categoriesSelected" [loggedIn]="loggedIn" [(alimentsId)]="alimentsId"></app-sidebar>
-</div>
+<app-sidebar-mobile (alimentsIdChange)="alimentsIdChange($event)" (categoriesSelectedChange)="categoriesSelectedChange($event)" (seulementLesAlimentsChange)="seulementLesAlimentsChange($event)" [(categoriesSelected)]="categoriesSelected" [(alimentsId)]="alimentsId" [loggedIn]="loggedIn" class="d-ms-block d-md-none"></app-sidebar-mobile>
+<app-sidebar-desktop (alimentsIdChange)="alimentsIdChange($event)" (categoriesSelectedChange)="categoriesSelectedChange($event)" (seulementLesAlimentsChange)="seulementLesAlimentsChange($event)" [(categoriesSelected)]="categoriesSelected" [(alimentsId)]="alimentsId" [loggedIn]="loggedIn" class="d-none d-sm-none d-md-block"></app-sidebar-desktop>
 
 <div class="container main-container-recette">
   <div class="row">

@@ -1,0 +1,5 @@
+<div id="sidebarMobile" class="col-10 mx-auto fixed-top pt-5" [class.sidebarMobileActivated]="activateSidebar" [class.sidebarMobileDesactivated]="!activateSidebar">
+    <div id="open" (click)="openSidebarMobile()">Rechercher</div>
+        <app-sidebar (alimentsIdChange)="alimentsIdFonction($event)" (categoriesSelectedChange)="categoriesSelectedFonction($event)" (seulementLesAlimentsChange)="seulementLesAlimentsFonction($event)" [(categoriesSelected)]="categoriesSelected" [loggedIn]="loggedIn" [(alimentsId)]="alimentsId"></app-sidebar>
+    <div id="close" (click)="closeSidebarMobile()">Fermer</div>
+</div>

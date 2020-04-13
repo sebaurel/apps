@@ -37,12 +37,14 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app-routing.module';
 import { HeaderComponent } from './components/container/header/header.component';
 import { NavigationComponent } from './components/container/header/navigation/navigation.component';
-import { NavMobileComponent } from './components/container/header/nav-mobile/nav-mobile.component';
-import { NavDesktopComponent } from './components/container/header/nav-desktop/nav-desktop.component';
+import { NavMobileComponent } from './components/container/header/navigation/nav-mobile/nav-mobile.component';
+import { NavDesktopComponent } from './components/container/header/navigation/nav-desktop/nav-desktop.component';
 import { ErrorInterceptor } from './jwtAuthorization/error.interceptor';
 import { CommentaireComponent } from './components/commentaire/commentaire.component';
 import { ModalCommentaireComponent } from './components/modals/modal-commentaire/modal-commentaire.component';
 import { SidebarComponent } from './components/container/sidebar/sidebar.component';
+import { SidebarMobileComponent } from './components/container/sidebar/sidebar-mobile/sidebar-mobile.component';
+import { SidebarDesktopComponent } from './components/container/sidebar/sidebar-desktop/sidebar-desktop.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalIngredientComponent } from './components/modals/modal-ingredient/modal-ingredient.component';
 import { ModalEtapesComponent } from './components/modals/modal-etapes/modal-etapes.component';
@@ -79,6 +81,8 @@ registerLocaleData(localeFr);
     CommentaireComponent,
     ModalCommentaireComponent,
     SidebarComponent,
+    SidebarMobileComponent,
+    SidebarDesktopComponent,
     ModalIngredientComponent,
     ModalEtapesComponent,
     RegisterConfirmComponent,
