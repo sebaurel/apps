@@ -10,5 +10,6 @@ import fr.sebaurel.apps.model.Commentaire;
 @Repository
 public interface CommentaireRepo extends JpaRepository<Commentaire, Long>{
 
-	List<Commentaire> findAllByIdRecette(Long idRecette);
+	List<Commentaire> findAllByIdRecetteOrderByDate(Long idRecette);
+	Commentaire findOneById(Long id);
 }

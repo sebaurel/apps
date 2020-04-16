@@ -1,12 +1,12 @@
 package fr.sebaurel.apps.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import fr.sebaurel.apps.model.Aliment;
 import fr.sebaurel.apps.service.IngredientSrv;
 
-@Service
+@Component
 public class Controle {
 
 	@Autowired

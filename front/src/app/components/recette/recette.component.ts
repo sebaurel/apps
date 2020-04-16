@@ -82,8 +82,6 @@ export class RecetteComponent implements OnInit {
     this.photoPathThumb = environment.PATH_UPLOAD + "default-thumb.png";
     this.recette.utilisateur = new Utilisateur;
     this.unites$ = this.enumService.getUnites();
-    
-     
   }
 
   addDeleteFavori(recette: Recette){
@@ -93,7 +91,6 @@ export class RecetteComponent implements OnInit {
       .subscribe(data => {
         localStorage.setItem("currentUser", JSON.stringify(data));
       });
-
     }else{
       recette.favori = "actif";
       this.utilisateurService.addFavori(this.currentUser.email, JSON.stringify(recette.id))

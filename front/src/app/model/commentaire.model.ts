@@ -1,4 +1,5 @@
 import { Utilisateur } from "./utilisateur.model";
+import { Photo } from './photo.model';
 
 export class Commentaire {
     id: number;
@@ -10,4 +11,5 @@ export class Commentaire {
     idRecette: number;
     idUtilisateur: number;
     valide: boolean;
+    photos: Photo[];
   }

@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -23,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import fr.sebaurel.apps.model.Aliment;
 import fr.sebaurel.apps.model.Categorie;
-import fr.sebaurel.apps.model.ElementCollectionsRecette;
+import fr.sebaurel.apps.model.Commentaire;
 import fr.sebaurel.apps.model.Etape;
 import fr.sebaurel.apps.model.Ingredient;
 import fr.sebaurel.apps.model.Recette;
@@ -43,6 +42,9 @@ public class RecetteSrv {
     EtapeSrv etapeSrv;
 	
 	@Autowired
+	CommentaireSrv commentaireSrv;
+	
+	@Autowired
     IngredientSrv ingredientSrv;
 	
 	@Autowired
@@ -58,21 +60,11 @@ public class RecetteSrv {
 	
 	public List<Recette> findRandom(int nombre) {
 		
-		List<Recette> listAllRecette = recetteRepo.findAllByPublier(true);
-		Collections.shuffle(listAllRecette);
-		List<Recette> listRandomRecette = new ArrayList<Recette>();
+		List<Recette> listAllRecettes = recetteRepo.findAllByPublier(true);
+		Collections.shuffle(listAllRecettes);
 		
-		for (int boucle=0;boucle<nombre;boucle++) {
-			try {
-				Recette recette = listAllRecette.get(ThreadLocalRandom.current().nextInt(0, listAllRecette.size()));
-				listRandomRecette.add(recette);
-				listAllRecette.remove(recette);
-			} catch(NullPointerException e) {
-				return listRandomRecette;
-			}
-		}
+		return listAllRecettes.subList(0, nombre);
 		
-		return listRandomRecette;
 	}
 	
 	public List<Recette> findAllByUtilisateurAndPublier(Utilisateur utilisateur) {
@@ -90,23 +82,9 @@ public class RecetteSrv {
 	public Recette find(Long id) {
 		Recette recette = recetteRepo.findOneById(id);
 		
-		Comparator<ElementCollectionsRecette> comparateur = new Comparator<ElementCollectionsRecette>() {
-			  public int compare(ElementCollectionsRecette element1, ElementCollectionsRecette element2) {
-			     Integer ordre1 = element1.getOrdre();
-			     Integer ordre2 = element2.getOrdre();
-			     if (ordre2.compareTo(ordre1) > 0) return -1;
-			     else if(ordre2.compareTo(ordre1) == 0) return 0;
-			     else return 1;
-			  }
-			};
-
-		List<Etape> etapes = recette.getEtapes();
-		Collections.sort(etapes, comparateur);
-		recette.setEtapes(etapes);
-		
-		List<Ingredient> ingredients = recette.getIngredients();
-		Collections.sort(ingredients, comparateur);
-		recette.setIngredients(ingredients);
+		recette.getEtapes().sort(Comparator.comparing(Etape::getOrdre));
+		recette.getIngredients().sort(Comparator.comparing(Ingredient::getOrdre));
+		recette.getCommentaires().sort(Comparator.comparing(Commentaire::getDate));
 
 		return recette;
 	}

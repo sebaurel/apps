@@ -13,27 +13,41 @@
           <div class="col-12 mx-auto">
             <div class="auth-form-dark text-left p-5">
           
-              <form name="form" novalidate>
+              <form [formGroup]="formCommentaire">
                 <div class="form-group">
                   <label for="title">Titre</label>
-                  <input type="text" class="form-control" name="title" id="title" [(ngModel)]="commentaire.title" #title="ngModel" required />
+                  <input type="text" class="form-control" name="title" id="title" formControlName="title"/>
                 </div>
                 <div class="form-group">
                   <label for="body">commentaire</label>
-                  <textarea rows="4" cols="50" class="form-control" name="body" id="body" [(ngModel)]="commentaire.body" #body="ngModel" novalidate></textarea>
+                  <textarea rows="4" cols="50" class="form-control" name="body" id="body" formControlName="body"></textarea>
                 </div>
-                <button class="btn btn-outline-dark" (click)="addCommentaire(); c('Close click')">Enregistrer le commentaire</button>
+                <p>Vous pouvez ajouter autant de photo que vous voulez</p>
+                <app-photo-upload [(photo)]="photo" [(photoThumbPath)]="photoThumbPath" [width]="0" [height]="0" [progress]="progress" (photoUpload)="photoCommentaireUpload($event)"></app-photo-upload>
+                <div *ngFor="let photo of photos" class="float-left p-0 ml-1 mb-1 photo">
+                  <fa-icon [icon]="faEraser" class="eraser" (click)="cancelPhoto(photo)"></fa-icon>
+                  <img [src]="photoThumbPath+photo.id+'-thumb.png'" alt="Photo" width="50px"/>
+                </div>
+                <div class="clearfix">&nbsp;</div>
+                <button class="btn btn-outline-dark" (click)="addCommentaire(formCommentaire)">Enregistrer le commentaire</button>
               </form>
                 
             </div>
           </div>
+
         </div>
       </div>
+    </div>
+    <div>
+      <div *ngIf="formErrors.title" class="help-block">{{formErrors.title}}</div>
+      <div *ngIf="formErrors.body" class="help-block">{{formErrors.body}}</div>
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Annuler</button>
   </div>
 </ng-template>
-<button class="btn btn-outline-dark" (click)="open(content)">Commenter</button>
-
+<button class="btn btn-outline-dark mt-3 mb-3" (click)="open(content)">
+  <span *ngIf="editCommentaire else elseBlock">Modifier</span>
+  <ng-template #elseBlock>Commenter</ng-template>
+</button>

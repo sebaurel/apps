@@ -24,9 +24,10 @@ import fr.sebaurel.apps.repository.PhotoRepo;
 
 @Service
 public class PhotoSrv {
+	//private final Path rootLocation = Paths.get("C:\\Program Files\\Apache24\\htdocs\\images");
 	private final Path rootLocation = Paths.get("/home/sebapps/images/");
-	
-	
+	// /home/sebapps/images/
+	// C:\\Program Files\\Apache24\\htdocs\\images
 	/*@Value("${photosPath}")
     private String photosPath;
 	//private Path rootLocation = Paths.get(photosPath);*/
@@ -51,12 +52,21 @@ public class PhotoSrv {
 			
 			String photoNom = photo.getId() + ".png";
 			String thumbNom = photo.getId() + "-thumb.png";
-	
+			
+			BufferedImage originalImage = ImageIO.read(file);
+
 			//photoSrv.storeOriginal(multipartFile);
-			int width = Integer.parseInt(widthString);
-			int height = Integer.parseInt(heightString);
-			store(file, photoNom, width, height);
-			store(file, thumbNom, 100, 100);
+			int width;
+			int height;
+			if (widthString.equals("0") && heightString.equals("0")) {
+				width = originalImage.getWidth();				
+				height = originalImage.getHeight();
+			} else {
+				width = Integer.parseInt(widthString);
+				height = Integer.parseInt(heightString);
+			}
+			store(originalImage, photoNom, width, height);
+			store(originalImage, thumbNom, 100, 100);
 			
 		} catch (Exception e) {
 			return photo;
@@ -101,9 +111,8 @@ public class PhotoSrv {
 		}
 	}
  
-	public void store(File file, String photoNom, int width, int height) throws IOException {
+	public void store(BufferedImage originalImage, String photoNom, int width, int height) throws IOException {
 		
-		BufferedImage originalImage = ImageIO.read(file);
 		int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
 		
 		
@@ -157,12 +166,16 @@ public class PhotoSrv {
 	}
 	
 	public void deletePhotoFile(Photo photo) {
-		String photonom = this.rootLocation.resolve(photo.getId()+ ".png").toString();
-		File photoFile = new File(photonom);
-		photoFile.delete();
-		
-		String thumbnom = this.rootLocation.resolve(photo.getId()+ "-thumb.png").toString();
-		File thumbFile = new File(thumbnom);
-		thumbFile.delete();
+		try{
+			String photonom = this.rootLocation.resolve(photo.getId()+ ".png").toString();
+			File photoFile = new File(photonom);
+			photoFile.delete();
+			
+			String thumbnom = this.rootLocation.resolve(photo.getId()+ "-thumb.png").toString();
+			File thumbFile = new File(thumbnom);
+			thumbFile.delete();
+		} catch (Exception e) {
+			//ne rien faire, le fichier n'existe pas
+		}
 	}
 }

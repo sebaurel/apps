@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommentaireService {
+  
+
+  commentaire: Commentaire = new Commentaire();
 
   constructor(
     private http: HttpClient
@@ -20,4 +23,13 @@ export class CommentaireService {
   public postCommentaire(commentaire: Commentaire){
     return this.http.post<Commentaire>(environment.API_URL+'rest/commentaire', commentaire, {observe: 'response'});
   };
+  
+  public putCommentaire(commentaire: Commentaire) {
+    return this.http.put<Commentaire>(environment.API_URL+'rest/commentaire', commentaire, {observe: 'body'});
+  }
+
+  public deleteCommentaire(idCommentaire: number) {
+    return this.http.delete<Commentaire>(environment.API_URL+'rest/commentaire/'+idCommentaire, {observe: "body"});
+  }
+
 }

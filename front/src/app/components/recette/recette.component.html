@@ -58,7 +58,7 @@
                         <!--<li><a href="#"><fa-icon [icon]="faComment"></fa-icon>&nbsp;{{commentaires.length}} Commentaire</a></li>-->
                     </ul>
                 </div>
-                <app-commentaire [(commentaires)]="commentaires" [idRecette]="recette.id"></app-commentaire>
+                <app-commentaire [(commentaires)]="commentaires" [idRecette]="recette.id" [loggedIn]="loggedIn" [admin]="admin" ></app-commentaire>
             </section>
         </div>
     </div>

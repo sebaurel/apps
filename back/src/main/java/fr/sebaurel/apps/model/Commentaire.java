@@ -2,6 +2,7 @@ package fr.sebaurel.apps.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -25,7 +27,7 @@ public class Commentaire implements Serializable {
 
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	private String title;
@@ -45,13 +47,16 @@ public class Commentaire implements Serializable {
 	
 	private boolean valide;
 	
+	@OneToMany(cascade = CascadeType.DETACH)
+    private List<Photo> photos;
+	
 	public Commentaire() {}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -109,6 +114,14 @@ public class Commentaire implements Serializable {
 
 	public void setValide(boolean valide) {
 		this.valide = valide;
-	};
+	}
+	
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
+	}
 	
 }

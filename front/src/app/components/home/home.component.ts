@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     private recetteService: RecetteService
   ) {
     
-    this.randomRecettes$ = recetteService.getRandomRecette();
+    this.randomRecettes$ = recetteService.getRandomRecette(3);
 
    }
 

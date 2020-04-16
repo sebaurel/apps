@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -160,7 +159,7 @@ public class UtilisateurSrv implements UserDetailsService {
     
 	public Utilisateur switchFavori(@Valid Utilisateur utilisateur, String idRecette, boolean add) {
 		Recette recette = recetteSrv.find(Long.parseLong(idRecette));
-		Collection<Recette> favoris = utilisateur.getFavoris();
+		List<Recette> favoris = utilisateur.getFavoris();
 		if (add) {
 			favoris.add(recette);
 		} else {
@@ -172,7 +171,7 @@ public class UtilisateurSrv implements UserDetailsService {
 	}
 
 	public Utilisateur frigo(Utilisateur utilisateur, String alimentsId) {
-		Collection<Aliment> alimentsSelected = alimentSrv.findAllById(alimentsId);
+		List<Aliment> alimentsSelected = alimentSrv.findAllById(alimentsId);
     	utilisateur.setFrigo(alimentsSelected);
     	
 		return save(utilisateur);

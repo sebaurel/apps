@@ -1,7 +1,6 @@
 package fr.sebaurel.apps.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class Recette implements Serializable {
 	private List<Ingredient> ingredients;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecette", fetch = FetchType.LAZY)
-	private Collection<Commentaire> commentaires;
+	private List<Commentaire> commentaires;
 	
 	@ManyToOne(cascade = CascadeType.DETACH)
     private Categorie categorie;
@@ -137,11 +136,11 @@ public class Recette implements Serializable {
 		this.publier = publier;
 	}
 
-	public Collection<Commentaire> getCommentaires() {
+	public List<Commentaire> getCommentaires() {
 		return commentaires;
 	}
 
-	public void setCommentaires(Collection<Commentaire> commentaires) {
+	public void setCommentaires(List<Commentaire> commentaires) {
 		this.commentaires = commentaires;
 	}
 

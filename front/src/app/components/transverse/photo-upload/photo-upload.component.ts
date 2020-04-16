@@ -52,8 +52,8 @@ export class PhotoUploadComponent implements OnInit {
       } else if (event instanceof HttpResponse) {
         this.photo = JSON.parse(JSON.stringify(event.body));
         this.photoThumbPath = environment.PATH_UPLOAD+this.photo.id+"-thumb.png"; 
+        this.photoUpload.emit(this.photo);
       }
-      this.photoUpload.emit(this.photo);
     })
     this.selectedFiles = undefined;
 

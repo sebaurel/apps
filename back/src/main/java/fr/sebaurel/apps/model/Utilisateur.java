@@ -1,7 +1,6 @@
 package fr.sebaurel.apps.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -70,8 +69,8 @@ public class Utilisateur implements UserDetails{
 	private String email;
 	
     @JsonSerialize(using = RecettesSerializer.class)
-	@OneToMany(mappedBy="id", cascade = CascadeType.DETACH)
-    private Collection<Recette> recettes;
+	@OneToMany(cascade = CascadeType.DETACH)
+    private List<Recette> recettes;
 	
 	@Column(columnDefinition = "TEXT")
 	private String descriptif;
@@ -82,13 +81,13 @@ public class Utilisateur implements UserDetails{
 	
     @JsonSerialize(using = RecettesSerializer.class)
 	@ManyToMany
-    private Collection<Recette> favoris;
+    private List<Recette> favoris;
 	
 	@ManyToMany
-    private Collection<Aliment> frigo;
+    private List<Aliment> frigo;
 	
-	@OneToMany(cascade = CascadeType.DETACH, mappedBy = "id", fetch = FetchType.LAZY)
-	private Collection<Commentaire> commentaires;
+	@OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+	private List<Commentaire> commentaires;
 	
 	@Transient
     private String reCaptcha;
@@ -166,7 +165,7 @@ public class Utilisateur implements UserDetails{
     
 	@JsonIgnore
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public List<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 
         list.add(role);
@@ -210,11 +209,11 @@ public class Utilisateur implements UserDetails{
 		this.enabled = enabled;
 	}
 
-	public Collection<Recette> getRecettes() {
+	public List<Recette> getRecettes() {
 		return recettes;
 	}
 	
-	public void setRecettes(Collection<Recette> recettes) {
+	public void setRecettes(List<Recette> recettes) {
 		this.recettes = recettes;
 	}
 
@@ -234,27 +233,27 @@ public class Utilisateur implements UserDetails{
 		this.photo = photo;
 	}
 
-	public Collection<Recette> getFavoris() {
+	public List<Recette> getFavoris() {
 		return favoris;
 	}
 
-	public void setFavoris(Collection<Recette> favoris) {
+	public void setFavoris(List<Recette> favoris) {
 		this.favoris = favoris;
 	}
 
-	public Collection<Aliment> getFrigo() {
+	public List<Aliment> getFrigo() {
 		return frigo;
 	}
 
-	public void setFrigo(Collection<Aliment> frigo) {
+	public void setFrigo(List<Aliment> frigo) {
 		this.frigo = frigo;
 	}
 
-	public Collection<Commentaire> getCommentaires() {
+	public List<Commentaire> getCommentaires() {
 		return commentaires;
 	}
 
-	public void setCommentaires(Collection<Commentaire> commentaires) {
+	public void setCommentaires(List<Commentaire> commentaires) {
 		this.commentaires = commentaires;
 	}
 	

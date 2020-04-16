@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import fr.sebaurel.apps.model.Aliment;
@@ -38,9 +37,9 @@ public class AlimentSrv {
 		return alimentRepo.save(aliment);
 	}
 	
-	public Collection<Aliment> findAllById(String alimentsId){
+	public List<Aliment> findAllById(String alimentsId){
 		String[] alimentsIdString = alimentsId.split(",");
-		Collection<Aliment> alimentsSelected = new ArrayList<Aliment>();
+		List<Aliment> alimentsSelected = new ArrayList<Aliment>();
 		
 		for(String alimentId : alimentsIdString){
 			String idString = alimentId.replaceAll("[^\\w]","");
