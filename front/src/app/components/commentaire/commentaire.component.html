@@ -12,11 +12,11 @@
                 <button class="btn btn-outline-dark font-weight-medium" (click)="spliceCommentaire(commentaire)" type="button">-</button>
             </div>
             <div *ngIf="commentaire.redacteur.idPhoto else pasDePhoto" class="float-left">
-                <img [src]="pathUpload+commentaire.redacteur.idPhoto+'.png'" alt="Photo" width="50px"/>
+                <img [src]="pathUpload+commentaire.redacteur.idPhoto+'-thumb.png'" alt="Photo" class="petiteThumb"/>
             </div>
             <ng-template #pasDePhoto>
                 <div class="float-left">
-                    <img [src]="pathUpload+'/avatar.png'" alt="Pas de photo" width="50px"/>
+                    <img [src]="pathUpload+'/avatar.png'" alt="Pas de photo"  class="petiteThumb"/>
                 </div>
             </ng-template>
             <span class="comment-name">{{commentaire.redacteur.pseudo}}&nbsp;</span>
@@ -25,7 +25,7 @@
                 <h5>{{commentaire.title}}</h5>
                 <p [innerText]="commentaire.body"></p>
                 <div *ngFor="let photo of commentaire.photos" class="float-left p-0 ml-1 mb-1">
-                    <a [href]="pathUpload+photo.id+'.png'"><img [src]="pathUpload+photo.id+'-thumb.png'" alt="Photo" width="50px"/></a>
+                    <a [href]="pathUpload+photo.id+'.png'"><img [src]="pathUpload+photo.id+'-thumb.png'" alt="Photo" class="petiteThumb"/></a>
                 </div>
                 <div class="clearfix">&nbsp;</div>
             </span>

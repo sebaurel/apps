@@ -31,6 +31,11 @@ public class UtilisateurCtrl {
     	return utilisateurSrv.find(email);
     }
     
+    @GetMapping("profil/{id}")
+	public Utilisateur getProfil(@PathVariable(value = "id") String id) {
+    	return utilisateurSrv.findProfil(id);
+    }
+    
     @PostMapping("/desactivate/{email}")
     public @ResponseBody Utilisateur desactivate(@PathVariable(value = "email") String email) throws CustomException{
     	return utilisateurSrv.desactivate(getUtilisateur(email));

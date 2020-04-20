@@ -15,9 +15,13 @@ export class UtilisateurService {
   getCurrentUserLogged(): Utilisateur {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
- 
+
   public saveUser(utilisateur: Utilisateur){
     return this.http.put(environment.API_URL+'rest/utilisateur', utilisateur);
+  }
+
+  public findUser(utilisateurId: string){
+    return this.http.get<Utilisateur>(environment.API_URL+'rest/utilisateur/profil/'+utilisateurId);
   }
 
   public deleteUser(utilisateur: Utilisateur){

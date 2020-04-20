@@ -199,6 +199,11 @@ public class UtilisateurSrv implements UserDetailsService {
 		mailSrv.EmailContact(email, name, text);
 	}
 
+	public Utilisateur findProfil(String id) {
+		long profilId = Long.parseLong(id);
+		return utilisateurRepo.findOneById(profilId);
+	}
+
 }
 
 	

@@ -10,4 +10,5 @@ public interface UtilisateurRepo extends JpaRepository<Utilisateur, Long>{
 
 	Utilisateur findOneByEmail(String email);
 	Integer deleteOneByEmail(String email);
+	Utilisateur findOneById(long id);
 }

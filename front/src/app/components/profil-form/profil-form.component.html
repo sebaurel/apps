@@ -41,7 +41,7 @@
                   <label for="photo">Photo de profil</label>
                   <div class="row">
   
-                    <app-photo-upload [(photo)]="utilisateur.photo" [(photoThumbPath)]="photoThumbPath" [width]="190" [height]="250" [progress]="progress" (photoUpload)="photoChange($event)"></app-photo-upload>
+                    <app-photo-upload [(photo)]="utilisateur.photo" [(photoThumbPath)]="photoThumbPath" [width]="0" [height]="0" [progress]="progress" (photoUpload)="photoChange($event)"></app-photo-upload>
   
                   </div>
                 </div>

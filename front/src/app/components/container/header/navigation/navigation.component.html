@@ -20,7 +20,7 @@
             <a class="dropdown" routerLink="/contact">Contact</a>
         </li>
         <li *ngIf="loggedIn else loginBlock" [className]="ongletCompte" on-mouseover="activate('compte')" on-mouseleave="deActivate('compte')">
-            <a class="dropdown-toggle" ><fa-icon [icon]="faUser"></fa-icon>&nbsp;Compte</a>
+            <a class="dropdown-toggle"><fa-icon [icon]="faUser"></fa-icon>&nbsp;Compte</a>
             <ul class="dropdown-menu" [hidden]="!menuCompte">
                 <li><a routerLink="/compte">Mon profil</a></li>
                 <li><a routerLink="/mesrecettes">Mes recettes</a></li>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RecetteService } from 'src/app/services/recette.service';
 import { Observable } from 'rxjs';
 import { Recette } from 'src/app/model/recette.model';
@@ -15,6 +15,7 @@ import { Photo } from 'src/app/model/photo.model';
 })
 export class FooterComponent implements OnInit {
 
+  @Input() loggedIn: boolean;
   pathUpload: string = environment.PATH_UPLOAD;
   lastRecette$: Observable<Recette>;
   lastCommentaire$ : Observable<Commentaire>;

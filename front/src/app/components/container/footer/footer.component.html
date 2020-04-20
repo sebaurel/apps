@@ -34,8 +34,8 @@
                 <h5>Derniers commentaires</h5>
                  <ul class="post-list">
                     <li *ngFor="let commentaire of lastCommentaire$ | async">
-                        <a href="#"><h6><span class="small">De</span> {{commentaire.redacteur.pseudo}}</h6></a>
-                        <a href="#">{{commentaire.body | slice:0:30}}</a>
+                        <a routerLink="/compte/{{commentaire.redacteur.id}}"><h6><span class="small">De</span> {{commentaire.redacteur.pseudo}}</h6></a>
+                        {{commentaire.body | slice:0:30}}
                     </li>
                 </ul>
             </div>
@@ -43,11 +43,11 @@
                 <h5>Photos</h5>
                 <ul class="img-feed">
                     <li *ngFor="let photo of lastPhoto$ | async">
-                        <a href="#"><img class="petiteThumb" [src]="pathUpload+photo.id+'-thumb.png'" alt="Image"></a>
+                        <a [href]="pathUpload+photo.id+'.png'"><img class="petiteThumb" [src]="pathUpload+photo.id+'-thumb.png'" alt="Image"></a>
                     </li>
                 </ul>
-            </div>
-        </div><!---->
+            </div><!---->
+        </div>
 
         <!--<div class="row"> Begin Sub Footer
             <div class="col-12 footer-col footer-sub">

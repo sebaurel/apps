@@ -56,7 +56,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
     	https.cors()
     	.and()
        	.authorizeRequests()
-    	.antMatchers("/", "/rest/recette/**", "/rest/categorie/**", "/rest/aliment/**", "/rest/unite/**", "/login**", "/rest/register**", "/rest/regitrationConfirm**").permitAll()
+    	.antMatchers("/", "/rest/utilisateur/profil/**", "/rest/commentaire/last", "/rest/photo/last", "/rest/recette/**", "/rest/categorie", "/rest/aliment", "/rest/unite", "/login", "/rest/register**", "/rest/regitrationConfirm**").permitAll()
         .anyRequest().authenticated()
         .and()
         .httpBasic()

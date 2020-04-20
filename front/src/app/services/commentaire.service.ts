@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Commentaire } from '../model/commentaire.model';
-import { environment } from "../../environments/environment";
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentaireService {
-  commentaire: Commentaire = new Commentaire();
+  //commentaire: Commentaire = new Commentaire();
 
   constructor(
     private http: HttpClient
