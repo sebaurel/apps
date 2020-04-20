@@ -65,6 +65,8 @@ public class RecetteSrv {
 		
 		return listAllRecettes.subList(0, nombre);
 		
+		//return findAllByIdIn(tableau de nombre après select id recette)
+		
 	}
 	
 	public List<Recette> findAllByUtilisateurAndPublier(Utilisateur utilisateur) {

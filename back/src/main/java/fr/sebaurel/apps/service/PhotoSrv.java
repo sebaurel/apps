@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,11 +27,11 @@ import fr.sebaurel.apps.repository.PhotoRepo;
 public class PhotoSrv {
 	//private final Path rootLocation = Paths.get("C:\\Program Files\\Apache24\\htdocs\\images");
 	private final Path rootLocation = Paths.get("/home/sebapps/images/");
-	// /home/sebapps/images/
-	// C:\\Program Files\\Apache24\\htdocs\\images
+
+
 	/*@Value("${photosPath}")
     private String photosPath;
-	//private Path rootLocation = Paths.get(photosPath);*/
+	private Path rootLocation = Paths.get(photosPath);*/
 
 	@Autowired
 	PhotoRepo photoRepo;
@@ -76,6 +77,13 @@ public class PhotoSrv {
 
 	public Photo find(long id) {
 		return photoRepo.findById(id);
+	}
+	
+	public List<Photo> findLastSixCommentaireRecette(){
+		List<String> recherche = new ArrayList<String>() ;
+		recherche.add("Recette");
+		recherche.add("Commentaire");
+		return photoRepo.findTop4ByValidAndUtilInOrderByIdDesc(true, recherche);
 	}
 	
 	public void invalidatePhoto(long id) {

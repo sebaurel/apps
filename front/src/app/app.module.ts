@@ -16,7 +16,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { ContainerComponent } from './components/container/container.component';
 import { AuthService } from './services/auth.service';
-import { ProfileComponent } from './components/profile/profile.component';
 import { UrlPermission } from './jwtAuthorization/url.permission';
 import { UtilisateurService } from './services/utilisateur.service';
 import { PreviousRouteService } from './services/previous-route.service';
@@ -53,6 +52,8 @@ import { PhotoUploadComponent } from './components/transverse/photo-upload/photo
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PrintRecetteComponent } from './components/transverse/print-recette/print-recette.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { ProfilComponent } from './components/profil/profil.component';
+import { ProfilFormComponent } from './components/profil-form/profil-form.component';
 
 registerLocaleData(localeFr);
 
@@ -62,7 +63,6 @@ registerLocaleData(localeFr);
     LoginComponent, 
     RegisterComponent,
     ContainerComponent,
-    ProfileComponent,
     RecetteFormComponent,
     RecetteComponent,
     HomeComponent,
@@ -89,6 +89,8 @@ registerLocaleData(localeFr);
     PhotoUploadComponent,
     PrintRecetteComponent,
     ContactComponent,
+    ProfilComponent,
+    ProfilFormComponent,
   ],
   imports: [
     HttpClientModule,

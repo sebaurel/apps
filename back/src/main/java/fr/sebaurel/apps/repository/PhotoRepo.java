@@ -13,4 +13,7 @@ public interface PhotoRepo extends JpaRepository<Photo, Long> {
 
 	Photo findById(long id);
 	List<Photo> findAllByValidAndDateBefore(boolean valid, Date date);
+	List<Photo> findTop4ByValidAndUtilInOrderByIdDesc(boolean Valide, List<String> recherche);
+
+	
 }

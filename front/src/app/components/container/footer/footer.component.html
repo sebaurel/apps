@@ -1,6 +1,6 @@
 <div class="footer-container"><!-- Begin Footer -->
-  <div class="container">
-      <div class="row footer-row">
+    <div class="container">
+        <div class="row footer-row">
             <div class="col-lg-3 col-sm-6 footer-col">
                 <h5>A propos</h5><br>
                 <address>
@@ -8,10 +8,10 @@
                     64100 Bayonne<br>
                 </address>
                 <ul class="social-icons">
-                    <li><a href="#" class="social-icon facebook"></a></li>
-                    <li><a href="#" class="social-icon twitter"></a></li>
-                    <!--<li><a href="#" class="social-icon dribble"></a></li>
-                    <li><a href="#" class="social-icon rss"></a></li>
+                    <!--<li><a href="https://www.facebook.com/sebaurel" class="social-icon facebook" target="blank"></a></li>-->
+                    <li><a href="https://twitter.com/Sebaurel64" class="social-icon twitter" target="blank"></a></li>
+                    <li><a href="https://www.linkedin.com/in/sébastien-aurel-8a29bb9a/" class="social-icon linkedin" target="blank"></a></li>
+                    <!--<li><a href="#" class="social-icon rss"></a></li>
                     <li><a href="#" class="social-icon forrst"></a></li>-->
                 </ul>
             </div>
@@ -30,31 +30,24 @@
                     </li>
                 </ul>
             </div>
-            <!--<div class="col-lg-3 col-sm-6 footer-col">
+            <div class="col-lg-3 col-sm-6 footer-col">
                 <h5>Derniers commentaires</h5>
                  <ul class="post-list">
-                    <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-                    <li><a href="#">Consectetur adipiscing elit est lacus gravida</a></li>
+                    <li *ngFor="let commentaire of lastCommentaire$ | async">
+                        <a href="#"><h6><span class="small">De</span> {{commentaire.redacteur.pseudo}}</h6></a>
+                        <a href="#">{{commentaire.body | slice:0:30}}</a>
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-3 col-sm-6 footer-col">
                 <h5>Photos</h5>
                 <ul class="img-feed">
-                    <li><a href="#"><img src="" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="assets\WG_Piccolo\img\gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="assets\WG_Piccolo\img\gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="assets\WG_Piccolo\img\gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="assets\WG_Piccolo\img\gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="assets\WG_Piccolo\img\gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="assets\WG_Piccolo\img\gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="assets\WG_Piccolo\img\gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="assets\WG_Piccolo\img\gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
-                    <li><a href="#"><img src="assets\WG_Piccolo\img\gallery/flickr-img-1.jpg" alt="Image Feed"></a></li>
+                    <li *ngFor="let photo of lastPhoto$ | async">
+                        <a href="#"><img class="petiteThumb" [src]="pathUpload+photo.id+'-thumb.png'" alt="Image"></a>
+                    </li>
                 </ul>
             </div>
-        </div>-->
+        </div><!---->
 
         <!--<div class="row"> Begin Sub Footer
             <div class="col-12 footer-col footer-sub">

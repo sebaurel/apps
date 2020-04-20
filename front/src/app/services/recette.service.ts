@@ -39,7 +39,7 @@ export class RecetteService {
     return this.http.get(environment.API_URL+'rest/recette/last', {observe: 'body'});
   }
   
-  getRandomRecette(nombre: number): Observable<any> {
+  public getRandomRecette(nombre: number): Observable<any> {
     return this.http.get(environment.API_URL+'rest/recette/random/'+nombre, {observe: 'body'});
   }
 

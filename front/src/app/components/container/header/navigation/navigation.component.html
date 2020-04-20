@@ -5,8 +5,9 @@
             <a class="dropdown" routerLink="/home">Accueil</a>
         </li>
         <li *ngIf="loggedIn else recetteBlock" [className]="ongletRecettes" on-mouseover="activate('recettes')" on-mouseleave="deActivate('recettes')">
-            <a class="dropdown-toggle" routerLink="/recettes">Recettes</a>
+            <a class="dropdown-toggle">Recettes</a>
             <ul class="dropdown-menu" [hidden]="!menuRecettes">
+                <li><a routerLink="/recettes">Recherche</a></li>
                 <li><a routerLink="/recette/new">Déposer</a></li>
             </ul>
         </li>
@@ -19,10 +20,11 @@
             <a class="dropdown" routerLink="/contact">Contact</a>
         </li>
         <li *ngIf="loggedIn else loginBlock" [className]="ongletCompte" on-mouseover="activate('compte')" on-mouseleave="deActivate('compte')">
-            <a class="dropdown-toggle" routerLink="/compte"><fa-icon [icon]="faUser"></fa-icon>&nbsp;Compte</a>
+            <a class="dropdown-toggle" ><fa-icon [icon]="faUser"></fa-icon>&nbsp;Compte</a>
             <ul class="dropdown-menu" [hidden]="!menuCompte">
-                <li *ngIf="loggedIn"><a routerLink="/mesrecettes">Mes recettes</a></li>
-                <li *ngIf="loggedIn"><a routerLink="/mesfavoris">Mes favoris</a></li>
+                <li><a routerLink="/compte">Mon profil</a></li>
+                <li><a routerLink="/mesrecettes">Mes recettes</a></li>
+                <li><a routerLink="/mesfavoris">Mes favoris</a></li>
                 <li *ngIf="admin"><a routerLink="/recette/aliment">Aliments</a></li>
                 <li><a href="#" (click)="logOut()">Déconnexion</a></li>
             </ul>

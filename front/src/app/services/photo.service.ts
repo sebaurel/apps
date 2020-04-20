@@ -10,6 +10,8 @@ import { Photo } from '../model/photo.model';
 })
 export class PhotoService {
   
+  url: string = environment.API_URL+'rest/photo';
+
   constructor(
     private uploadService: UploadFileService,
     private http: HttpClient
@@ -21,12 +23,15 @@ export class PhotoService {
     .append("height", height)
     .append("width", width);
 
-    let url = environment.API_URL+'rest/photo'
     
-    return this.uploadService.pushFileToStorage(selectedPhoto, url, httpParams);
+    return this.uploadService.pushFileToStorage(selectedPhoto, this.url, httpParams);
   }
 
   deletePhoto(photo: Photo) {
-    return this.http.delete(environment.API_URL+'rest/photo/'+ photo.id)
+    return this.http.delete(this.url+ photo.id)
+  }
+
+  public getLastPhoto(): Observable<Photo> {
+    return this.http.get<Photo>(this.url+'/last', {observe: 'body'});
   }
 }

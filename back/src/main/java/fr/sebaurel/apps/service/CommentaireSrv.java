@@ -54,4 +54,8 @@ public class CommentaireSrv {
 		}
 		commentaireRepo.delete(commentaire);
 	}
+
+	public List<Commentaire> findLastThree() {
+		return commentaireRepo.findTop3ByValideOrderByIdDesc(true);
+	}
 }

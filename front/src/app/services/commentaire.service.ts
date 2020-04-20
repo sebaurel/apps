@@ -8,8 +8,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommentaireService {
-  
-
   commentaire: Commentaire = new Commentaire();
 
   constructor(
@@ -31,5 +29,11 @@ export class CommentaireService {
   public deleteCommentaire(idCommentaire: number) {
     return this.http.delete<Commentaire>(environment.API_URL+'rest/commentaire/'+idCommentaire, {observe: "body"});
   }
+
+  public getLastCommentaire(): Observable<any> {
+    return this.http.get(environment.API_URL+'rest/commentaire/last', {observe: 'body'});
+  }
+  
+
 
 }

@@ -10,12 +10,12 @@ import { Photo } from 'src/app/model/photo.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+  selector: 'app-profil-form',
+  templateUrl: './profil-form.component.html',
+  styleUrls: ['./profil-form.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ProfileComponent implements OnInit, CanComponentDeactivate {
+export class ProfilFormComponent implements OnInit, CanComponentDeactivate {
 
   utilisateur: Utilisateur = this.userService.getCurrentUserLogged();
   photoThumbPath: String;
@@ -102,4 +102,5 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
       return true;
     }
   }
+
 }

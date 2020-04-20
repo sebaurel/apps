@@ -3,7 +3,8 @@ import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { ContainerComponent } from "./components/container/container.component";
 import { UrlPermission } from "./jwtAuthorization/url.permission";
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfilFormComponent } from './components/profil-form/profil-form.component';
+import { ProfilComponent } from './components/profil/profil.component';
 import { RecetteFormComponent } from './components/recette-form/recette-form.component';
 import { RecettesComponent } from './components/recettes/recettes.component';
 import { AlimentFormComponent } from './components/aliment-form/aliment-form.component';
@@ -31,14 +32,17 @@ export const routes: Routes = [
   {
     path: 'recettes',
     component: ContainerComponent,
-    children: [
-      { path: '', component: RecettesComponent, outlet: 'connected' },
-    ],
+    children: [{ path: '', component: RecettesComponent, outlet: 'connected' },],
   },
   {
     path: 'compte',
     component: ContainerComponent, canActivate: [UrlPermission],
-    children: [{ path: '', component: ProfileComponent, canDeactivate: [ConfirmationGuard], outlet: 'connected' }]
+    children: [{ path: '', component: ProfilFormComponent, canDeactivate: [ConfirmationGuard], outlet: 'connected' }]
+  },
+  {
+    path: 'compte/:id',
+    component: ContainerComponent, canActivate: [UrlPermission],
+    children: [{ path: '', component: ProfilComponent, canDeactivate: [ConfirmationGuard], outlet: 'connected' }]
   },
   {
     path: 'mesrecettes',

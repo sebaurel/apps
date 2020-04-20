@@ -52,4 +52,9 @@ public class CommentaireCtrl {
     public void delete( @PathVariable(value = "id") Long id) {
         commentaireSrv.delete(id);
     }
+ 	
+ 	@GetMapping("/last")
+    public List<Commentaire> lastCommentaire(){
+    	return commentaireSrv.findLastThree();
+    }
 }
