@@ -8,7 +8,11 @@ td.celluleThumbs{
 div.tableIngredients, .tableEtapes {
   border-bottom: 1px dotted #a9a9a9;
   margin-bottom: 5px
-}	
+}
+
+.brouillon {
+	color: #d8450b;
+}
 
 /* The switch - the box around the slider */
 .switch {
@@ -51,11 +55,11 @@ transition: .4s;
 }
 
 input:checked + .slider {
-background-color: #2196F3;
+background-color: #d8450b;
 }
 
 input:focus + .slider {
-box-shadow: 0 0 1px #2196F3;
+box-shadow: 0 0 1px #d8450b;
 }
 
 input:checked + .slider:before {
@@ -107,4 +111,30 @@ border-radius: 50%;
   
   .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
 	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .mat-stepper-horizontal {
+	  padding: 0.5rem;
+    }
+  
+  .basic-container .mat-step-header {
+	background-color: rgba($color: #d8450b, $alpha: 0.5);
+	border: solid 1px #d8450b;
+	color: #fff;
+	padding: 5px;
+	height: 100%;
+  }
+
+  .basic-container .mat-step-header .mat-step-icon-selected {
+	background-color: #d8450b;
+	color: #fff;
+  }
+  
+  .mat-step-header .mat-step-icon {
+	  background-color: rgba(167, 35, 35, 0.54);
+	  color: #fff;
+  }
+  .mat-stepper-horizontal-line {
+	  border-top-color: #d8450b;
+	  margin: 0px !important;
   }

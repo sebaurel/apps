@@ -35,15 +35,15 @@ export const routes: Routes = [
     children: [{ path: '', component: RecettesComponent, outlet: 'connected' },],
   },
   {
-    path: 'compte/:id',
-    component: ContainerComponent,
-    children: [{ path: '', component: ProfilComponent, outlet: 'connected' }]
-  }, 
-  {
     path: 'compte',
     component: ContainerComponent, canActivate: [UrlPermission],
     children: [{ path: '', component: ProfilFormComponent, canDeactivate: [ConfirmationGuard], outlet: 'connected' }]
   },
+  {
+    path: 'compte/:id',
+    component: ContainerComponent,
+    children: [{ path: '', component: ProfilComponent, outlet: 'connected' }]
+  }, 
   {
     path: 'mesrecettes',
     component: ContainerComponent, canActivate: [UrlPermission],
@@ -86,7 +86,7 @@ export const routes: Routes = [
   },
 
 // otherwise redirect to login
-  //{ path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: 'home' }
 ];
 
 export const routing = RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' });

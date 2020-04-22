@@ -20,6 +20,7 @@ import { Unite } from '../../model/unite.model';
 import { CanComponentDeactivate } from '../../gards/confirmation.guard';
 import { FormValidator } from '../../util/form.util';
 import { Aliment } from 'src/app/model/aliment.model';
+import { faArrowsAltV } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-recetteForm',
@@ -28,6 +29,9 @@ import { Aliment } from 'src/app/model/aliment.model';
   encapsulation: ViewEncapsulation.None
 })
 export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
+
+  faArrowsAltV = faArrowsAltV;
+
   recette: Recette = new Recette();
   publier: boolean = false;
   titrePage: String = "Nouvelle Recette"

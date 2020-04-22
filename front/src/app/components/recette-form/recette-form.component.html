@@ -1,11 +1,6 @@
 <h1 class="title-bg">
   {{titrePage}}
-  <ng-container *ngIf="publier; else elseTemplate">
-    <span>(Publier)</span>
-  </ng-container>
-  <ng-template #elseTemplate>
-    <span>(Brouillon)</span>
-  </ng-template>
+  <span *ngIf="!publier">&nbsp;(Brouillon)</span>
 </h1>
 <form [formGroup]="formPublier">
   <h5 class="title-bg">
@@ -13,13 +8,18 @@
       <input type="checkbox" id="switchPublier" formControlName="switchPublier">
       <span class="slider round"></span>
     </label>
-    Publier
+    <ng-container *ngIf="publier; else elseTemplate">
+      <span>&nbsp;Publier</span>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <span class="brouillon">&nbsp;Brouillon</span>
+    </ng-template>
   </h5>
 </form>
 
-<div class="p-2" width="100%">
+<div class="basic-container" width="100%">
   <mat-horizontal-stepper>
-    <mat-step label="Description">
+    <mat-step label="Description" class="mat-step-header">
       <div class="col-12 col-md-4 mx-auto">
         <div class="auth-form-dark text-left">
 
@@ -58,17 +58,17 @@
 
     <mat-step label="Ingrédients">
 
-      <div class="col-12 col-md-4 mx-auto">
+      <div class="col-12 col-md-5 mx-auto">
         <div class="auth-form-dark text-left">
 
           <div cdkDropList class="example-list" (cdkDropListDropped)="dropIngredient($event)">
             <div *ngFor="let ingredient of ingredients" width="100%" class="tableIngredients example-box" cdkDrag>
               <table style="width:100%">
                 <tr>
-                  <td *ngIf="ingredient.aliment.photo != null else elseBlock" rowspan="2" width="40px" padding="5px" class="celluleThumbs">
+                  <td *ngIf="ingredient.aliment.photo != null else pasDePhoto" rowspan="2" width="40px" padding="5px" class="celluleThumbs">
                     <img class="petiteThumb" [src]="pathUpload+ingredient.aliment.photo.id+'-thumb.png'" />
                   </td>
-                  <ng-template #elseBlock>
+                  <ng-template #pasDePhoto>
                     <td rowspan="2" width="40px" padding="5px" class="celluleThumbs">
                       <img [src]="photoThumbPathDefaultIngredient" class="petiteThumb" />
                     </td>
@@ -80,7 +80,8 @@
                   <td>
                     <app-modal-ingredient (confirmExit)="confirmExit=$event" [editIngredient]=true [ingredient]="ingredient" [ingredients]="ingredients"></app-modal-ingredient>
                   </td>
-                  <td width="40px"><button class="btn btn-outline-dark font-weight-medium" (click)="spliceIngredient(ingredient)" type="button">-</button></td>
+                  <td><button class="btn btn-outline-dark font-weight-medium" (click)="spliceIngredient(ingredient)" type="button">Supprimer</button></td>
+                  <td><button class="btn btn-outline-dark font-weight-medium" type="button"><fa-icon [icon]="faArrowsAltV"></fa-icon></button></td>
                 </tr>
                 <tr>
                   <td width="100%" ><em>&nbsp;{{ingredient.commentaire}}</em></td>
@@ -108,7 +109,7 @@
 
     <mat-step label="Etapes">
 
-      <div class="col-12 mx-auto">
+      <div class="col-12 col-md-10 mx-auto">
         <div class="auth-form-dark text-left">
           <div cdkDropList class="example-list" (cdkDropListDropped)="dropEtape($event)">
             <div *ngFor="let etape of etapes " width="100%" class="tableEtapes example-box" cdkDrag>
@@ -126,7 +127,8 @@
                   <td>
                     <app-modal-etapes (confirmExit)="confirmExit=$event" [editEtape]="true" [etape]="etape" [etapes]="etapes"></app-modal-etapes>
                   </td>
-                  <td><button class="btn btn-outline-dark font-weight-medium" (click)="spliceEtape(etape)" type="button">-</button></td>
+                  <td><button class="btn btn-outline-dark font-weight-medium" (click)="spliceEtape(etape)" type="button">Supprimer</button></td>
+                  <td><button class="btn btn-outline-dark font-weight-medium" type="button"><fa-icon [icon]="faArrowsAltV"></fa-icon></button></td>
                 </tr>
               </table>
 
