@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
 import { environment } from "../../environments/environment";
+import { Utilisateur } from '../model/utilisateur.model';
 
 @Injectable()
 export class AuthService {
@@ -34,6 +35,18 @@ export class AuthService {
     this.router.navigate(['/login']);
 
   }
+
+  ChangePassword(email: string, passwordOld: string, passwordNew: string) {
+    
+    let params = new HttpParams()
+    .append("email", email)
+    .append("passwordOld", passwordOld)
+    .append("passwordNew", passwordNew);
+
+    return this.http.post<HttpResponse<Utilisateur>>(environment.API_URL+'rest/changepassword', '',{params})
+
+  }
+
 
 }
 

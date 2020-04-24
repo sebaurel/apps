@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from "@angular/router";
 
 import { Utilisateur } from "../../model/utilisateur.model";
-import { AccountService } from "../../services/account.service";
+import { AccountService, EmailMustMatch } from "../../services/account.service";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormValidator } from '../../util/form.util'
 declare var grecaptcha: any;
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
       passwordConfirm:['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     }, {
-      validator: MustMatch('password', 'passwordConfirm')
+      validator: EmailMustMatch('password', 'passwordConfirm')
     });
 
     this.formRegister.valueChanges.subscribe(()=> {
@@ -94,25 +94,5 @@ export class RegisterComponent implements OnInit {
         alert(err);
     }
   )
-  }
-}
-
-
-export function MustMatch(controlName: string, matchingControlName: string) {
-  return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
-
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-          // return if another validator has already found an error on the matchingControl
-          return;
-      }
-
-      // set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-          matchingControl.setErrors({ mustMatch: true });
-      } else {
-          matchingControl.setErrors(null);
-      }
   }
 }

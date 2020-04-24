@@ -54,6 +54,7 @@ import { PrintRecetteComponent } from './components/transverse/print-recette/pri
 import { ContactComponent } from './components/contact/contact.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { ProfilFormComponent } from './components/profil-form/profil-form.component';
+import { ModalMotdepassComponent } from './components/modals/modal-motdepass/modal-motdepass.component';
 
 registerLocaleData(localeFr);
 
@@ -91,6 +92,7 @@ registerLocaleData(localeFr);
     ContactComponent,
     ProfilComponent,
     ProfilFormComponent,
+    ModalMotdepassComponent,
   ],
   imports: [
     HttpClientModule,

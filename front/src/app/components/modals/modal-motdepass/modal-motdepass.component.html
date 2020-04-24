@@ -1,0 +1,45 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Changement de mot de passe</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-scroller background-picture">
+            <div class="container-fluid page-body-wrapper full-page-wrapper">
+                Tu es bien {{utilisateur.pseudo}} ?
+                <form [formGroup]="formMotdepass">
+                    <div class="content-wrapper d-flex align-items-center auth login-full-bg">
+                        <div class="col-12 mx-auto">
+                            <div class="auth-form-dark text-left p-5">
+                                <div class="form-group">
+                                    <label for="passwordOld">Ancien mot de passe</label>
+                                    <input type="password" class="form-control" name="passwordOld" id="passwordOld" formControlName="passwordOld"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Nouveau mot de passe</label>
+                                    <input type="password" class="form-control" name="password" id="password" formControlName="password"/>
+                                    <div *ngIf="formErrors.password" class="help-block">{{formErrors.password}}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordConfirm">Confirmation du nouveau mot de passe</label>
+                                    <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" formControlName="passwordConfirm"/>
+                                    <div *ngIf="formErrors.passwordConfirm" class="help-block">{{formErrors.passwordConfirm}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 mb-3 text-center">
+                        <button class="btn btn-lg font-weight-medium" class="btn-warning" (click)="onSubmit(formMotdepass)">Modifier mon mot de passe</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Fermer</button>
+    </div>
+</ng-template>
+<button class="btn btn-outline-dark mt-3 mb-3" (click)="open(content)">Changer de mot de passe</button>

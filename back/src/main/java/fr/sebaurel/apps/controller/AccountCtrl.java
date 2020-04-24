@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +33,11 @@ public class AccountCtrl {
     @PostMapping("/regitrationConfirm")
     public @ResponseBody Utilisateur confirmRegistration (@RequestBody String token) throws CustomException {
         return utilisateurSrv.confirmToken(token);
+    }
+    
+    @PostMapping("/changepassword")
+    public @ResponseBody Utilisateur changePasswordAccount(@RequestParam("email") String email, @RequestParam("passwordOld") String passwordOld, @RequestParam("passwordNew") String passwordNew) throws CustomException {
+        return utilisateurSrv.changePassword(email,passwordOld,passwordNew);
     }
     
 }

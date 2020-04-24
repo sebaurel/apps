@@ -204,6 +204,23 @@ public class UtilisateurSrv implements UserDetailsService {
 		return utilisateurRepo.findOneById(profilId);
 	}
 
+	public Utilisateur changePassword(String email, String passwordOld, String passwordNew) throws CustomException {
+		Utilisateur utilisateur = find(email);
+		
+		if (passwordEncoder.matches(passwordOld,utilisateur.getPassword())) {
+			try {
+				utilisateur.setPassword(passwordEncoder.encode(passwordNew));
+				utilisateurRepo.save(utilisateur);
+			} catch (Exception e) {
+				throw new CustomException("Erreur lors du changement de mot de passe.\nVeuillez reessayer plus tard", HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			throw new CustomException("L'ancien mot de passe n'est pas correct !", HttpStatus.BAD_REQUEST);
+		}
+
+		return utilisateur;
+	}
+
 }
 
 	
