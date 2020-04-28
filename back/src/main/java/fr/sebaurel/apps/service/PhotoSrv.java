@@ -16,17 +16,19 @@ import javax.imageio.ImageIO;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 //import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.sebaurel.apps.model.Photo;
 import fr.sebaurel.apps.repository.PhotoRepo;
+import fr.sebaurel.apps.util.CustomException;
 
 @Service
 public class PhotoSrv {
-	//private final Path rootLocation = Paths.get("C:\\Program Files\\Apache24\\htdocs\\images");
 	private final Path rootLocation = Paths.get("/home/sebapps/images/");
+	//private final Path rootLocation = Paths.get("C:\\Program Files\\Apache24\\htdocs\\images");
 
 
 	/*@Value("${photosPath}")
@@ -40,7 +42,7 @@ public class PhotoSrv {
 		return photoRepo.findAll();
 	}
 	
-	public Photo save(MultipartFile multipartFile, String heightString, String widthString) {
+	public Photo save(MultipartFile multipartFile, String heightString, String widthString) throws Exception {
 		purgePhotos();
 		Photo photo = new Photo();
 		try {
@@ -70,7 +72,8 @@ public class PhotoSrv {
 			store(originalImage, thumbNom, 100, 100);
 			
 		} catch (Exception e) {
-			return photo;
+			throw e;
+			//throw new CustomException(e.getStackTrace().toString(), HttpStatus.BAD_REQUEST);
 		}
 		return photoRepo.save(photo);
 	}
@@ -122,7 +125,6 @@ public class PhotoSrv {
 	public void store(BufferedImage originalImage, String photoNom, int width, int height) throws IOException {
 		
 		int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-		
 		
 		BufferedImage resizeImagePng = resizeImage(originalImage, type, width, height);
 		ImageIO.write(resizeImagePng, "png", new File(this.rootLocation.resolve(photoNom).toString()));

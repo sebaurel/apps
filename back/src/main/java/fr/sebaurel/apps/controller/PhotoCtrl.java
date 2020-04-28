@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.sebaurel.apps.model.Photo;
 import fr.sebaurel.apps.service.PhotoSrv;
+import fr.sebaurel.apps.util.CustomException;
 
 @RestController
 @RequestMapping("rest/photo")
@@ -28,7 +29,7 @@ public class PhotoCtrl {
 	ObjectMapper mapper;
 	
 	@PostMapping("")
-	public Photo handleFileUpload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("height") String height, @RequestParam("width") String width) {
+	public Photo handleFileUpload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("height") String height, @RequestParam("width") String width) throws Exception {
 		return photoSrv.save(multipartFile,height,width);
 	}
 	

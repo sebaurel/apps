@@ -5,6 +5,7 @@ import { AlimentService } from 'src/app/services/aliment.service';
 import { environment } from 'src/environments/environment';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
 import { Utilisateur } from 'src/app/model/utilisateur.model';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-frigo',
@@ -26,8 +27,12 @@ export class ModalFrigoComponent implements OnInit {
   alimentsId: number[] = []; // Pour envoyer les id des aliments au back afin de sauvegarder le frigo
   currentUser: Utilisateur;
 
+  formAliments: FormGroup = this.formBuilder.group({
+    alimentsSelecteur: ['']
+  })
 
   constructor(
+    private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private alimentService: AlimentService,
     private utilisateurService: UtilisateurService
@@ -75,11 +80,12 @@ export class ModalFrigoComponent implements OnInit {
     this.alimentsSelectedModal.forEach(aliment => { //on rempli la liste des id a sauvegarder
         this.alimentsId.push(aliment.id);
       });
-
-    this.utilisateurService.enregistreFrigo(this.utilisateurService.getCurrentUserLogged().email, this.alimentsId)
-    .subscribe(data => {
-      localStorage.setItem("currentUser", JSON.stringify(data));
-    });
+    if (confirm("En enregistrant ce frigo, vous écraserez celui précédement enregistré")){
+      this.utilisateurService.enregistreFrigo(this.utilisateurService.getCurrentUserLogged().email, this.alimentsId)
+      .subscribe(data => {
+        localStorage.setItem("currentUser", JSON.stringify(data));
+      });
+    }
   }
 
   viderFrigo(){
@@ -91,5 +97,8 @@ export class ModalFrigoComponent implements OnInit {
     JSON.parse(localStorage.getItem('currentUser')).frigo.forEach((aliment:Aliment) => {
       this.alimentService.pushAliment(aliment, this.alimentsSelectedModal);
     });
+    this.formAliments.setValue({
+      alimentsSelecteur: this.alimentsSelectedModal,
+    });//ng-select ne se rafraichit pas !! obligé de faire un setvalue sur le formulaire
   }
 }

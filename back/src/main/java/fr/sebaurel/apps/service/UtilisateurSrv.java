@@ -114,8 +114,10 @@ public class UtilisateurSrv implements UserDetailsService {
 			String token = UUID.randomUUID().toString();
 		    createVerificationToken(utilisateur, token);
 		    mailSrv.EmailConfirmRegistrationToken(newUtilisateur, token);
-		} catch (Exception e) {
+		} catch (MessagingException e) {
 			throw new CustomException("L'email de confirmation n'a pas pu être envoyé, merci d'essayer plus tard.",HttpStatus.SERVICE_UNAVAILABLE);
+		} catch (Exception e) {
+			throw new CustomException("Erreur lors de la création de votre compte.\nMerci d'essayer plus tard ou de contacter un administrateur.",HttpStatus.SERVICE_UNAVAILABLE);
 		}
 		
         return newUtilisateur;
@@ -209,10 +211,13 @@ public class UtilisateurSrv implements UserDetailsService {
 		
 		if (passwordEncoder.matches(passwordOld,utilisateur.getPassword())) {
 			try {
+				mailSrv.sendEmail(utilisateur.getEmail(), "Changement de mot de passe frigolo", "<H1 align=\"center\">Changement de mot de passe</H1><p align=\"center\">Vous avez récemment changé votre mot de passe sur frigolo.<br>Si ce n'est pas vous, merci de contacter immediatement un administrateur</p>");
 				utilisateur.setPassword(passwordEncoder.encode(passwordNew));
 				utilisateurRepo.save(utilisateur);
+			} catch (MessagingException e) {
+				throw new CustomException("Erreur d'envoie du mail de changement de mot de passe.\nVeuillez reessayer plus tard, ou contacter un administrateur", HttpStatus.BAD_REQUEST);
 			} catch (Exception e) {
-				throw new CustomException("Erreur lors du changement de mot de passe.\nVeuillez reessayer plus tard", HttpStatus.BAD_REQUEST);
+				throw new CustomException("Erreur lors du changement de mot de passe.\nVeuillez reessayer plus tard, ou contacter un administrateur", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			throw new CustomException("L'ancien mot de passe n'est pas correct !", HttpStatus.BAD_REQUEST);

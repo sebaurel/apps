@@ -79,7 +79,7 @@ export class ModalCommentaireComponent implements OnInit {
     if (this.formCommentaire.valid) {
       this.commentaire.photos = this.photos;
 
-      if (!this.editCommentaire) this.commentaire.redacteur = this.currentUser; // a changer l'edition detruit le redacteur
+      if (!this.editCommentaire) this.commentaire.redacteur = this.currentUser;
       this.commentaire.idRecette = this.idRecette;
       this.commentaire.idUtilisateur = this.idUtilisateur;
       this.commentaire.valide = true;

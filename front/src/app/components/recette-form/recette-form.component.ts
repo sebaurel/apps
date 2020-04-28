@@ -123,7 +123,8 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
             });
 
             this.titrePage = recetteReceive.titre;
-
+            this.recette.utilisateur = recetteReceive.utilisateur;
+            this.recette.date = recetteReceive.date;
             this.publier = recetteReceive.publier;
             this.formPublier.setValue({
               switchPublier: recetteReceive.publier,
@@ -143,7 +144,8 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
               this.photoThumbPath = environment.PATH_UPLOAD + recetteReceive.photo.id + "-thumb.png";
             }
           }else{
-            
+            this.recette.utilisateur = this.currentUser;
+            this.recette.date = new Date();
             this.photoThumbPath = environment.PATH_UPLOAD + "default-thumb.png";
           }
 
@@ -190,9 +192,7 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
       this.recette.categorie = formRecette.get('categorie').value;
       this.recette.ingredients = this.ingredients;
       //if (this.photo) this.recette.photo = this.photo;
-      this.recette.utilisateur = this.currentUser;
       this.recette.etapes = this.etapes;
-      this.recette.date = new Date();
       this.recette.publier = this.publier;
       if (this.recette.id == null) {
         this.recetteService.postRecette(this.recette).subscribe(recetteSaved => {

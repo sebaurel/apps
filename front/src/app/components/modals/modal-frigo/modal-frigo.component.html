@@ -1,4 +1,4 @@
-<button class="btn btn-outline-dark font-weight-medium btn-block" (click)="open(content)">Ajouter</button>
+<button class="btn btn-outline-dark font-weight-medium btn-block" (click)="open(content)">Remplir mon frigo</button>
 <ng-template #content let-c="close">
     <div class="modal-header">
       <h4 class="modal-title">Mon frigo</h4>
@@ -11,19 +11,19 @@
         <div class="container-fluid page-body-wrapper full-page-wrapper">
           <div class="content-wrapper d-flex auth login-full-bg">
             <div class="col-12 mx-auto align-items-center">
+              <form [formGroup]="formAliments">
+                <label for="alimentsSelecteur">Ajouter un aliment : </label>
 
-              <label for="alimentsSelecteur">Ajouter un aliment : </label>
-
-              <ng-select [items]="aliments" [(ngModel)]="alimentsSelectedModal" bindLabel="nom" placeholder="Commencer à écrire pour recherche" [multiple]="true" [hideSelected]="true" name="alimentsSelecteur" (change)="ModalFrigoChange()"> </ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
-
+                <ng-select [items]="aliments" [(ngModel)]="alimentsSelectedModal" formControlName="alimentsSelecteur" bindLabel="nom" placeholder="Commencer à écrire pour recherche" [multiple]="true" [hideSelected]="true" name="alimentsSelecteur" (change)="ModalFrigoChange()"> </ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
   <div class="modal-footer">
-      <button *ngIf="loggedIn" class="btn btn-outline-dark" (click)="sauvegardeFrigo(); c()" type="button">Sauvegarder</button>
+      <button *ngIf="loggedIn" class="btn btn-outline-dark" (click)="sauvegardeFrigo()" type="button">Sauvegarder</button>
       <button *ngIf="loggedIn" class="btn btn-outline-dark" (click)="recupereFrigo()" type="button">Recupérer</button>
-      <button type="button" class="btn btn-outline-dark" (click)="c()">Fermer</button>
+      <button type="button" class="btn btn-outline-dark" (click)="c()">Chercher</button>
   </div>
 </ng-template>
