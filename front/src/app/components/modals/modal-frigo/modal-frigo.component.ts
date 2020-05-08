@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
 import { Utilisateur } from 'src/app/model/utilisateur.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-modal-frigo',
@@ -16,12 +18,11 @@ export class ModalFrigoComponent implements OnInit {
 
   @Input() loggedIn: boolean;
   @Input() alimentsSelectedModal: Aliment[]; //le tableau des aliments affichés
-  @Input() aliments: Aliment[]; //le tableau des aliments
   @Output() close: EventEmitter<Aliment> = new EventEmitter<Aliment>(); //evenement de fermeture qui entraine l'appel au WS de filtre
   @Output() change: EventEmitter<Aliment[]> = new EventEmitter<Aliment[]>(); //evenement de changement qui actualise la liste du partent mais qui n'entraine pas l'appel au WS de filtre
   photoThumbPath: String = environment.PATH_UPLOAD + "default-aliment.png";
   pathUpload:String = environment.PATH_UPLOAD;
-
+  aliments$: Observable<Aliment[]>;
   aliment: Aliment;
 
   alimentsId: number[] = []; // Pour envoyer les id des aliments au back afin de sauvegarder le frigo
@@ -44,9 +45,15 @@ export class ModalFrigoComponent implements OnInit {
   }
 
   open(content) {
+    this.aliments$ = this.alimentService.getAliments().pipe(map(data => {
+      data.sort((a, b) => a.nom.localeCompare(b.nom));
+    return data;}   ));
+
     this.modalService.open(content).result.then((result) => {
       this.close.emit();
     }, (reason) => {});
+
+    
   }
 
   ModalFrigoChange(){
@@ -57,7 +64,6 @@ export class ModalFrigoComponent implements OnInit {
     this.alimentService.pushAliment(aliment, this.alimentsSelectedModal); //on l'ajoute dans l'aliment selected
 
     //this.alimentsId.push(aliment.id); //On l'ajoute a la liste des aliments à sauvegarder /!\ cet ajout est faite directement dans la fonction de sauvegarde
-    this.alimentService.spliceAliment(aliment, this.aliments); //On le sort de la liste des aliments a selectionner
   }
 
 

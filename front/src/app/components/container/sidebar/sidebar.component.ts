@@ -27,7 +27,6 @@ export class SidebarComponent implements OnInit {
   categories$: Observable<Categorie>;// on recupere toutes les categories en base
 
   alimentsSelected : Aliment[] = new Array<Aliment>();
-  aliments: Aliment[] = []; // on recupere tout les aliments en base trier
   @Input() alimentsId: number[];
   @Output() alimentsIdChange: EventEmitter<number[]> = new EventEmitter<number[]>()
   @Input() seulementLesAliments: boolean = false;
@@ -43,12 +42,7 @@ export class SidebarComponent implements OnInit {
   ) {
 
     this.categories$ = this.categorieService.getCategories();
-
-    this.alimentService.getAliments().subscribe(aliments => {
-      aliments.forEach(aliment => {
-        this.alimentService.pushAliment(aliment, this.aliments)
-      });
-    });  
+ 
   }
 
   ngOnInit() { }
