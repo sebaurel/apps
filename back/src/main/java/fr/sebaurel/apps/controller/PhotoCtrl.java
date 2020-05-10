@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.sebaurel.apps.model.Photo;
 import fr.sebaurel.apps.service.PhotoSrv;
-import fr.sebaurel.apps.util.CustomException;
 
 @RestController
 @RequestMapping("rest/photo")

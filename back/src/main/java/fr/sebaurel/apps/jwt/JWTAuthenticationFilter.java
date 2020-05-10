@@ -22,7 +22,6 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.sebaurel.apps.model.Utilisateur;
-import fr.sebaurel.apps.jwt.SecurityConstants;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	
