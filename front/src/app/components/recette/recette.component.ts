@@ -56,12 +56,8 @@ export class RecetteComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.recetteService.getRecette(params['id'])
-      /*.pipe(map((rec : Recette) => {
-        this.recette = rec;
-        }))*/
       .subscribe((rec : Recette) => {
         this.recette = rec;
-        //this.commentaires = this.recette.commentaires;
         this.recette.commentaires.forEach((commentaire: Commentaire) =>{
           if(commentaire.valide) this.commentaires.push(commentaire);
         });
@@ -72,9 +68,7 @@ export class RecetteComponent implements OnInit {
         };
         this.isLoading = false;
       })
-    }); 
-    
-    
+    });
   }
 
   ngOnInit() {

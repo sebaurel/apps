@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { faEdit, faHeart } from '@fortawesome/free-solid-svg-icons';
 
-
 import { environment } from "../../../../environments/environment";
 import { EnumService } from 'src/app/services/enum.service';
 import { Categorie } from 'src/app/model/categorie.model';
@@ -26,8 +25,7 @@ export class SidebarComponent implements OnInit {
 
   categories$: Observable<Categorie>;// on recupere toutes les categories en base
 
-  alimentsSelected : Aliment[] = new Array<Aliment>();
-  aliments: Aliment[] = []; // on recupere tout les aliments en base trier
+  alimentsSelected: Aliment[] = new Array<Aliment>();
   @Input() alimentsId: number[];
   @Output() alimentsIdChange: EventEmitter<number[]> = new EventEmitter<number[]>()
   @Input() seulementLesAliments: boolean = false;
@@ -36,7 +34,7 @@ export class SidebarComponent implements OnInit {
   frigoActifOk: string = "frigoNonActif";
   photoThumbPathFrigo: String = environment.PATH_UPLOAD + "default-aliment.png";
 
-  
+
   constructor(
     private alimentService: AlimentService,
     private categorieService: EnumService
@@ -44,24 +42,19 @@ export class SidebarComponent implements OnInit {
 
     this.categories$ = this.categorieService.getCategories();
 
-    this.alimentService.getAliments().subscribe(aliments => {
-      aliments.forEach(aliment => {
-        this.alimentService.pushAliment(aliment, this.aliments)
-      });
-    });  
   }
 
   ngOnInit() { }
 
-  categorieChanged(){
+  categorieChanged() {
     this.categoriesSelectedChange.emit(this.categoriesSelected);
   }
 
-  FrigoChanged(aliments: Aliment[]){
+  FrigoChanged(aliments: Aliment[]) {
     this.alimentsSelected = aliments;
   }
 
-  FrigoModalClose(){
+  FrigoModalClose() {
     this.frigoActifOk = "frigoActif";
     this.alimentsId = [];
     this.alimentsSelected.forEach(aliment => {
@@ -71,29 +64,29 @@ export class SidebarComponent implements OnInit {
     this.utiliserFrigo = true;
   }
 
-  seulementLesAlimentsChanged(){
-    if (this.seulementLesAliments) this.seulementLesAliments=false;
-    else this.seulementLesAliments=true; //permet de ne pas inverser la selection des le premier click
+  seulementLesAlimentsChanged() {
+    if (this.seulementLesAliments) this.seulementLesAliments = false;
+    else this.seulementLesAliments = true; //permet de ne pas inverser la selection des le premier click
     this.seulementLesAlimentsChange.emit(this.seulementLesAliments);
   };
 
-  FrigoSwitch(){
+  FrigoSwitch() {
     console.log("switch");
     this.alimentsId = [];
-    if(!this.utiliserFrigo){//lorsque l'on click sur la fonction, le frigo est à actif, il faut donc l'inverser
+    if (!this.utiliserFrigo) {//lorsque l'on click sur la fonction, le frigo est à actif, il faut donc l'inverser
       this.utiliserFrigo = true;
       this.frigoActifOk = "frigoActif";
       this.alimentsSelected.forEach(aliment => {
         this.alimentsId.push(aliment.id);
       });
-    }else{
+    } else {
       this.utiliserFrigo = false;
       this.frigoActifOk = "frigoNonActif";
     }
     this.alimentsIdChange.emit(this.alimentsId);
   }
 
-  spliceAliment(aliment: Aliment){
+  spliceAliment(aliment: Aliment) {
     this.alimentService.spliceAliment(aliment, this.alimentsSelected);
     this.FrigoModalClose();
   }

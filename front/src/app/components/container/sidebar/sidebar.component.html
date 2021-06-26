@@ -13,7 +13,7 @@
       <input type="checkbox" [ngModel]="utiliserFrigo" (click)="FrigoSwitch()">
       <span class="slider"></span>
     </label>
-    Mon frigo <app-modal-frigo (change)="FrigoChanged($event)" (close)="FrigoModalClose()" [(alimentsSelectedModal)]="alimentsSelected" [loggedIn]="loggedIn" [aliments]="aliments"></app-modal-frigo>
+    Mon frigo <app-modal-frigo (change)="FrigoChanged($event)" (close)="FrigoModalClose()" [(alimentsSelectedModal)]="alimentsSelected" [loggedIn]="loggedIn"></app-modal-frigo>
   </h5>
   <div id="frigo" [className]="frigoActifOk">
     <table style="width:100%">
@@ -31,12 +31,4 @@
     </div>-->
     
   </div>
-  <!--<div>
-    Recettes par pages<br>
-    <a href="javascript:void(0);" (click)="onPageSizeChanged('5')">5</a>,
-    <a href="javascript:void(0);" (click)="onPageSizeChanged('10')">10</a>,
-    <a href="javascript:void(0);" (click)="onPageSizeChanged('25')">25</a>,
-    <a href="javascript:void(0);" (click)="onPageSizeChanged('50')">50</a>,
-    <a href="javascript:void(0);" (click)="onPageSizeChanged('100')">100</a>
-  </div>-->
 </div>

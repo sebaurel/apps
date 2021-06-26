@@ -14,7 +14,7 @@
               <form [formGroup]="formAliments">
                 <label for="alimentsSelecteur">Ajouter un aliment : </label>
 
-                <ng-select [items]="aliments" [(ngModel)]="alimentsSelectedModal" formControlName="alimentsSelecteur" bindLabel="nom" placeholder="Commencer à écrire pour recherche" [multiple]="true" [hideSelected]="true" name="alimentsSelecteur" (change)="ModalFrigoChange()"> </ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
+                <ng-select [items]="aliments$ | async" [(ngModel)]="alimentsSelectedModal" formControlName="alimentsSelecteur" bindLabel="nom" placeholder="Commencer à écrire pour recherche" [multiple]="true" [hideSelected]="true" name="alimentsSelecteur" (change)="ModalFrigoChange()"> </ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
               </form>
             </div>
           </div>
