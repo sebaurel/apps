@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <p>Chéri(e), on mange quoi ce soir ? … Ce qu'il y a dans le frigo !!!<br>
+        <p>Chéri(e), qu'est-ce qu'on mange ce soir ? … Ce qu'il y a dans le frigo !!!<br>
         Qui ne s'est jamais posé la question : <em>Que puis-je faire avec les aliments présents dans mon frigo ?</em><br><br>
         Heureusement, Frigolo est là. Une manière simple de trouver des recettes en fonction de son frigo !<br>
         Je remplis mon frigo virtuel et Frigolo me trouve les recettes.</p>
@@ -10,29 +10,32 @@
 
 
 <div *ngFor="let recette of randomRecettes$ | async" class="row mb-4 mt-4" >
-    <div class="offset-md-1 col-md-10 blog">
-      <article>
-          <div class="col-md-10">
-            <div routerLink="/recette/{{recette.id}}">
-              <div *ngIf="recette.photo != null else elseBlock" class="float-left mr-3 mb-3">
-                <img [src]="pathUpload+recette.photo.id+'-thumb.png'" alt="Photo principale de la recette" />
-              </div>
-              <ng-template #elseBlock><div class="float-left mr-3 mb-3">
-                <img [src]="pathUpload+'/default-thumb.png'" alt="Pas de photo" /></div>
-              </ng-template>
-              <h3 class="title-bg">
-                {{ recette.titre }}
-                <ng-container *ngIf="!recette.publier">
-                    <span>(Brouillon)</span>
-                </ng-container>
-              </h3>
+  <div class="offset-md-1 col-md-10 blog">
+    <article>
+        <div class="col-md-10">
+          <div routerLink="/recette/{{recette.id}}">
+            <div *ngIf="recette.photo != null else elseBlock" class="float-left mr-3 mb-3">
+              <img [src]="pathUpload+recette.photo.id+'-thumb.png'" alt="Photo principale de la recette" />
             </div>
-            <div *ngFor="let ingredient of recette.ingredients" class="float-left p-0 ml-1 mb-1">
-              <app-modal-aliment-view [aliment]="ingredient.aliment"></app-modal-aliment-view>
-            </div>
-            <div class="clearfix"></div>
-            <p [innerText]="recette.descriptif" routerLink="/recette/{{recette.id}}"></p>
+            <ng-template #elseBlock><div class="float-left mr-3 mb-3">
+              <img [src]="pathUpload+'/default-thumb.png'" alt="Pas de photo" /></div>
+            </ng-template>
+            <h3 class="title-bg">
+              {{ recette.titre }}
+            </h3>
           </div>
-      </article>
-    </div>
+          <div *ngFor="let ingredient of recette.ingredients" class="float-left p-0 ml-1 mb-1">
+            <app-modal-aliment-view [aliment]="ingredient.aliment"></app-modal-aliment-view>
+          </div>
+          <div class="clearfix"></div>
+          <p [innerText]="recette.descriptif" routerLink="/recette/{{recette.id}}"></p>
+        </div>
+    </article>
   </div>
+</div>
+<div class="container">
+  <div class="row">
+    <a routerLink="/recettes">Rechercher d'autre recette</a>
+  </div>
+</div>
+<br><br>

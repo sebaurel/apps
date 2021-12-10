@@ -1,0 +1,19 @@
+a { 
+    color: #383838;
+	font-family: "Oswald", sans-serif; 
+	font-weight: normal;
+	text-shadow: none; 
+	text-transform:uppercase;
+    text-decoration: none;
+	font-size:12px; 
+	padding: 10px;
+    border: 1px solid #383838;
+}
+
+a:hover {
+    color: #f9f9f9;
+    text-decoration: none;
+    background-color: #383838;
+    background-image: none;
+    filter: none;
+  }

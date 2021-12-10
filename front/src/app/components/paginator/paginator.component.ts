@@ -10,6 +10,7 @@ export class PaginatorComponent {
 
   @Input() pages: Page<any>;
   @Output() pageChange = new EventEmitter<string>();
+  @Output() PageSizeChange = new EventEmitter<string>();
 }
 
 

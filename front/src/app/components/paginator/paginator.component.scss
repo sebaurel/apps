@@ -1,4 +1,72 @@
 
-.container {
-    margin: 16px 0;
+.navigationPage {
+    display: table-cell;
+}
+
+.numeroPages{
+	display: table-cell;
+}
+
+button  { 
+    color: #383838;
+    border: 0px;
+    font-family: "Oswald", sans-serif; 
+	font-weight: bold;
+}
+
+button.pages  { 
+    color: #383838;
+    border: 1px solid #383838;
+    padding: 0px 5px;
+}
+
+button:hover {
+    color: #f9f9f9;
+    background-color: #383838;
+}
+
+button.pages, .numeroPageCourante {
+	font-size: 12px;
+    vertical-align: 6px;
+}
+
+.numeroPageCourante {
+    color: #383838;
+    font-family: "Oswald", sans-serif; 
+	font-weight: bold;
+    cursor: none;
+}
+
+div.recetteParPage {
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-style: italic;
+	margin-top: 5px;
+}
+
+.recetteParPage ul{
+	display: inline;
+	padding: 0;
+}
+
+.recetteParPage ul li {
+	display: inline;
+	color: #383838;
+	padding: 2px 4px 2px 2px;
+	margin: 2px;
+    border: 1px solid #383838;
+    font-family: "Oswald", sans-serif; 
+	font-weight: bold;
+	font-size: 10px;
+	cursor: pointer;
+}
+
+.recetteParPage ul li:hover {
+	color: #f9f9f9;
+    background-color: #383838;
+}
+
+.currentRecetteParPage {
+	color: #ffffff !important;
+    background-color: #383838;
+	cursor: none !important;
 }
