@@ -16,23 +16,18 @@ import javax.imageio.ImageIO;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.sebaurel.apps.model.Photo;
 import fr.sebaurel.apps.repository.PhotoRepo;
-//import fr.sebaurel.apps.util.CustomException;
 
 @Service
 public class PhotoSrv {
-	private final Path rootLocation = Paths.get("/home/sebapps/images/");
-	//private final Path rootLocation = Paths.get("C:\\Program Files\\Apache24\\htdocs\\images");
-
-
-	/*@Value("${photosPath}")
-    private String photosPath;
-	private Path rootLocation = Paths.get(photosPath);*/
+	
+	@Value("${spring.profiles.photosPath:default}") String photosPath;
+	private static Path rootLocation;
 
 	@Autowired
 	PhotoRepo photoRepo;
@@ -42,6 +37,7 @@ public class PhotoSrv {
 	}
 	
 	public Photo save(MultipartFile multipartFile, String heightString, String widthString) throws Exception {
+		rootLocation = Paths.get(photosPath);
 		purgePhotos();
 		Photo photo = new Photo();
 		try {
@@ -115,7 +111,7 @@ public class PhotoSrv {
 	public void storeOriginal(MultipartFile multipartFile) {
 		
 		try {
-			Files.copy(multipartFile.getInputStream(), this.rootLocation.resolve(multipartFile.getOriginalFilename()));
+			Files.copy(multipartFile.getInputStream(), rootLocation.resolve(multipartFile.getOriginalFilename()));
 		} catch (Exception e) {
 			throw new RuntimeException("FAIL! : " + e.getMessage());
 		}
@@ -126,7 +122,7 @@ public class PhotoSrv {
 		int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
 		
 		BufferedImage resizeImagePng = resizeImage(originalImage, type, width, height);
-		ImageIO.write(resizeImagePng, "png", new File(this.rootLocation.resolve(photoNom).toString()));
+		ImageIO.write(resizeImagePng, "png", new File(rootLocation.resolve(photoNom).toString()));
 		
 	}
 	
@@ -176,11 +172,11 @@ public class PhotoSrv {
 	
 	public void deletePhotoFile(Photo photo) {
 		try{
-			String photonom = this.rootLocation.resolve(photo.getId()+ ".png").toString();
+			String photonom = rootLocation.resolve(photo.getId()+ ".png").toString();
 			File photoFile = new File(photonom);
 			photoFile.delete();
 			
-			String thumbnom = this.rootLocation.resolve(photo.getId()+ "-thumb.png").toString();
+			String thumbnom = rootLocation.resolve(photo.getId()+ "-thumb.png").toString();
 			File thumbFile = new File(thumbnom);
 			thumbFile.delete();
 		} catch (Exception e) {

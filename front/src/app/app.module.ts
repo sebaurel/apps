@@ -55,6 +55,11 @@ import { ContactComponent } from './components/contact/contact.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { ProfilFormComponent } from './components/profil-form/profil-form.component';
 import { ModalMotdepassComponent } from './components/modals/modal-motdepass/modal-motdepass.component';
+import { ContentTextComponent } from './components/transverse/content-text/content-text.component';
+import { QuillModule  } from 'ngx-quill';
+import { ArticleFormComponent } from './components/article-form/article-form.component';
+import { ArticleComponent } from './components/article/article.component';
+
 
 registerLocaleData(localeFr);
 
@@ -93,6 +98,9 @@ registerLocaleData(localeFr);
     ProfilComponent,
     ProfilFormComponent,
     ModalMotdepassComponent,
+    ContentTextComponent,
+    ArticleFormComponent,
+    ArticleComponent,
   ],
   imports: [
     HttpClientModule,
@@ -107,7 +115,8 @@ registerLocaleData(localeFr);
     MatStepperModule,
     MatIconModule,
     DragDropModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    QuillModule.forRoot(),
   ],
   providers: [
     PreviousRouteService,

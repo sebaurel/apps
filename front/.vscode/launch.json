@@ -5,25 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "edge",
+            "name": "Launch Chrome",
             "request": "launch",
-            "name": "Launch Edge",
+            "type": "pwa-chrome",
             "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}"
-        },
-        {
-            "type": "firefox",
-            "request": "attach",
-            "name": "Attach to Firefox"
-        },
-        {
-            "type": "edge",
-            "request": "attach",
-            "name": "Attach to Edge",
-            "port": 2015,
-            "webRoot": "${workspaceFolder}"
-        },
-
+        }
+        
        
     ]
 }

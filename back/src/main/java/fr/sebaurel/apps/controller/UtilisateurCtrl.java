@@ -52,12 +52,12 @@ public class UtilisateurCtrl {
     }
     
     @PostMapping("/favori/add")
-    public Utilisateur addFavori(@RequestParam("email") String email, @RequestParam("idRecette") String idRecette) {
+    public Utilisateur addFavori(@RequestParam("email") String email, @RequestParam("idRecette") String idRecette) throws NumberFormatException, Exception {
     	return utilisateurSrv.switchFavori(getUtilisateur(email), idRecette, true);
     }
 	
 	@DeleteMapping("/favori/delete")
-    public Utilisateur deleteFavori(@RequestParam("email") String email, @RequestParam("idRecette") String idRecette) {
+    public Utilisateur deleteFavori(@RequestParam("email") String email, @RequestParam("idRecette") String idRecette) throws NumberFormatException, Exception {
     	return utilisateurSrv.switchFavori(getUtilisateur(email), idRecette, false);
     }
 	

@@ -14,6 +14,8 @@ import { ConfirmationGuard } from './gards/confirmation.guard';
 import { RegisterConfirmComponent } from './components/register-confirm/register-confirm.component';
 import { PrintRecetteComponent } from './components/transverse/print-recette/print-recette.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { ArticleFormComponent } from './components/article-form/article-form.component';
+import { ArticleComponent } from './components/article/article.component';
 
 export const routes: Routes = [
 
@@ -28,6 +30,16 @@ export const routes: Routes = [
     path: 'home',
     component: ContainerComponent,
     children: [{ path: '', component: HomeComponent, outlet: 'connected' }]
+  },
+  {
+    path: 'article/new',
+    component: ContainerComponent,
+    children: [{ path: '', component: ArticleFormComponent, canDeactivate: [ConfirmationGuard], outlet: 'connected' }]
+  },
+  {
+    path: 'article/:id',
+    component: ContainerComponent,
+    children: [{ path: '', component: ArticleComponent, outlet: 'connected' }]
   },
   {
     path: 'recettes',
@@ -85,7 +97,7 @@ export const routes: Routes = [
     component: PrintRecetteComponent
   },
 
-// otherwise redirect to login
+// otherwise redirect to home
   { path: '**', redirectTo: 'home' }
 ];
 

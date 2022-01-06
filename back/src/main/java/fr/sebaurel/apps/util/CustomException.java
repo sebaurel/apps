@@ -10,11 +10,16 @@ public class CustomException extends Exception  {
   private final HttpStatus httpStatus;
 
   public CustomException(String message, HttpStatus httpStatus) {
-    this.message = message;
+	this.message = message;
     this.httpStatus = httpStatus;
   }
 
-  @Override
+  public CustomException(String message) {
+	this.httpStatus = null;
+	this.message = message;
+}
+
+@Override
   public String getMessage() {
     return message;
   }

@@ -11,7 +11,7 @@
         <div class="content-wrapper d-flex align-items-center auth login-full-bg">
     
           <div class="col-12 mx-auto">
-            <div class="auth-form-dark text-left p-5">
+            <div class="auth-form-dark text-start p-5">
           
               <form [formGroup]="formCommentaire">
                 <div class="form-group">
@@ -24,7 +24,7 @@
                 </div>
                 <p>Vous pouvez ajouter autant de photo que vous voulez</p>
                 <app-photo-upload [(photo)]="photo" [(photoThumbPath)]="photoThumbPath" [width]="0" [height]="0" [progress]="progress" (photoUpload)="photoCommentaireUpload($event)"></app-photo-upload>
-                <div *ngFor="let photo of photos" class="float-left p-0 ml-1 mb-1 photo">
+                <div *ngFor="let photo of photos" class="float-start p-0 ms-1 mb-1 photo">
                   <fa-icon [icon]="faEraser" class="eraser" (click)="cancelPhoto(photo)"></fa-icon>
                   <img [src]="photoThumbPath+photo.id+'-thumb.png'" alt="Photo" width="50px"/>
                 </div>

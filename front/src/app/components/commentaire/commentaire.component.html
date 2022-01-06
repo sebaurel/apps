@@ -11,11 +11,11 @@
                 <app-modal-commentaire [(commentaires)]="commentaires" [commentaire]="commentaire" [idUtilisateur]="idUtilisateur" [idRecette]="idRecette" *ngIf="loggedIn"  [editCommentaire]="true"></app-modal-commentaire>
                 <button class="btn btn-outline-dark font-weight-medium" (click)="spliceCommentaire(commentaire)" type="button">-</button>
             </div>
-            <div *ngIf="commentaire.redacteur.idPhoto else pasDePhoto" class="float-left">
+            <div *ngIf="commentaire.redacteur.idPhoto else pasDePhoto" class="float-start">
                 <img [src]="pathUpload+commentaire.redacteur.idPhoto+'-thumb.png'" alt="Photo" class="petiteThumb"/>
             </div>
             <ng-template #pasDePhoto>
-                <div class="float-left">
+                <div class="float-start">
                     <img [src]="pathUpload+'/avatar.png'" alt="Pas de photo"  class="petiteThumb"/>
                 </div>
             </ng-template>
@@ -24,7 +24,7 @@
             <span class="comment-content">
                 <h5>{{commentaire.title}}</h5>
                 <p [innerText]="commentaire.body"></p>
-                <div *ngFor="let photo of commentaire.photos" class="float-left p-0 ml-1 mb-1">
+                <div *ngFor="let photo of commentaire.photos" class="float-start p-0 ms-1 mb-1">
                     <a [href]="pathUpload+photo.id+'.png'"><img [src]="pathUpload+photo.id+'-thumb.png'" alt="Photo" class="petiteThumb"/></a>
                 </div>
                 <div class="clearfix">&nbsp;</div>

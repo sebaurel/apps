@@ -47,7 +47,7 @@ public class Utilisateur implements UserDetails{
     
 	private String firstName;
 
-	private String lastName;
+	private String lastName;// Utilisé par UserDetails pour identifier l'user. On prefère utiliser le mail cf. utilisateurSrv.loadUserByUsername(lastname) renvoie a utilisateurSrv.find(email)
 
 	@NotNull
 	@Size(max = 100)
@@ -93,6 +93,11 @@ public class Utilisateur implements UserDetails{
     private String reCaptcha;
     
 	public Utilisateur() {
+	}
+	
+	@Override
+	public String toString() {
+		return this.email + " - " + this.pseudo;
 	}
 	
 	public Long getId() {

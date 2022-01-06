@@ -37,7 +37,6 @@ public class VerificationToken {
     }
 
     public VerificationToken() {
-    	super();
 	}
     
     public VerificationToken(final String token) {

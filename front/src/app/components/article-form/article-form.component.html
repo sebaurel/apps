@@ -1,0 +1,31 @@
+<div class="container-scroller background-picture">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <h1>{{formArticle.get('titre').value}}</h1>
+        <form [formGroup]="formArticle">
+            <div class="col-lg-5 mx-auto">
+                <div class="auth-form-dark text-start m-5">
+                    <div class="row">
+                        <div class="form-group mb-3 col-6" [ngClass]="{'has-error': formErrors.titre}">
+                            <label for="titre">Titre</label>
+                            <input type="text" class="form-control" name="titre" id="titre" formControlName="titre" />
+                            <div *ngIf="formErrors.titre" class="help-block">{{formErrors.titre}}</div>
+                        </div>
+                        <div class="form-group mb-3 col-4">
+                            <app-photo-upload [(photo)]="article.photo" [(photoThumbPath)]="photoThumbPath" [width]="0"
+                                [height]="0" [progress]="progress" (photoUpload)="photoChange($event)">
+                            </app-photo-upload>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <app-content-text (body)="bodyChange($event)"></app-content-text>
+                    </div>
+                    <div class="row m-5">
+                        <button class="btn col-2 text-center"
+                            [ngClass]="!confirmExit ? 'btn-success' : 'btn-warning'"
+                            (click)="onValide()" type="button">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

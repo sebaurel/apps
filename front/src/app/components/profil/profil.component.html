@@ -1,10 +1,10 @@
 <p>Profil de {{profil.pseudo}}</p>
 
-<div *ngIf="photo.id else pasDePhoto" class="float-left">
+<div *ngIf="photo.id else pasDePhoto" class="float-start">
     <img [src]="pathUpload+photo.id+'-thumb.png'" alt="Photo"/>
 </div>
 <ng-template #pasDePhoto>
-    <div class="float-left">
+    <div class="float-start">
         <img [src]="pathUpload+'/avatar.png'" alt="Pas de photo"/>
     </div>
 </ng-template>

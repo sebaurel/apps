@@ -135,10 +135,6 @@ ul.post-data li:last-child {padding-right: 0px;}
 #contact-form .btn {margin-top: 12px;}
 
 
-.post-category-list li > button.actif, .post-data li > button.actif {
-	color:#FFF; 
-	background-color:#d8450b;
-	-webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;  
+fa-icon.actif {
+	color:#d8450b !important;  
 }

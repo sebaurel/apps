@@ -19,10 +19,10 @@
                 <h5>Dernières recettes</h5>
                 <ul>
                     <li *ngFor="let recette of lastRecette$ | async">
-                        <div *ngIf="recette.photo != null else elseBlock" class="float-left mr-3 mb-3">
+                        <div *ngIf="recette.photo != null else elseBlock" class="float-start me-3 mb-3">
                             <img class="petiteThumb" [src]="pathUpload+recette.photo.id+'-thumb.png'" alt="Photo" />
                         </div>
-                        <ng-template #elseBlock><div class="float-left mr-3 mb-3">
+                        <ng-template #elseBlock><div class="float-start me-3 mb-3">
                             <img class="petiteThumb" [src]="pathUpload+'/default-thumb.png'" alt="Pas de photo" /></div>
                         </ng-template>
                         <a routerLink="/recette/{{recette.id}}">{{recette.titre}}</a><br>

@@ -18,26 +18,26 @@
                 <h4 class="title-categorie d-lg-inline-block">{{recette.categorie.nom}}</h4>
                 <ul class="post-data">
                   <li>
-                    <div *ngIf="recette.utilisateur.photo != null else pasDePhotoAuteur" class="float-left mr-3">
+                    <div *ngIf="recette.utilisateur.photo != null else pasDePhotoAuteur" class="float-start me-3">
                       <img [src]="pathUpload+recette.utilisateur.photo.id+'-thumb.png'" alt="Photo de l'auteur" class="petiteThumb" />
                     </div>
-                    <ng-template #pasDePhotoAuteur><div class="float-left mr-3">
+                    <ng-template #pasDePhotoAuteur><div class="float-start me-3">
                       <img [src]="pathUpload+'avatar.png'" alt="Pas de photo" class="petiteThumb" /></div>
                     </ng-template>
-                    <h6><fa name="user"></fa> {{recette.utilisateur.pseudo}}</h6><a href="#"></a>
+                    <h5><fa name="user"></fa> {{recette.utilisateur.pseudo}}</h5><a href="#"></a>
                   </li>
                   <li>
-                    <button *ngIf="recette.utilisateur.email == currentUserMailEditRecette || admin" routerLink="/recette/edit/{{recette.id}}"><fa-icon [icon]="faEdit"></fa-icon>&nbsp;<span class="d-none d-md-none d-lg-inline-block">edit.&nbsp;&nbsp;</span></button>
-                    <button *ngIf="loggedIn" (click)="addDeleteFavori(recette)" [className]="recette.favori" ><fa-icon [icon]="faHeart"></fa-icon>&nbsp;<span class="d-none d-md-none d-lg-inline-block">favori</span></button>
+                    <button *ngIf="recette.utilisateur.email == currentUserMailEditRecette || admin" routerLink="/recette/edit/{{recette.id}}"  class="btn"><fa-icon [icon]="faEdit"></fa-icon>&nbsp;<span class="d-none d-md-none d-lg-inline-block">edit.&nbsp;&nbsp;</span></button>
+                    <button *ngIf="loggedIn" (click)="addDeleteFavori(recette)"  class="btn" ><fa-icon [icon]="faHeart" [ngClass]="recette.favori" style="color: rgb(190, 190, 190);"></fa-icon>&nbsp;<span class="d-none d-md-none d-lg-inline-block">favori</span></button>
                   </li>
                 </ul>
               </div>
               <div class="col-md-10">
                 <div routerLink="/recette/{{recette.id}}">
-                  <div *ngIf="recette.photo != null else pasDePhotoRecette" class="float-left mr-3 mb-3">
+                  <div *ngIf="recette.photo != null else pasDePhotoRecette" class="float-start me-3 mb-3">
                     <img [src]="pathUpload+recette.photo.id+'-thumb.png'" alt="Photo principale de la recette" />
                   </div>
-                  <ng-template #pasDePhotoRecette><div class="float-left mr-3 mb-3">
+                  <ng-template #pasDePhotoRecette><div class="float-start me-3 mb-3">
                     <img [src]="pathUpload+'/default-thumb.png'" alt="Pas de photo" /></div>
                   </ng-template>
                   <h3 class="title-bg">
@@ -47,7 +47,7 @@
                     </ng-container>
                   </h3>
                 </div>
-                <div *ngFor="let ingredient of recette.ingredients" class="float-left p-0 ml-1 mb-1">
+                <div *ngFor="let ingredient of recette.ingredients" class="float-start p-0 ms-1 mb-1">
                   <app-modal-aliment-view [aliment]="ingredient.aliment"></app-modal-aliment-view>
                 </div>
                 <div class="clearfix"></div>

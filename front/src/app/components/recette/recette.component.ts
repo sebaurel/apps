@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faEdit, faHeart, faUser, faComment, faCalendar, faPrint } from '@fortawesome/free-solid-svg-icons';
 
 import { RecetteService } from '../../services/recette.service';
@@ -45,7 +45,8 @@ export class RecetteComponent implements OnInit {
     private enumService: EnumService,
     private utilisateurService: UtilisateurService,
     private recetteService: RecetteService,
-    public printService: PrintService
+    private router: Router,
+    public printService: PrintService,
   ) { 
     this.isLoading = true;
     if (this.currentUser != null){
@@ -56,20 +57,26 @@ export class RecetteComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.recetteService.getRecette(params['id'])
-      .subscribe((rec : Recette) => {
-        this.recette = rec;
-        this.recette.commentaires.forEach((commentaire: Commentaire) =>{
-          if(commentaire.valide) this.commentaires.push(commentaire);
-        });
-        if (this.currentUser) {
-          this.currentUser.favoris.forEach(favori => {
-            if (favori.id == this.recette.id) this.recette.favori = "actif";
-          });
-        };
-        this.isLoading = false;
-      })
+      .subscribe({next: (recette : Recette) => {
+                                                this.recette = recette;
+                                                this.recette.commentaires.forEach((commentaire: Commentaire) =>{
+                                                  if(commentaire.valide) this.commentaires.push(commentaire);
+                                                });
+                                                if (this.currentUser) {
+                                                  this.currentUser.favoris.forEach(favori => {
+                                                    if (favori.id == this.recette.id) this.recette.favori = "actif";
+                                                  });
+                                                };
+                                                this.isLoading = false;
+                                              },
+                  error: () => {
+                                  alert('Recette non trouvée');
+                                  this.router.navigate(['/recettes']);
+                                }
+                  })
     });
-  }
+}
+
 
   ngOnInit() {
     this.photoPath = environment.PATH_UPLOAD + "default.png";

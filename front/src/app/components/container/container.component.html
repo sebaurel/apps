@@ -1,12 +1,12 @@
 <app-header [loggedIn]="loggedIn" [activateMenu]="activateMenu"></app-header>
 
-<div class="container-scroller">
+<div class="container-scroller" style="background-color: white;">
   <div class="container-fluid page-body-wrapper">
-      <div class="main-panel">
-        <div class="content-wrapper" (click)="closeNavigationMobile()">
-          <router-outlet name="connected"></router-outlet>
-        </div>
-      </div> 
+    <div class="main-panel">
+      <div class="content-wrapper" (click)="closeNavigationMobile()">
+        <router-outlet name="connected"></router-outlet>
+      </div>
+    </div>
   </div>
 </div>
-<app-footer [loggedIn]="loggedIn"></app-footer>
+<app-footer [loggedIn]="loggedIn"></app-footer> 

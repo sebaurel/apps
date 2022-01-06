@@ -77,7 +77,10 @@ public class UtilisateurSrv implements UserDetailsService {
 		return utilisateurRepo.save(utilisateur);
 	}
 	
-	public Integer deleteUser(String email) {	
+	public int deleteUser(String email) {
+		Utilisateur utilisateur = utilisateurRepo.findOneByEmail(email);
+		VerificationToken token = tokenRepo.findByUtilisateur(utilisateur);
+		tokenRepo.delete(token);
 		return utilisateurRepo.deleteOneByEmail(email);
 	}
 	
@@ -101,7 +104,7 @@ public class UtilisateurSrv implements UserDetailsService {
 	    if (!utilisateur.getEmail().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
                 +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
                 +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")) {
-        	throw new CustomException("Mail invalide",HttpStatus.NOT_ACCEPTABLE);
+        	throw new CustomException("Email invalide",HttpStatus.NOT_ACCEPTABLE);
         }
         
         try {
@@ -138,7 +141,6 @@ public class UtilisateurSrv implements UserDetailsService {
 	}
 
 	public Utilisateur updateUser(@Valid Utilisateur utilisateur) throws CustomException {
-		Utilisateur newUtilisateur = new Utilisateur();
 		
 		try {
 	    	Utilisateur oldUtilisateur = find(utilisateur.getEmail());
@@ -148,18 +150,17 @@ public class UtilisateurSrv implements UserDetailsService {
 	    		}else if(!utilisateur.getPhoto().isValid()){
 	    			photoSrv.validatePhoto(utilisateur.getPhoto(), "Profil");
 	    		}
-	    	}else {
+	    	}else if (oldUtilisateur.getPhoto() != null) {
 	    		photoSrv.invalidatePhoto(oldUtilisateur.getPhoto().getId());
 	    	}
-			newUtilisateur = save(utilisateur);
+			return save(utilisateur);
 		}
 		catch(Exception e) {
     		 throw new CustomException("Erreur lors de la modification",HttpStatus.NOT_MODIFIED);
-    	}
-    	return newUtilisateur;
+    	}	
 	}
     
-	public Utilisateur switchFavori(@Valid Utilisateur utilisateur, String idRecette, boolean add) {
+	public Utilisateur switchFavori(@Valid Utilisateur utilisateur, String idRecette, boolean add) throws NumberFormatException, CustomException {
 		Recette recette = recetteSrv.find(Long.parseLong(idRecette));
 		List<Recette> favoris = utilisateur.getFavoris();
 		if (add) {

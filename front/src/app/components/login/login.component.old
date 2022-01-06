@@ -4,7 +4,7 @@
       <div class="content-wrapper d-flex align-items-center auth login-full-bg">
         <div class="row w-100">
           <div class="col-lg-6 mx-auto">
-            <div class="auth-form-dark text-left p-5">
+            <div class="auth-form-dark text-start p-5">
                 <h2>Login</h2>
                 <form name="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
                     <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>

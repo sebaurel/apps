@@ -28,6 +28,7 @@ import fr.sebaurel.apps.service.CategorieSrv;
 import fr.sebaurel.apps.service.PhotoSrv;
 import fr.sebaurel.apps.service.RecetteSrv;
 import fr.sebaurel.apps.service.UtilisateurSrv;
+import fr.sebaurel.apps.util.CustomException;
 
 @RestController
 @RequestMapping("rest/recette")
@@ -49,7 +50,7 @@ public class RecetteCtrl {
 	PhotoSrv photoSrv;
 	
     @GetMapping("/{id}")
-    public Recette findRecette(@PathVariable(value = "id") Long id) {
+    public Recette findRecette(@PathVariable(value = "id") Long id) throws CustomException {
     	return recetteSrv.find(id);
     }
     
@@ -102,12 +103,12 @@ public class RecetteCtrl {
    	}
 
     @PostMapping("")
-    public ResponseEntity<Recette> create( @RequestBody Recette recette) {
+    public ResponseEntity<Recette> create( @RequestBody Recette recette) throws Exception {
         return new ResponseEntity<Recette>(recetteSrv.preSaveRecette(recette), HttpStatus.CREATED);
     }
     
     @PutMapping("")
-    public ResponseEntity<Recette> modify( @RequestBody Recette newRecette) {
+    public ResponseEntity<Recette> modify( @RequestBody Recette newRecette) throws CustomException {
     	Recette oldRecette = recetteSrv.find(newRecette.getId());
     	photoSrv.replacePhoto(newRecette.getPhoto(), oldRecette.getPhoto(), "Recette");
     	
@@ -122,7 +123,7 @@ public class RecetteCtrl {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete( @PathVariable(value = "id") Long id) {
+    public ResponseEntity<Object> delete( @PathVariable(value = "id") Long id) throws CustomException {
     	Recette recette = recetteSrv.find(id);
     	if (recette.getPhoto() != null) {
 			photoSrv.invalidatePhoto(recette.getPhoto().getId());// invalide la photo qui sera supprimer lors de la prochaine purge

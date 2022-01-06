@@ -25,12 +25,12 @@ public class AccountCtrl {
     @Autowired(required=false)
     UtilisateurSrv utilisateurSrv;
     
-    @PostMapping("/register")
+      @PostMapping("/register")
     public @ResponseBody Utilisateur registerUserAccount(@RequestBody @Valid Utilisateur utilisateur) throws CustomException {
         return utilisateurSrv.createUserAccount(utilisateur);
     }
       
-    @PostMapping("/regitrationConfirm")
+    @PostMapping("/registrationConfirm")
     public @ResponseBody Utilisateur confirmRegistration (@RequestBody String token) throws CustomException {
         return utilisateurSrv.confirmToken(token);
     }

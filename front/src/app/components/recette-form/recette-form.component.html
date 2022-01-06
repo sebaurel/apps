@@ -21,7 +21,7 @@
   <mat-horizontal-stepper>
     <mat-step label="Description" class="mat-step-header">
       <div class="col-12 col-md-4 mx-auto">
-        <div class="auth-form-dark text-left">
+        <div class="auth-form-dark text-start">
 
           <form [formGroup]="formRecette">
             <div class="form-group">
@@ -59,7 +59,7 @@
     <mat-step label="Ingrédients">
 
       <div class="col-12 col-md-5 mx-auto">
-        <div class="auth-form-dark text-left">
+        <div class="auth-form-dark text-start">
 
           <div cdkDropList class="example-list" (cdkDropListDropped)="dropIngredient($event)">
             <div *ngFor="let ingredient of ingredients" width="100%" class="tableIngredients example-box" cdkDrag>
@@ -110,7 +110,7 @@
     <mat-step label="Etapes">
 
       <div class="col-12 col-md-10 mx-auto">
-        <div class="auth-form-dark text-left">
+        <div class="auth-form-dark text-start">
           <div cdkDropList class="example-list" (cdkDropListDropped)="dropEtape($event)">
             <div *ngFor="let etape of etapes " width="100%" class="tableEtapes example-box" cdkDrag>
 

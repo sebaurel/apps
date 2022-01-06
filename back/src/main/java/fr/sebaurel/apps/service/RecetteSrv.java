@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import fr.sebaurel.apps.model.Aliment;
@@ -28,6 +29,7 @@ import fr.sebaurel.apps.model.Ingredient;
 import fr.sebaurel.apps.model.Recette;
 import fr.sebaurel.apps.model.Utilisateur;
 import fr.sebaurel.apps.repository.RecetteRepo;
+import fr.sebaurel.apps.util.CustomException;
 
 @Service
 public class RecetteSrv {
@@ -81,12 +83,16 @@ public class RecetteSrv {
 		return recetteRepo.findAll(pageable);
 	}
 
-	public Recette find(Long id) {
+	public Recette find(Long id) throws CustomException {
 		Recette recette = recetteRepo.findOneById(id);
-		
-		recette.getEtapes().sort(Comparator.comparing(Etape::getOrdre));
-		recette.getIngredients().sort(Comparator.comparing(Ingredient::getOrdre));
-		recette.getCommentaires().sort(Comparator.comparing(Commentaire::getDate));
+		try {
+			recette.getEtapes().sort(Comparator.comparing(Etape::getOrdre));
+			recette.getIngredients().sort(Comparator.comparing(Ingredient::getOrdre));
+			recette.getCommentaires().sort(Comparator.comparing(Commentaire::getDate));
+		}
+		catch(Exception e) {
+			throw new CustomException("Recette non trouvée", HttpStatus.NOT_FOUND);
+		};
 
 		return recette;
 	}
@@ -177,7 +183,7 @@ public class RecetteSrv {
      return page;
     }
 	
-	public Recette preSaveRecette(Recette recette) {
+	public Recette preSaveRecette(Recette recette) throws CustomException {
 		Recette newRecette = save(recette);
 		
 		if (!newRecette.getEtapes().isEmpty()) {

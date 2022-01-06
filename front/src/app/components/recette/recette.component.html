@@ -9,11 +9,11 @@
                 </ng-container>
             </h1>
             <div class="btn-group">
-                <button *ngIf="recette.utilisateur.email == currentUserEmail || admin" routerLink="/recette/edit/{{recette.id}}" ><fa-icon [icon]="faEdit"></fa-icon>&nbsp;edit</button>
+                <button *ngIf="recette.utilisateur.email == currentUserEmail || admin" routerLink="/recette/edit/{{recette.id}}" class="btn"><fa-icon [icon]="faEdit"></fa-icon>&nbsp;edit</button>
                 &nbsp;&nbsp;
-                <button *ngIf="loggedIn" (click)="addDeleteFavori(recette)" [className]="recette.favori"><fa-icon [icon]="faHeart"></fa-icon>&nbsp;favori</button>
+                <button *ngIf="loggedIn" (click)="addDeleteFavori(recette)" class="btn"><fa-icon [icon]="faHeart" [ngClass]="recette.favori" style="color: rgb(190, 190, 190);"></fa-icon>&nbsp;favori</button>
                 &nbsp;&nbsp;
-                <button (click)="onPrint()"><fa-icon [icon]="faPrint"></fa-icon>&nbsp;Imprimer</button>
+                <button (click)="onPrint()" class="btn"><fa-icon [icon]="faPrint"></fa-icon>&nbsp;Imprimer</button>
             </div>
             <section class="post-content">
                 <div *ngIf="recette.photo else elseBlock">

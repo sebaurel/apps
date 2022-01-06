@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import fr.sebaurel.apps.model.Photo;
 import fr.sebaurel.apps.service.PhotoSrv;
 
@@ -23,9 +21,6 @@ public class PhotoCtrl {
 
 	@Autowired
 	PhotoSrv photoSrv;
-	
-	@Autowired
-	ObjectMapper mapper;
 	
 	@PostMapping("")
 	public Photo handleFileUpload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("height") String height, @RequestParam("width") String width) throws Exception {
