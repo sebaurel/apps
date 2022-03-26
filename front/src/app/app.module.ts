@@ -59,6 +59,9 @@ import { ContentTextComponent } from './components/transverse/content-text/conte
 import { QuillModule  } from 'ngx-quill';
 import { ArticleFormComponent } from './components/article-form/article-form.component';
 import { ArticleComponent } from './components/article/article.component';
+import { ArticleModule } from './modules/article/article.module';
+import { RecetteModule } from './modules/recette/recette.module';
+import { ContactModule } from './modules/contact/contact.module';
 
 
 registerLocaleData(localeFr);
@@ -117,6 +120,9 @@ registerLocaleData(localeFr);
     DragDropModule,
     FontAwesomeModule,
     QuillModule.forRoot(),
+    ContactModule,
+    ArticleModule,
+    RecetteModule,
   ],
   providers: [
     PreviousRouteService,

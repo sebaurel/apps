@@ -33,7 +33,7 @@ export const routes: Routes = [
   },
   {
     path: 'article/new',
-    component: ContainerComponent,
+    component: ContainerComponent, canActivate: [UrlPermission],
     children: [{ path: '', component: ArticleFormComponent, canDeactivate: [ConfirmationGuard], outlet: 'connected' }]
   },
   {
