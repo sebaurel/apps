@@ -16,6 +16,7 @@ import { Categorie } from 'src/app/model/categorie.model';
 import { Utilisateur } from 'src/app/model/utilisateur.model';
 import { Aliment } from 'src/app/model/aliment.model';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { Ingredient } from 'src/app/model/ingredient.model';
 
 @Component({
   selector: 'app-recettes',
@@ -50,7 +51,7 @@ export class RecettesComponent implements OnInit {
   loggedIn: boolean = false;
   isLoading: boolean = false;
 
-  alimentsSelected : Aliment[] = new Array<Aliment>();
+  //alimentsSelected : Aliment[] = new Array<Aliment>();
   alimentsId: number[] = [];
   seulementLesAliments: boolean = false;
 
@@ -103,13 +104,17 @@ export class RecettesComponent implements OnInit {
             if (recette.id == favori.id_recette || recette.id == favori.id){
               recette.favori = "actif";
             }
-          })
+          });
+          this.recherche(recette);
         })
-      });
+      })
     }else{
       this.pages.subscribe((recettesPageable: any) => {
         this.isLoading = false;
         this.nbRecette = recettesPageable.totalElements;
+        recettesPageable.content.forEach((recette : Recette) => {
+          this.recherche(recette);
+        })
 
       });
       this.currentUser = new Utilisateur
@@ -162,6 +167,13 @@ export class RecettesComponent implements OnInit {
     this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
   }
   
+  recherche(recette: Recette){
+    recette.ingredients.forEach((ingredient : Ingredient) => {
+      this.alimentsId.forEach((alimentId:number) => {
+        if (ingredient.aliment.id == alimentId) ingredient.recherche = true;
+      })
+    })
+  }
 }
 
 

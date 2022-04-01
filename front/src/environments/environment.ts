@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  API_URL : "http://localhost:8080/apps/",
+  API_URL : "http://localhost:8080/apps17/",
+  //PATH_UPLOAD : "C:\\Program Files\\Apache Software Foundation\\Apache24\\htdocs\\images"
   PATH_UPLOAD : "http://localhost/images/"
-
+  
 };
 
 /*

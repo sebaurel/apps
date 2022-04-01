@@ -1,4 +1,4 @@
-<button class="btn btn-outline-dark font-weight-medium btn-block" (click)="open(content)">Remplir mon frigo</button>
+<button class="btn btn-outline-dark font-weight-medium btn-block" (click)="open(content)">Ouvrir mon frigo</button>
 <ng-template #content let-c="close">
     <div class="modal-header">
       <h4 class="modal-title">Mon frigo</h4>
@@ -12,7 +12,7 @@
           <div class="content-wrapper d-flex auth login-full-bg">
             <div class="col-12 mx-auto align-items-center">
               <form [formGroup]="formAliments">
-                <label for="alimentsSelecteur">Ajouter un aliment : </label>
+                <label for="alimentsSelecteur">Ajouter des aliments : </label>
 
                 <ng-select [items]="aliments$ | async" [(ngModel)]="alimentsSelectedModal" formControlName="alimentsSelecteur" bindLabel="nom" placeholder="Commencer à écrire pour recherche" [multiple]="true" [hideSelected]="true" name="alimentsSelecteur" (change)="ModalFrigoChange()"> </ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
               </form>
