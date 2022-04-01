@@ -11,4 +11,5 @@ export class Ingredient {
     aliment: Aliment;
     recette: Recette;
     ordre: number;
+    recherche?: boolean = false;
   }

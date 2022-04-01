@@ -1,4 +1,4 @@
-<button class="btn btn-outline-dark" (click)="open(content)">{{aliment.nom}}</button>
+<button class="btn" [ngClass]="recherche ? 'btn-success' : 'btn-outline-dark'" (click)="open(content)">{{aliment.nom}}</button>
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title">{{aliment.nom}}</h4>

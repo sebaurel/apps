@@ -48,7 +48,7 @@
                   </h3>
                 </div>
                 <div *ngFor="let ingredient of recette.ingredients" class="float-start p-0 ms-1 mb-1">
-                  <app-modal-aliment-view [aliment]="ingredient.aliment"></app-modal-aliment-view>
+                  <app-modal-aliment-view [aliment]="ingredient.aliment" [recherche]="ingredient.recherche"></app-modal-aliment-view>
                 </div>
                 <div class="clearfix"></div>
                 <p [innerText]="recette.descriptif" routerLink="/recette/{{recette.id}}"></p>

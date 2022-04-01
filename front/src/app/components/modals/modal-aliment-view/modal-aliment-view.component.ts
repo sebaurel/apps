@@ -10,7 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ModalAlimentViewComponent implements OnInit {
 
-  @Input() aliment: Aliment; // recupere laliments de la fenetre parent.
+  @Input() aliment: Aliment; // récupère l'aliments de la fenêtre parent.
+  @Input() recherche: boolean; // récupère la mise en valeur de l'aliment s'il est recherché.
 
   photoThumbPath: String;
 
@@ -24,6 +25,7 @@ export class ModalAlimentViewComponent implements OnInit {
     }else{
       this.photoThumbPath = environment.PATH_UPLOAD + "default-aliment.png";
     }
+    console.log(this.recherche);
   }
   open(content) {
     this.modalService.open(content)
