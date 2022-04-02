@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Commentaire } from 'src/app/model/commentaire.model';
 import { CommentaireService } from 'src/app/services/commentaire.service';
-import { Utilisateur } from 'src/app/model/utilisateur.model';
-import { Photo } from 'src/app/model/photo.model';
 import { environment } from 'src/environments/environment';
 import { faEraser } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormValidator } from 'src/app/util/form.util';
+import { Commentaire } from 'src/app/models/commentaire.model';
+import { Photo } from 'src/app/models/photo.model';
+import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
 
 @Component({
   selector: 'app-modal-commentaire',

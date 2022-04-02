@@ -3,7 +3,7 @@ import { HttpParams, HttpEvent, HttpClient} from '@angular/common/http';
 import { UploadFileService } from './upload-file.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Photo } from '../model/photo.model';
+import { Photo } from '../models/photo.model';
 
 @Injectable({
   providedIn: 'root'

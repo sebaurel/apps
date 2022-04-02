@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RecetteService } from 'src/app/services/recette.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Recette } from 'src/app/model/recette.model';
+import { Recette } from 'src/app/modules/recette/models/recette.model';
+import { RecetteService } from 'src/app/modules/recette/services/recette.service';
 
 @Component({
   selector: 'app-ingredient',

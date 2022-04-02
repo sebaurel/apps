@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RecetteService } from 'src/app/services/recette.service';
 import { Observable } from 'rxjs';
-import { Recette } from 'src/app/model/recette.model';
 import { environment } from 'src/environments/environment';
 import { CommentaireService } from 'src/app/services/commentaire.service';
 import { PhotoService } from 'src/app/services/photo.service';
-import { Commentaire } from 'src/app/model/commentaire.model';
-import { Photo } from 'src/app/model/photo.model';
+import { Commentaire } from 'src/app/models/commentaire.model';
+import { Photo } from 'src/app/models/photo.model';
+import { Recette } from 'src/app/modules/recette/models/recette.model';
+import { RecetteService } from 'src/app/modules/recette/services/recette.service';
 
 @Component({
   selector: 'app-footer',
