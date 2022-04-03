@@ -28,7 +28,7 @@ export class RecetteService {
   }
 
   public getRecettes(): Observable<any>{
-    return this.http.get(environment.API_URL+'rest/recette', {observe: 'body' });
+    return this.http.get(environment.API_URL+'rest/recette', {observe: 'body'});
   }
 
   public getRecette(idRecette :number): Observable<any>{
@@ -47,7 +47,7 @@ export class RecetteService {
     return this.http.delete(environment.API_URL+'rest/recette/'+ idRecette);
   }
 
-  list(emailUtilisateur?: string, categories?: number[], alimentsId?: number[], favori?: string, seulementLesAliments?:boolean, urlOrFilter?: string | object): Observable<Page<Recette>> {
+  list(emailUtilisateur?: string, categories?: number[], alimentsId?: number[], favori?: boolean, seulementLesAliments?:boolean, urlOrFilter?: string | object): Observable<Page<Recette>> {
     return queryPaginated<Recette>(this.http, environment.API_URL+'rest/recette/list', emailUtilisateur, categories, alimentsId, favori, seulementLesAliments, urlOrFilter);
   }
   
