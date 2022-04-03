@@ -31,7 +31,7 @@
                       <div class="form-group">
                         <label for="file">Photo de l'aliment</label>
                         <div class="row">
-                          <app-photo-upload [(photo)]="photo" [(photoThumbPath)]="photoThumbPath" [width]="200" [height]="200" [progress]="progress" (photoUpload)="photo=$event"></app-photo-upload>
+                          <app-photo-upload [photo]="photo" [photoThumbPath]="photoThumbPath" [width]=200 [height]=200 [progress]="progress" (photoUpload)="photo=$event"></app-photo-upload>
                         </div>
                       </div>
                       

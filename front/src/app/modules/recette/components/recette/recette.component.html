@@ -16,8 +16,8 @@
                 <button (click)="onPrint()" class="btn"><fa-icon [icon]="faPrint"></fa-icon>&nbsp;Imprimer</button>
             </div>
             <section class="post-content">
-                <div *ngIf="recette.photo else elseBlock">
-                    <img [src]="pathUpload+recette.photo.id+'.png'" alt="Photo principale de la recette" width="100%"/>
+                <div *ngIf="recette.photo != null else elseBlock">
+                    <img [src]="pathUpload + recette.photo.id.toString() + '.png'" alt="Photo principale de la recette" width="100%"/>
                 </div>
                 <ng-template #elseBlock>
                     <img [src]="photoPath" alt="Pas de photo" width="100%"/>
@@ -39,7 +39,7 @@
                         <li *ngFor="let etape of recette.etapes">
                             <!--<a href="#">-->
                                 <div *ngIf="etape.photo else noPhoto">
-                                    <img [src]="pathUpload+etape.photo.id+'-thumb.png'" alt="Photo de l'etape"/>
+                                    <img [src]="'{{pathUpload+etape.photo.id}}' + '-thumb.png'" alt="Photo de l'etape"/>
                                 </div>
                                 <ng-template #noPhoto>
                                     <img [src]="photoPathThumb" alt="Pas de photo"/>
@@ -58,7 +58,7 @@
                         <!--<li><a href="#"><fa-icon [icon]="faComment"></fa-icon>&nbsp;{{commentaires.length}} Commentaire</a></li>-->
                     </ul>
                 </div>
-                <app-commentaire [(commentaires)]="commentaires" [idRecette]="recette.id" [loggedIn]="loggedIn" [admin]="admin" ></app-commentaire>
+                <app-commentaire [commentaires]="commentaires" [idRecette]="recette.id" [loggedIn]="loggedIn" [admin]="admin" ></app-commentaire>
             </section>
         </div>
     </div>

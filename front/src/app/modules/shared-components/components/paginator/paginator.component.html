@@ -6,7 +6,7 @@
     <button (click)="pageChange.emit(pages.number+1)" [hidden]="pages.last"><mat-icon>keyboard_arrow_right</mat-icon></button>
   </div>-->
   <div class="numeroPages" ><!--*ngIf="pages.totalPages > 1"-->
-    <button (click)="pageChange.emit(first)" [hidden]="pages.first"><mat-icon>first_page</mat-icon></button>
+    <button (click)="pageChange.emit(pages.first)" [hidden]="pages.first"><fa-icon [icon]="faAngleDoubleLeft"></fa-icon></button>
     &nbsp;
     <button (click)="pageChange.emit(pages.number-3)" [hidden]="pages.number-3 < pages.first" class="pages"><span>{{pages.number - 2}}</span></button>
     &nbsp;
@@ -22,7 +22,7 @@
     &nbsp;
     <button (click)="pageChange.emit(pages.number+3)" [hidden]="pages.number+4 > pages.totalPages" class="pages"><span>{{pages.number + 4}}</span></button>
     &nbsp;
-    <button (click)="pageChange.emit(pages.totalPages - 1)" [hidden]="pages.last"><mat-icon>last_page</mat-icon></button>
+    <button (click)="pageChange.emit(pages.totalPages - 1)" [hidden]="pages.last"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></button>
   </div>
   <!--<div>{{ pages.totalPages }} page<span *ngIf="pages.totalPages > 1">s</span></div>-->
   <div class="recetteParPage">

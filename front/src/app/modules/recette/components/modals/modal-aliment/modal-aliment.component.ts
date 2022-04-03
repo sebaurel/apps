@@ -4,8 +4,8 @@ import { NgForm } from '@angular/forms';
 import { environment } from "../../../../../../environments/environment";
 import { isPlatformBrowser } from '@angular/common';
 import { Aliment } from '../../../models/aliment.model';
-import { Photo } from 'src/app/models/photo.model';
 import { AlimentService } from '../../../services/aliment.service';
+import { Photo } from 'src/app/modules/shared-components/models/photo.model';
 
 @Component({
   selector: 'app-modal-aliment',

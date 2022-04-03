@@ -1,4 +1,4 @@
-import { Photo } from "../../../models/photo.model";
+import { Photo } from "../../shared-components/models/photo.model";
 import { Recette } from "./recette.model";
 
 export class Etape {
@@ -8,5 +8,6 @@ export class Etape {
     descriptif: HTMLAreaElement;
     recette: Recette;
     ordre: number;
+    position: number
   }
 	

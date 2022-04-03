@@ -18,15 +18,15 @@ export class SidebarRecetteDesktopComponent{
 
   constructor() { }
 
-  categoriesSelectedFonction(categoriesSelected){
+  categoriesSelectedFonction(categoriesSelected: number[]){
     this.categoriesSelectedChange.emit(categoriesSelected);
   };
 
-  seulementLesAlimentsFonction(seulementLesAliments){
+  seulementLesAlimentsFonction(seulementLesAliments: boolean){
     this.seulementLesAlimentsChange.emit(seulementLesAliments);
   };
 
-  alimentsIdFonction(alimentsId){
+  alimentsIdFonction(alimentsId: number[]){
     this.alimentsIdChange.emit(alimentsId);
   }
 }

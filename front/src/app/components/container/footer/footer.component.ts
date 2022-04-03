@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CommentaireService } from 'src/app/services/commentaire.service';
-import { PhotoService } from 'src/app/services/photo.service';
-import { Commentaire } from 'src/app/models/commentaire.model';
-import { Photo } from 'src/app/models/photo.model';
+import { Commentaire } from 'src/app/modules/shared-components/models/commentaire.model';
 import { Recette } from 'src/app/modules/recette/models/recette.model';
 import { RecetteService } from 'src/app/modules/recette/services/recette.service';
+import { Photo } from 'src/app/modules/shared-components/models/photo.model';
+import { CommentaireService } from 'src/app/modules/shared-components/services/commentaire.service';
+import { PhotoService } from 'src/app/modules/shared-components/services/photo.service';
 
 @Component({
   selector: 'app-footer',
@@ -17,9 +17,9 @@ export class FooterComponent implements OnInit {
 
   @Input() loggedIn: boolean;
   pathUpload: string = environment.PATH_UPLOAD;
-  lastRecette$: Observable<Recette>;
-  lastCommentaire$ : Observable<Commentaire>;
-  lastPhoto$ : Observable<Photo>;
+  lastRecette$: Observable<Recette[]>;
+  lastCommentaire$ : Observable<Commentaire[]>;
+  lastPhoto$ : Observable<Photo[]>;
 
   constructor(
     private recetteService: RecetteService,

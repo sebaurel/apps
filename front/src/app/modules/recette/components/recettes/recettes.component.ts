@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgIterable, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
-import { debounceTime, startWith, merge, switchMap, share } from 'rxjs/operators';
+import { debounceTime, startWith, switchMap, share, mergeWith } from 'rxjs/operators';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { faEdit, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faHeart, faUser, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 import { RecetteService } from '../../services/recette.service';
 import { Recette } from '../../models/recette.model';
 
-import { PageableService } from 'src/app/services/pageable.service';
 import { EnumService } from 'src/app/services/enum.service';
 import { UtilisateurService } from 'src/app/modules/shared-components/services/utilisateur.service';
 import { environment } from 'src/environments/environment';
 import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
 import { Categorie } from '../../models/categorie.model';
 import { Ingredient } from '../../models/ingredient.model';
-import { Page } from 'src/app/util/pagination-page';
+import { Page } from 'src/app/modules/shared-components/util/page';
+import { PageableService } from 'src/app/modules/shared-components/services/pageable.service';
 
 @Component({
   selector: 'app-recettes',
@@ -23,20 +23,21 @@ import { Page } from 'src/app/util/pagination-page';
   styleUrls: ['./recettes.component.scss']
 })
 export class RecettesComponent implements OnInit {
-  faEdit = faEdit;
-  faHeart = faHeart;
+  faUser: IconDefinition = faUser;
+  faEdit: IconDefinition = faEdit;
+  faHeart: IconDefinition  = faHeart;
   pathUpload: string = environment.PATH_UPLOAD;
   photoPath: string = environment.PATH_UPLOAD + "default.png";
 
   filterForm: FormGroup;
-  pages: Observable<Page<Recette>>;
+  pages: Observable<Page<Recette>>;// = new Observable<Page<Recette>>();
 
-  pageUrl = new Subject<string>();
-  pageSize: string = "5";
-  pageNavigate: string;
+  pageUrl: Subject<string> = new Subject<string>();
+  pageSize: number = 5;
+  pageNavigate: number;
 
   categoriesSelected: number[] = [];
-  categories$: Observable<Categorie>;// on recupere toutes les categories en base
+  categories$:  Observable<NgIterable<Categorie>>;// on recupere toutes les categories en base
 
   urls: UrlSegment[];
   url1er: string = "";
@@ -70,7 +71,7 @@ export class RecettesComponent implements OnInit {
     this.pages = this.filterForm.valueChanges.pipe(
       debounceTime(200),
       startWith(this.filterForm.value),
-      merge(this.pageUrl),
+      mergeWith(this.pageUrl),
       switchMap(urlOrFilter => this.recetteService.list(this.currentUserEmail, this.categoriesSelected, this.alimentsId, this.favori, this.seulementLesAliments, urlOrFilter)),
       share()
     );    
@@ -122,16 +123,16 @@ export class RecettesComponent implements OnInit {
 
   }
 
-  onPageChanged(pageSelected: string) {
+  onPageChanged(pageSelected: number) {
     this.isLoading = true;
     this.pageNavigate = pageSelected;
     this.pageableService.rechargement(this.pageUrl, this.pageNavigate, this.pageSize);
   }
 
-  onPageSizeChanged(pageSizeSelected: string) {
+  onPageSizeChanged(pageSizeSelected: number) {
     this.isLoading = true;
     this.pageSize = pageSizeSelected;
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
+    this.pageableService.rechargement(this.pageUrl, 0, this.pageSize);
   }
 
   addDeleteFavori(recette: Recette){
@@ -153,17 +154,17 @@ export class RecettesComponent implements OnInit {
 
   alimentsIdChange(alimentsid: number[]){
     this.alimentsId = alimentsid;
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
+    this.pageableService.rechargement(this.pageUrl, 0, this.pageSize);
   }
 
   categoriesSelectedChange(categoriesSelected: number[]){
     this.categoriesSelected = categoriesSelected;
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
+    this.pageableService.rechargement(this.pageUrl, 0, this.pageSize);
   }
 
   seulementLesAlimentsChange(seulementLesAliments: boolean){
     this.seulementLesAliments = seulementLesAliments;
-    this.pageableService.rechargement(this.pageUrl, "0", this.pageSize);
+    this.pageableService.rechargement(this.pageUrl, 0, this.pageSize);
   }
   
   recherche(recette: Recette){

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, NgIterable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { faEdit, faHeart } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,13 +21,13 @@ export class SidebarRecetteComponent implements OnInit {
   @Input() loggedIn: boolean;
 
   @Input() categoriesSelected: number[];
-  @Output() categoriesSelectedChange: EventEmitter<number[]> = new EventEmitter<number[]>()
+  @Output() categoriesSelectedChange: EventEmitter<number[]> = new EventEmitter<number[]>();
 
-  categories$: Observable<Categorie>;// on recupere toutes les categories en base
+  categories$: Observable<NgIterable<Categorie>>;//  on recupere toutes les categories en base
 
   alimentsSelected: Aliment[] = new Array<Aliment>();
   @Input() alimentsId: number[];
-  @Output() alimentsIdChange: EventEmitter<number[]> = new EventEmitter<number[]>()
+  @Output() alimentsIdChange: EventEmitter<number[]> = new EventEmitter<number[]>();
   @Input() seulementLesAliments: boolean = false;
   @Output() seulementLesAlimentsChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   utiliserFrigo: boolean = false;
@@ -41,7 +41,7 @@ export class SidebarRecetteComponent implements OnInit {
   ) {
 
     this.categories$ = this.categorieService.getCategories();
-
+    
   }
 
   ngOnInit() { }

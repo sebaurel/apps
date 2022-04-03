@@ -1,8 +1,6 @@
 import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from "../../environments/environment";
-import { Photo } from '../models/photo.model';
 
 
 @Injectable({

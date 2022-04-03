@@ -6,6 +6,11 @@ export class Page<T> {
     next: string;       // URL of the next page
     previous: string;   // URL of the previous page
     content: Array<T>;  // items for the current page
+    pageable: any;
+    first: number;
+    last: number;
+    totalPages: number;
+    number: number;
   }
 
   

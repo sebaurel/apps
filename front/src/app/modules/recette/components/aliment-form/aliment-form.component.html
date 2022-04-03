@@ -16,7 +16,7 @@
               <label for="descriptif">Description</label>
               <textarea rows="4" cols="50" class="form-control" name="descriptif" id="descriptif" [(ngModel)]="aliment.descriptif" #descriptif="ngModel" novalidate>{{aliment.descriptif}}</textarea>
             </div>
-            <app-photo-upload [(photo)]="photo" [(photoThumbPath)]="photoThumbPath" [width]="200" [progress]="progress" [height]="200" (photoUpload)="photo=$event"></app-photo-upload>
+            <app-photo-upload [photo]="photo" [photoThumbPath]="photoThumbPath" [width]=200 [height]=200 [progress]="progress" (photoUpload)="photo=$event"></app-photo-upload>
             <div class="mt-5">
               <button class="btn btn-lg btn-warning btn-block btn-signin font-weight-medium" type="submit">Enregistrer l'aliment</button>
             </div>

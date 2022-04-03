@@ -23,10 +23,10 @@
                   <textarea rows="4" cols="50" class="form-control" name="body" id="body" formControlName="body"></textarea>
                 </div>
                 <p>Vous pouvez ajouter autant de photo que vous voulez</p>
-                <app-photo-upload [(photo)]="photo" [(photoThumbPath)]="photoThumbPath" [width]="0" [height]="0" [progress]="progress" (photoUpload)="photoCommentaireUpload($event)"></app-photo-upload>
+                <app-photo-upload [photo]="photo" [photoThumbPath]="photoThumbPath" [width]="" [height]="" [progress]="progress" (photoUpload)="photoCommentaireUpload($event)"></app-photo-upload>
                 <div *ngFor="let photo of photos" class="float-start p-0 ms-1 mb-1 photo">
                   <fa-icon [icon]="faEraser" class="eraser" (click)="cancelPhoto(photo)"></fa-icon>
-                  <img [src]="photoThumbPath+photo.id+'-thumb.png'" alt="Photo" width="50px"/>
+                  <img [src]="photoThumbPath + '{{photo.id}}' + '-thumb.png'" alt="Photo" width="50px"/>
                 </div>
                 <div class="clearfix">&nbsp;</div>
                 <button class="btn btn-outline-dark" (click)="addCommentaire(formCommentaire)">Enregistrer le commentaire</button>

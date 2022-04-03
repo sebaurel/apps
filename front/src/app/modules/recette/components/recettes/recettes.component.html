@@ -8,8 +8,8 @@
 
     <div class="col-md-11 col-sm-12 mx-auto">
       <app-spinner [isLoading]="isLoading"></app-spinner>
-      <div *ngIf="(pages | async)?.content == 0">Pas de recette, il est temps de faire les courses</div>
-      <div *ngFor="let recette of (pages | async)?.content" [ngClass]="row" >
+      <div *ngIf="nbRecette == 0">Pas de recette, il est temps de faire les courses</div>
+      <div *ngFor="let recette of (pages | async)?.content" Class="row" >
         <div class="offset-md-1 col-md-10 blog">
 
           <article>
@@ -24,7 +24,7 @@
                     <ng-template #pasDePhotoAuteur><div class="float-start me-3">
                       <img [src]="pathUpload+'avatar.png'" alt="Pas de photo" class="petiteThumb" /></div>
                     </ng-template>
-                    <h5><fa name="user"></fa> {{recette.utilisateur.pseudo}}</h5><a href="#"></a>
+                    <h5><fa-icon [icon]="faUser"></fa-icon> {{recette.utilisateur.pseudo}}</h5><a href="#"></a>
                   </li>
                   <li>
                     <button *ngIf="recette.utilisateur.email == currentUserMailEditRecette || admin" routerLink="/recette/edit/{{recette.id}}"  class="btn"><fa-icon [icon]="faEdit"></fa-icon>&nbsp;<span class="d-none d-md-none d-lg-inline-block">edit.&nbsp;&nbsp;</span></button>
@@ -35,7 +35,7 @@
               <div class="col-md-10">
                 <div routerLink="/recette/{{recette.id}}">
                   <div *ngIf="recette.photo != null else pasDePhotoRecette" class="float-start me-3 mb-3">
-                    <img [src]="pathUpload+recette.photo.id+'-thumb.png'" alt="Photo principale de la recette" />
+                    <img [src]="pathUpload + recette.photo.id +'-thumb.png'" alt="Photo principale de la recette" />
                   </div>
                   <ng-template #pasDePhotoRecette><div class="float-start me-3 mb-3">
                     <img [src]="pathUpload+'/default-thumb.png'" alt="Pas de photo" /></div>
@@ -63,6 +63,5 @@
 </div>
 <div class="col-12 mx-auto" align="center">
   <app-paginator [pages]="pages | async" (pageChange)="onPageChanged($event)" (PageSizeChange)="onPageSizeChanged($event)"></app-paginator>
-
 </div>
 <!--{{(pages | async) | json}}-->

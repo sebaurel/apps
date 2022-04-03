@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, NgIterable, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 //import 'rxjs/add/operator/filter';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-
 import { Recette } from '../../models/recette.model';
 import { Ingredient } from '../../models/ingredient.model';
-import { Photo } from '../../../../models/photo.model';
 import { RecetteService } from '../../services/recette.service';
 import { Etape } from '../../models/etape.model';
 import { Categorie } from '../../models/categorie.model';
@@ -21,6 +19,7 @@ import { EnumService } from 'src/app/services/enum.service';
 import { PreviousRouteService } from 'src/app/modules/shared-components/services/previous-route.service';
 import { Aliment } from '../../models/aliment.model';
 import { FormValidator } from 'src/app/util/form.util';
+import { Photo } from 'src/app/modules/shared-components/models/photo.model';
 
 @Component({
   selector: 'app-recetteForm',
@@ -38,16 +37,16 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
   ingredients: Ingredient[] = [];
   ingredient: Ingredient = new Ingredient();
 
-  categories$: Observable<Categorie>;
+  categories$:  Observable<NgIterable<Categorie>>;
   categorieSelected: Categorie;
   unites$: Observable<Unite>;
   etapes: Etape[] = [];
   newEtape: Etape = new Etape;
 
-  //photo: Photo;
-  pathUpload:String = environment.PATH_UPLOAD;
+  pathUpload: string = environment.PATH_UPLOAD;
   photoThumbPath: string = environment.PATH_UPLOAD + "default-thumb.png";
-  photoThumbPathDefaultEtape: String  = environment.PATH_UPLOAD + "default-thumb.png";//permet d'afficher la photo par default au lieu de celle de la recette
+  photoThumbPathDefaultEtape: string  = environment.PATH_UPLOAD + "default-thumb.png";//permet d'afficher la photo par default au lieu de celle de la recette
+  photoThumbPathDefaultIngredient: string;
   progress: { percentage: number } = { percentage: 0 };
   
   currentUser: Utilisateur = JSON.parse(localStorage.getItem('currentUser'));

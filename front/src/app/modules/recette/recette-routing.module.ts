@@ -9,7 +9,7 @@ import { RecetteFormComponent } from './components/recette-form/recette-form.com
 import { RecetteComponent } from './components/recette/recette.component';
 import { RecettesComponent } from './components/recettes/recettes.component';
 
-export const routesRecette: Routes = [
+export const routes: Routes = [
   
   {
     path: 'recettes',
@@ -55,8 +55,7 @@ export const routesRecette: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routesRecette)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 

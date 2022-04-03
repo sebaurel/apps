@@ -8,7 +8,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { QuillModule } from 'ngx-quill';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PreviousRouteService } from './services/previous-route.service';
 import { UrlPermission } from './jwtAuthorization/url.permission';
 import { UtilisateurService } from './services/utilisateur.service';
@@ -17,7 +17,8 @@ import { JwtInterceptor } from './jwtAuthorization/jwt.interceptor';
 import { ErrorInterceptor } from './jwtAuthorization/error.interceptor';
 import { ConfirmationGuard } from './gards/confirmation.guard';
 import { AuthService } from '../authentication/services/auth.service';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ModalCommentaireComponent } from './modals/modal-commentaire/modal-commentaire.component';
 
 
 @NgModule({
@@ -25,12 +26,14 @@ import { AuthService } from '../authentication/services/auth.service';
     PaginatorComponent,
     SpinnerComponent,
     CommentaireComponent,
-    PhotoUploadComponent,
-    ContentTextComponent
+    ModalCommentaireComponent,
+    ContentTextComponent,
+    PhotoUploadComponent
   ],
   exports:[
     PaginatorComponent,
     SpinnerComponent,
+    ModalCommentaireComponent,
     CommentaireComponent,
     PhotoUploadComponent,
     ContentTextComponent,
@@ -40,7 +43,9 @@ import { AuthService } from '../authentication/services/auth.service';
     QuillModule.forRoot(),
     NgbModule,
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [
     PreviousRouteService,

@@ -25,7 +25,7 @@
                 <input type="email" class="form-control" name="email" id="email" formControlName="email" />
               </div>
               <div class="form-group">
-                <app-modal-motdepass [(utilisateur)]="utilisateur"></app-modal-motdepass>
+                <app-modal-motdepass [utilisateur]="utilisateur"></app-modal-motdepass>
               </div>
   
             </div>
@@ -40,7 +40,7 @@
                   <label for="photo">Photo de profil</label>
                   <div class="row">
   
-                    <app-photo-upload [(photo)]="utilisateur.photo" [(photoThumbPath)]="photoThumbPath" [width]="0" [height]="0" [progress]="progress" (photoUpload)="photoChange($event)"></app-photo-upload>
+                    <app-photo-upload [photo]="utilisateur.photo" [photoThumbPath]="photoThumbPath" [width]=0 [height]=0 [progress]="progress" (photoUpload)="photoChange($event)"></app-photo-upload>
   
                   </div>
                 </div>

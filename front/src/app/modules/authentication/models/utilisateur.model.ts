@@ -1,6 +1,6 @@
-import { Photo } from "../../../models/photo.model";
 import { Recette } from "../../recette/models/recette.model";
 import { Aliment } from "../../recette/models/aliment.model";
+import { Photo } from "../../shared-components/models/photo.model";
 
 export class Utilisateur {
     id: number;

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from "../../../../../environments/environment";
-import { CommentaireService } from 'src/app/services/commentaire.service';
-import { Commentaire } from 'src/app/models/commentaire.model';
+import { Commentaire } from 'src/app/modules/shared-components/models/commentaire.model';
+import { CommentaireService } from '../../services/commentaire.service';
 
 @Component({
   selector: 'app-commentaire',

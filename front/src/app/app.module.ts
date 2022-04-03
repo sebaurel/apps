@@ -50,7 +50,6 @@ registerLocaleData(localeFr);
     HomeComponent
   ],
   imports: [
-    CommonModule,
     SharedComponentsModule,
     HttpClientModule,
     BrowserModule,
@@ -62,7 +61,6 @@ registerLocaleData(localeFr);
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatStepperModule,
-    MatIconModule,
     DragDropModule,
     FontAwesomeModule,
     RecetteModule,

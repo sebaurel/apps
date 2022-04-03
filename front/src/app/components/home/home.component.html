@@ -15,7 +15,7 @@
         <div class="col-md-10">
           <div routerLink="/recette/{{recette.id}}">
             <div *ngIf="recette.photo != null else elseBlock" class="float-start me-3 mb-3">
-              <img [src]="pathUpload+recette.photo.id+'-thumb.png'" alt="Photo principale de la recette" />
+              <img [src]="pathUpload + recette.photo.id + '-thumb.png'" alt="Photo principale de la recette" />
             </div>
             <ng-template #elseBlock><div class="float-start me-3 mb-3">
               <img [src]="pathUpload+'/default-thumb.png'" alt="Pas de photo" /></div>

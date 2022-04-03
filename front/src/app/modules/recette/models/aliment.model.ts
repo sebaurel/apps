@@ -1,4 +1,4 @@
-import { Photo } from "../../../models/photo.model";
+import { Photo } from "../../shared-components/models/photo.model";
 
 export class Aliment {
     id: number;

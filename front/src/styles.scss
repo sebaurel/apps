@@ -65,7 +65,7 @@ html, body {
   .color-bar-1 { background:#414141; height:5px; }
   .color-bar-2 { height:3px; }
   
-  img.petiteThumb:hover + div.photoAliment {
+  img.petiteThumb:hover + div.agrandissement-photo div.photoAliment {
     visibility: visible;
 }
 
@@ -73,13 +73,17 @@ img.petiteThumb {
     height: 40px;
     width: 40px;
     position: relative;
-
+}
+div.agrandissement-photo {
+    position: absolute;
+    width: 0;
+    height: 0;
 }
 div.photoAliment {
     visibility: hidden;
-    position: absolute;
-    left: 80px;
-    top: 100px;
+    position:relative;
+    left: 40px;
+    top: -40px;
 }
 
 .imagePhoto{

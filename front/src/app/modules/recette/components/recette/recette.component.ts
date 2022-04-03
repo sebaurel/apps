@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { PrintService } from 'src/app/services/print.service';
 import { Unite } from '../../models/unite.model';
 import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
-import { Commentaire } from 'src/app/models/commentaire.model';
+import { Commentaire } from 'src/app/modules/shared-components/models/commentaire.model';
 import { UtilisateurService } from 'src/app/modules/shared-components/services/utilisateur.service';
 import { RecetteService } from '../../services/recette.service';
 

@@ -22,6 +22,8 @@ import { ModalFrigoComponent } from './components/modals/modal-frigo/modal-frigo
 import { ModalIngredientComponent } from './components/modals/modal-ingredient/modal-ingredient.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { RecetteRoutingModule } from './recette-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -39,7 +41,7 @@ import { RecetteRoutingModule } from './recette-routing.module';
     ModalEtapesComponent,
     ModalFrigoComponent,
     ModalIngredientComponent,
- ],
+  ],
   imports: [
     CommonModule,
     SharedComponentsModule,
@@ -50,7 +52,9 @@ import { RecetteRoutingModule } from './recette-routing.module';
     ReactiveFormsModule,
     NgSelectModule,
     NgbModule,
-    RecetteRoutingModule
+    RecetteRoutingModule,
+    NgxPaginationModule,
+    DragDropModule
   ],
   exports:[
     ModalAlimentViewComponent

@@ -5,9 +5,9 @@ import { UtilisateurService } from 'src/app/modules/shared-components/services/u
 import { FormValidator } from 'src/app/util/form.util';
 import { CanComponentDeactivate } from 'src/app/modules/shared-components/gards/confirmation.guard';
 import { environment } from 'src/environments/environment';
-import { Photo } from 'src/app/models/photo.model';
 import { Utilisateur } from '../../models/utilisateur.model';
 import { AuthService } from '../../services/auth.service';
+import { Photo } from 'src/app/modules/shared-components/models/photo.model';
 
 @Component({
   selector: 'app-profil-form',

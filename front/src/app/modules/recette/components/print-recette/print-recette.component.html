@@ -6,7 +6,7 @@
      
         
 <div class="titre">
-            <span *ngIf="recette.photo" class="photo"><img [src]="pathUpload+recette.photo.id+'-thumb.png'" alt="Photo principale de la recette"/></span>&nbsp;{{recette.titre}}
+            <span *ngIf="recette.photo" class="photo"><img [src]="pathUpload+'{{recette.photo.id}}'+'-thumb.png'" alt="Photo principale de la recette"/></span>&nbsp;{{recette.titre}}
         </div>    
 <div class="content" border="1px solid green">
     <h5 class="title-bg">Ingredients</h5>
@@ -34,7 +34,7 @@
 
 <div class="header">
     <div class="titre">
-        <span *ngIf="recette.photo" class="photo"><img [src]="pathUpload+recette.photo.id+'-thumb.png'" alt="Photo principale de la recette"/></span>&nbsp;{{recette.titre}}
+        <span *ngIf="recette.photo" class="photo"><img [src]="pathUpload+'{{recette.photo.id}}'+'-thumb.png'" alt="Photo principale de la recette"/></span>&nbsp;{{recette.titre}}
     </div>
 </div>
 <div class="footer">AWESOME FOOTER</div>-->

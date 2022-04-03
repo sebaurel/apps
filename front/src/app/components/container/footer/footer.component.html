@@ -20,7 +20,7 @@
                 <ul>
                     <li *ngFor="let recette of lastRecette$ | async">
                         <div *ngIf="recette.photo != null else elseBlock" class="float-start me-3 mb-3">
-                            <img class="petiteThumb" [src]="pathUpload+recette.photo.id+'-thumb.png'" alt="Photo" />
+                            <img class="petiteThumb" [src]="pathUpload + recette.photo.id + '-thumb.png'" alt="Photo" />
                         </div>
                         <ng-template #elseBlock><div class="float-start me-3 mb-3">
                             <img class="petiteThumb" [src]="pathUpload+'/default-thumb.png'" alt="Pas de photo" /></div>
@@ -42,8 +42,8 @@
             <div class="col-lg-3 col-sm-6 footer-col">
                 <h5>Photos</h5>
                 <ul class="img-feed">
-                    <li *ngFor="let photo of lastPhoto$ | async">
-                        <a [href]="pathUpload+photo.id+'.png'"><img class="petiteThumb" [src]="pathUpload+photo.id+'-thumb.png'" alt="Image"></a>
+                    <li *ngFor="let photo of (lastPhoto$ | async)">
+                        <a [href]="pathUpload + photo.id + '.png'"><img class="petiteThumb" [src]="pathUpload + photo.id + '-thumb.png'" alt="Image"></a>
                     </li>
                 </ul>
             </div><!---->

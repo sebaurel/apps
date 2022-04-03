@@ -9,7 +9,7 @@ export class PageableService {
 
   constructor() { }
 
-  rechargement(pageUrl: Subject<string>, pageNavigate: string, pageSize: string){
-    pageUrl.next(environment.API_URL + 'rest/recette/list/?page=' + pageNavigate + "&" + "size=" + pageSize);
+  rechargement(pageUrl: Subject<string>, pageNavigate: number, pageSize: number): void {
+    pageUrl.next(environment.API_URL + 'rest/recette/list/?page=' + pageNavigate.toString() + "&size=" + pageSize.toString());
   }
 }

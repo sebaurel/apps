@@ -1,13 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CommentaireService } from 'src/app/services/commentaire.service';
 import { environment } from 'src/environments/environment';
 import { faEraser } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormValidator } from 'src/app/util/form.util';
-import { Commentaire } from 'src/app/models/commentaire.model';
-import { Photo } from 'src/app/models/photo.model';
+import { Commentaire } from 'src/app/modules/shared-components/models/commentaire.model';
 import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
+import { Photo } from '../../models/photo.model';
+import { CommentaireService } from '../../services/commentaire.service';
 
 @Component({
   selector: 'app-modal-commentaire',
@@ -18,6 +18,7 @@ export class ModalCommentaireComponent implements OnInit {
   faEraser = faEraser;
   @Input() commentaire: Commentaire;
   photos: Photo[] = [];
+  photo:Photo;
   @Input() idRecette: number ;
   @Input() idUtilisateur: number ;
   @Input() commentaires: Commentaire[];

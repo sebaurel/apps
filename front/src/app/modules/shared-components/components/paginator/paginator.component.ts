@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Page } from 'src/app/util/pagination-page';
+import { Page } from 'src/app/modules/shared-components/util/page';
+import { faAngleDoubleLeft, faAngleDoubleRight, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-paginator',
@@ -7,10 +8,12 @@ import { Page } from 'src/app/util/pagination-page';
   styleUrls: ['./paginator.component.scss']
 })
 export class PaginatorComponent {
+  faAngleDoubleLeft: IconDefinition = faAngleDoubleLeft;
+  faAngleDoubleRight: IconDefinition = faAngleDoubleRight;
 
   @Input() pages: Page<any>;
-  @Output() pageChange = new EventEmitter<string>();
-  @Output() PageSizeChange = new EventEmitter<string>();
+  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() PageSizeChange: EventEmitter<number> = new EventEmitter<number>();
 }
 
 

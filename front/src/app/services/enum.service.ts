@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgIterable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Categorie } from '../modules/recette/models/categorie.model';
@@ -14,8 +14,8 @@ export class EnumService {
     private http: HttpClient
   ) { }
 
-  public getCategories(): Observable<Categorie>{
-    return  this.http.get<Categorie>(environment.API_URL+'rest/categorie', {observe: "body"});
+  public getCategories(): Observable<NgIterable<Categorie>>{
+    return  this.http.get<NgIterable<Categorie>>(environment.API_URL+'rest/categorie', {observe: "body"});
   }
 
   public getUnites(): Observable<Unite>{

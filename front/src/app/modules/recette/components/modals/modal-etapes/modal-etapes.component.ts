@@ -3,8 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from 'src/environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Photo } from 'src/app/models/photo.model';
 import { Etape } from '../../../models/etape.model';
+import { Photo } from 'src/app/modules/shared-components/models/photo.model';
 //import { FormValidator } from 'src/app/util/form.util';
 
 @Component({

@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Photo } from 'src/app/models/photo.model';
+import { Photo } from 'src/app/modules/shared-components/models/photo.model';
 import { environment } from 'src/environments/environment';
 import { Aliment } from '../../models/aliment.model';
 import { AlimentService } from '../../services/aliment.service';

@@ -39,7 +39,7 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     
-    if (JSON.parse(localStorage.getItem('currentUser'))) this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    //if (JSON.parse(localStorage.getItem('currentUser'))) this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 
     if (this.loggedIn && this.currentUser.role == "ADMIN") this.admin = true;

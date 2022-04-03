@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Page, queryPaginated } from 'src/app/util/pagination-page';
+import { Page, queryPaginated } from 'src/app/modules/shared-components/util/page';
 import { Recette } from '../models/recette.model';
 
 
@@ -28,7 +28,7 @@ export class RecetteService {
   }
 
   public getRecettes(): Observable<any>{
-    return this.http.get(environment.API_URL+'rest/recette', {observe: 'body'});
+    return this.http.get(environment.API_URL+'rest/recette', {observe: 'body' });
   }
 
   public getRecette(idRecette :number): Observable<any>{

@@ -19,5 +19,8 @@
       "dom"
     ],
     "allowSyntheticDefaultImports": true
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
 }

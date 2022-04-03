@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { PhotoService } from 'src/app/services/photo.service';
-import { Photo } from 'src/app/models/photo.model';
+import { Photo } from '../../models/photo.model';
+import { PhotoService } from '../../services/photo.service';
 
 @Component({
   selector: 'app-photo-upload',
@@ -18,8 +18,8 @@ export class PhotoUploadComponent implements OnInit {
   @Input() photo: Photo;
   @Input() progress: { percentage: number } = { percentage: 0 };
   @Input() photoThumbPath: String;
-  @Input() width: string;
-  @Input() height: string;
+  @Input() width: number;
+  @Input() height: number;
   @Output() photoUpload: EventEmitter<Photo> = new EventEmitter<Photo>();
 
   constructor(

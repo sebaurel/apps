@@ -12,7 +12,7 @@ import { RecetteService } from 'src/app/modules/recette/services/recette.service
 export class HomeComponent implements OnInit {
 
   pathUpload: string = environment.PATH_UPLOAD;
-  randomRecettes$: Observable<Recette>;
+  randomRecettes$: Observable<Recette[]>;
   
   photoPath: string;
   photoPathThumb: string;

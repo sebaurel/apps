@@ -1,4 +1,4 @@
-import { Utilisateur } from "../modules/authentication/models/utilisateur.model";
+import { Utilisateur } from "../../authentication/models/utilisateur.model";
 import { Photo } from './photo.model';
 
 export class Commentaire {
