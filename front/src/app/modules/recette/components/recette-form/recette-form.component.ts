@@ -37,7 +37,7 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
   ingredients: Ingredient[] = [];
   ingredient: Ingredient = new Ingredient();
 
-  categories$:  Observable<NgIterable<Categorie>>;
+  categories:  Observable<NgIterable<Categorie>>;
   categorieSelected: Categorie;
   unites$: Observable<Unite>;
   etapes: Etape[] = [];
@@ -173,7 +173,7 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
       this.confirmExit = true;
     })  
 
-    this.categories$ = this.enumService.getCategories();
+    this.categories = this.enumService.getCategories();
     this.unites$ = this.enumService.getUnites();
 
     this.returnUrls = this.previousRouteService.getPreviousUrl();

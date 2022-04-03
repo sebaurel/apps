@@ -39,7 +39,7 @@
                         <li *ngFor="let etape of recette.etapes">
                             <!--<a href="#">-->
                                 <div *ngIf="etape.photo else noPhoto">
-                                    <img [src]="'{{pathUpload+etape.photo.id}}' + '-thumb.png'" alt="Photo de l'etape"/>
+                                    <img [src]="pathUpload + etape.photo.id.toString() + '-thumb.png'" alt="Photo de l'etape"/>
                                 </div>
                                 <ng-template #noPhoto>
                                     <img [src]="photoPathThumb" alt="Pas de photo"/>

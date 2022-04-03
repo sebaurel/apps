@@ -29,8 +29,8 @@
         </div>
       </form>
     </div>
-    <div class="col-6 col-md-11 mx-auto">
-      <button class="btn btn-outline-dark" (click)="addEtape(); c()">
+    <div class="col-6 col-md-11 mx-auto text-center">
+      <button class="btn btn-warning my-3" (click)="addEtape(); c()">
         <span *ngIf="editEtape else elseBlock">Modifier l'étape</span>
         <ng-template #elseBlock>Enregistrer l'étape</ng-template>
       </button>

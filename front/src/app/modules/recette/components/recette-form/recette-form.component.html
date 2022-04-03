@@ -30,7 +30,12 @@
             </div>
             <div>
               <label for="categorie">Categorie&nbsp;</label>
-              <ng-select [items: Categorie]="categories$ | async" bindLabel="nom" placeholder="Séléctionner une categorie" [hideSelected]="true" formControlName="categorie" class="col-12"></ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
+              <!--<ng-select [items: Categorie]="categories | async" bindLabel="nom" placeholder="Séléctionner une categorie" [hideSelected]="true" formControlName="categorie" class="col-12"></ng-select>--> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
+              <ng-select bindLabel="nom" placeholder="Séléctionner une categorie" [hideSelected]=true name="categorieSelecteur" formControlName="categorie" >
+                <ng-option [value]="item.id" *ngFor="let item of (categories | async)">
+                  {{item.nom}}
+                </ng-option>
+              </ng-select>
             </div>
             <div>
               <label for="descriptif">Description</label>
@@ -66,7 +71,7 @@
               <table style="width:100%">
                 <tr>
                   <td *ngIf="ingredient.aliment.photo != null else pasDePhoto" rowspan="2" width="40px" padding="5px" class="celluleThumbs">
-                    <img class="petiteThumb" [src]="'{{pathUpload+ingredient.aliment.photo.id}}' + '-thumb.png'" />
+                    <img class="petiteThumb" [src]="pathUpload + ingredient.aliment.photo.id.toString() + '-thumb.png'" />
                   </td>
                   <ng-template #pasDePhoto>
                     <td rowspan="2" width="40px" padding="5px" class="celluleThumbs">
@@ -111,12 +116,12 @@
 
       <div class="col-12 col-md-10 mx-auto">
         <div class="auth-form-dark text-start">
-          <div cdkDropList class="example-list" cdkDropListDropped="dropEtape($event: CdkDragDrop<Etape[]>)">
+          <div cdkDropList class="example-list" (cdkDropListDropped)="dropEtape($event)">
             <div *ngFor="let etape of etapes " width="100%" class="tableEtapes example-box" cdkDrag>
 
               <table style="width:100%">
                 <tr>
-                  <td *ngIf="etape.photo != null else elseBlock" class="celluleThumbs"><img class="petiteThumb" [src]="pathUpload+etape.photo.id+'-thumb.png'" /></td>
+                  <td *ngIf="etape.photo != null else elseBlock" class="celluleThumbs"><img class="petiteThumb" [src]="pathUpload + etape.photo.id+'-thumb.png'" /></td>
                   <ng-template #elseBlock>
                     <td class="celluleThumbs"><img class="petiteThumb" [src]="photoThumbPathDefaultEtape" /></td>
                   </ng-template>

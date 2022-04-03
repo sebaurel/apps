@@ -43,7 +43,7 @@ export class RecettesComponent implements OnInit {
   url1er: string = "";
   url2nd: string = "";
   nbRecette: number;
-  favori: string = "false";//creation d'un faux boolean pour le passer dans l'url
+  favori: boolean = false;
   currentUser: Utilisateur = JSON.parse(localStorage.getItem('currentUser'));
   currentUserMailEditRecette: string = null;
   admin: boolean = false;
@@ -88,7 +88,7 @@ export class RecettesComponent implements OnInit {
     } 
     if (this.url1er == "mesfavoris") {
       this.currentUserEmail = this.currentUser.email;
-      this.favori = "true"
+      this.favori = true
     }
 
     if (this.currentUser != null){
