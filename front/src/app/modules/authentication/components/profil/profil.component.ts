@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Photo } from 'src/app/models/photo.model';
-import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { UtilisateurService } from 'src/app/modules/shared-components/services/utilisateur.service';
 import { environment } from 'src/environments/environment';
 import { Utilisateur } from '../../models/utilisateur.model';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
-import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { UtilisateurService } from 'src/app/modules/shared-components/services/utilisateur.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

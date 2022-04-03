@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Photo } from 'src/app/models/photo.model';
 import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
-import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { UtilisateurService } from 'src/app/modules/shared-components/services/utilisateur.service';
 import { Article } from '../../models/article.model';
 import { ArticleService } from '../../services/article.service';
 

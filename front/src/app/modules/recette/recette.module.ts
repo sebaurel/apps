@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { RecetteRoutingModule } from './recette-routing.module';
 import { RecettesComponent } from './components/recettes/recettes.component';
 import { SidebarRecetteComponent } from './components/sidebar/sidebar-recette.component';
 import { SidebarRecetteMobileComponent } from './components/sidebar/sidebar-mobile/sidebar-recette-mobile.component';
@@ -22,6 +21,7 @@ import { ModalEtapesComponent } from './components/modals/modal-etapes/modal-eta
 import { ModalFrigoComponent } from './components/modals/modal-frigo/modal-frigo.component';
 import { ModalIngredientComponent } from './components/modals/modal-ingredient/modal-ingredient.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import { RecetteRoutingModule } from './recette-routing.module';
 
 
 @NgModule({
@@ -41,16 +41,19 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
     ModalIngredientComponent,
  ],
   imports: [
-    SharedComponentsModule,
     CommonModule,
-    RecetteRoutingModule,
+    SharedComponentsModule,
     FontAwesomeModule,
     MatStepperModule,
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
-    NgbModule
+    NgbModule,
+    RecetteRoutingModule
+  ],
+  exports:[
+    ModalAlimentViewComponent
   ]
 })
 export class RecetteModule { }

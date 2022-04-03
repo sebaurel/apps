@@ -26,7 +26,8 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
     CommonModule,
     AuthenticationRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AuthenticationRoutingModule
   ]
 })
 export class AuthenticationModule { }

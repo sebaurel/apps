@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
 
-import { UtilisateurService } from '../../services/utilisateur.service';
+import { UtilisateurService } from '../../modules/shared-components/services/utilisateur.service';
 
 @Component({
   selector: 'app-container',

@@ -8,7 +8,7 @@ import Quill from 'quill';
 
 // or, from each individual module
 //import BlotFormatter from 'quill-blot-formatter/dist/BlotFormatter';
-import { BlotFormatter } from 'quill-blot-formatter';
+import BlotFormatter from 'quill-blot-formatter';
 import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
 import { Article } from '../../models/article.model';
 import { ArticleService } from '../../services/article.service';

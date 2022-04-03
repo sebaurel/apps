@@ -14,7 +14,8 @@ import { ContactComponent } from './components/contact/contact.component';
     CommonModule,
     ContactRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ContactRoutingModule
   ]
 })
 export class ContactModule { }

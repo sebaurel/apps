@@ -25,7 +25,6 @@ export class ModalAlimentViewComponent implements OnInit {
     }else{
       this.photoThumbPath = environment.PATH_UPLOAD + "default-aliment.png";
     }
-    console.log(this.recherche);
   }
   open(content) {
     this.modalService.open(content)

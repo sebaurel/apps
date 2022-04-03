@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContainerComponent } from 'src/app/components/container/container.component';
-import { ConfirmationGuard } from 'src/app/gards/confirmation.guard';
-import { UrlPermission } from 'src/app/jwtAuthorization/url.permission';
+import { ConfirmationGuard } from 'src/app/modules/shared-components/gards/confirmation.guard';
+import { UrlPermission } from 'src/app/modules/shared-components/jwtAuthorization/url.permission';
 import { LoginComponent } from './components/login/login.component';
 import { ProfilFormComponent } from './components/profil-form/profil-form.component';
 import { ProfilComponent } from './components/profil/profil.component';

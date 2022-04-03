@@ -8,14 +8,14 @@ import { faEdit, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { RecetteService } from '../../services/recette.service';
 import { Recette } from '../../models/recette.model';
 
-import { Page } from 'src/app/util/pagination-page';
 import { PageableService } from 'src/app/services/pageable.service';
 import { EnumService } from 'src/app/services/enum.service';
-import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { UtilisateurService } from 'src/app/modules/shared-components/services/utilisateur.service';
 import { environment } from 'src/environments/environment';
 import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
 import { Categorie } from '../../models/categorie.model';
 import { Ingredient } from '../../models/ingredient.model';
+import { Page } from 'src/app/util/pagination-page';
 
 @Component({
   selector: 'app-recettes',

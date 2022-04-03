@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { UtilisateurService } from 'src/app/modules/shared-components/services/utilisateur.service';
 import { FormValidator } from 'src/app/util/form.util';
-import { CanComponentDeactivate } from 'src/app/gards/confirmation.guard';
+import { CanComponentDeactivate } from 'src/app/modules/shared-components/gards/confirmation.guard';
 import { environment } from 'src/environments/environment';
 import { Photo } from 'src/app/models/photo.model';
 import { Utilisateur } from '../../models/utilisateur.model';

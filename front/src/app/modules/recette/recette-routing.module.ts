@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContainerComponent } from 'src/app/components/container/container.component';
-import { ConfirmationGuard } from 'src/app/gards/confirmation.guard';
-import { UrlPermission } from 'src/app/jwtAuthorization/url.permission';
+import { ConfirmationGuard } from 'src/app/modules/shared-components/gards/confirmation.guard';
+import { UrlPermission } from 'src/app/modules/shared-components/jwtAuthorization/url.permission';
 import { AlimentFormComponent } from './components/aliment-form/aliment-form.component';
 import { PrintRecetteComponent } from './components/print-recette/print-recette.component';
 import { RecetteFormComponent } from './components/recette-form/recette-form.component';
 import { RecetteComponent } from './components/recette/recette.component';
 import { RecettesComponent } from './components/recettes/recettes.component';
 
-const routes: Routes = [
+export const routesRecette: Routes = [
   
   {
     path: 'recettes',
@@ -55,7 +55,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routesRecette)],
   exports: [RouterModule]
 })
+
 export class RecetteRoutingModule { }

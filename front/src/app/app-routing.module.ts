@@ -10,6 +10,7 @@ export const routes: Routes = [
   },
   // otherwise redirect to home
   { path: '**', redirectTo: 'home' }
+  
 ];
 
 export const routing = RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' });

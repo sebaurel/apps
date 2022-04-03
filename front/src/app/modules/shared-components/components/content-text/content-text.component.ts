@@ -3,7 +3,7 @@ import { StyledImage } from './styled-image'
 import Quill from 'quill';
 
 // or, from each individual module
-import { BlotFormatter } from 'quill-blot-formatter';
+import BlotFormatter from 'quill-blot-formatter';
 Quill.register('modules/blotFormatter', BlotFormatter);
 Quill.register(StyledImage, true);
 

@@ -13,12 +13,12 @@ import { RecetteService } from '../../services/recette.service';
 import { Etape } from '../../models/etape.model';
 import { Categorie } from '../../models/categorie.model';
 import { faArrowsAltV } from '@fortawesome/free-solid-svg-icons';
-import { CanComponentDeactivate } from 'src/app/gards/confirmation.guard';
+import { CanComponentDeactivate } from 'src/app/modules/shared-components/gards/confirmation.guard';
 import { Unite } from '../../models/unite.model';
 import { environment } from 'src/environments/environment';
 import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
 import { EnumService } from 'src/app/services/enum.service';
-import { PreviousRouteService } from 'src/app/services/previous-route.service';
+import { PreviousRouteService } from 'src/app/modules/shared-components/services/previous-route.service';
 import { Aliment } from '../../models/aliment.model';
 import { FormValidator } from 'src/app/util/form.util';
 
