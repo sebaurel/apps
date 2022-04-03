@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { Utilisateur } from 'src/app/model/utilisateur.model';
+import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
+import { AuthService } from 'src/app/modules/authentication/services/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -39,7 +39,7 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     
-    if (JSON.parse(localStorage.getItem('currentUser'))) this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    //if (JSON.parse(localStorage.getItem('currentUser'))) this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 
     if (this.loggedIn && this.currentUser.role == "ADMIN") this.admin = true;

@@ -1,0 +1,37 @@
+
+<div *ngIf="pages">
+  <!--<div class="navigationPage">
+    <button (click)="pageChange.emit(pages.number-1)" [hidden]="pages.first"><mat-icon>keyboard_arrow_left</mat-icon></button>
+    <span class="numeroPageCourante">{{pages.number + 1}}</span>
+    <button (click)="pageChange.emit(pages.number+1)" [hidden]="pages.last"><mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>-->
+  <div class="numeroPages" ><!--*ngIf="pages.totalPages > 1"-->
+    <button (click)="pageChange.emit(pages.first)" [hidden]="pages.first"><fa-icon [icon]="faAngleDoubleLeft"></fa-icon></button>
+    &nbsp;
+    <button (click)="pageChange.emit(pages.number-3)" [hidden]="pages.number-3 < pages.first" class="pages"><span>{{pages.number - 2}}</span></button>
+    &nbsp;
+    <button (click)="pageChange.emit(pages.number-2)" [hidden]="pages.number-2 < pages.first" class="pages"><span>{{pages.number - 1}}</span></button>
+    &nbsp; 
+    <button (click)="pageChange.emit(pages.number-1)" [hidden]="pages.first" class="pages"><span>{{pages.number}}</span></button>
+    &nbsp;
+    <span class="numeroPageCourante">{{pages.number + 1}}</span>
+    &nbsp;
+    <button (click)="pageChange.emit(pages.number+1)" [hidden]="pages.last" class="pages"><span>{{pages.number + 2}}</span></button>
+    &nbsp;
+    <button (click)="pageChange.emit(pages.number+2)" [hidden]="pages.number+3 > pages.totalPages" class="pages"><span>{{pages.number + 3}}</span></button>
+    &nbsp;
+    <button (click)="pageChange.emit(pages.number+3)" [hidden]="pages.number+4 > pages.totalPages" class="pages"><span>{{pages.number + 4}}</span></button>
+    &nbsp;
+    <button (click)="pageChange.emit(pages.totalPages - 1)" [hidden]="pages.last"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></button>
+  </div>
+  <!--<div>{{ pages.totalPages }} page<span *ngIf="pages.totalPages > 1">s</span></div>-->
+  <div class="recetteParPage">
+    Recettes par pages
+    <ul>
+      <li *ngFor="let item of [1,5,10,25,50,100]" (click)="PageSizeChange.emit(item)" [ngClass]="{'currentRecetteParPage' : item == pages.pageable.pageSize}">
+        <span>{{item}}</span>
+      </li>
+   </ul>
+  </div>
+</div>
+ <!--{{pages.content | json}}-->

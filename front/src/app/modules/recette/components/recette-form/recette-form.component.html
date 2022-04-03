@@ -1,0 +1,175 @@
+<h1 class="title-bg">
+  {{titrePage}}
+  <span *ngIf="!publier">&nbsp;(Brouillon)</span>
+</h1>
+<form [formGroup]="formPublier">
+  <h5 class="title-bg">
+    <label class="switch">
+      <input type="checkbox" id="switchPublier" formControlName="switchPublier">
+      <span class="slider round"></span>
+    </label>
+    <ng-container *ngIf="publier; else elseTemplate">
+      <span>&nbsp;Publier</span>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <span class="brouillon">&nbsp;Brouillon</span>
+    </ng-template>
+  </h5>
+</form>
+
+<div class="basic-container" width="100%">
+  <mat-horizontal-stepper>
+    <mat-step label="Description" class="mat-step-header">
+      <div class="col-12 col-md-4 mx-auto">
+        <div class="auth-form-dark text-start">
+
+          <form [formGroup]="formRecette">
+            <div class="form-group">
+              <label for="titre" class='control-label'>Titre</label>
+              <input type="text" class="form-control" id="titre" formControlName="titre" />
+            </div>
+            <div>
+              <label for="categorie">Categorie&nbsp;</label>
+              <ng-select [items: Categorie]="categories$ | async" bindLabel="nom" placeholder="Séléctionner une categorie" [hideSelected]="true" formControlName="categorie" class="col-12"></ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
+            </div>
+            <div>
+              <label for="descriptif">Description</label>
+              <textarea rows="4" cols="50" class="form-control" id="descriptif" formControlName="descriptif"></textarea>
+            </div>
+          </form>
+
+          <div class="form-group">
+            <label for="file">Photo de la recette</label>
+            <div class="row">
+              <app-photo-upload [photo]="recette.photo" [photoThumbPath]="photoThumbPath" [width]=770 [height]=300 [progress]="progress" (photoUpload)="photoChange($event)"></app-photo-upload>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="fleche-etapes">
+        <button class="btn etape-suivante" mat-button matStepperNext>
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+    </mat-step>
+
+
+
+    <mat-step label="Ingrédients">
+
+      <div class="col-12 col-md-5 mx-auto">
+        <div class="auth-form-dark text-start">
+
+          <div cdkDropList class="example-list" (cdkDropListDropped)="dropIngredient($event)">
+            <div *ngFor="let ingredient of ingredients" width="100%" class="tableIngredients example-box" cdkDrag>
+              <table style="width:100%">
+                <tr>
+                  <td *ngIf="ingredient.aliment.photo != null else pasDePhoto" rowspan="2" width="40px" padding="5px" class="celluleThumbs">
+                    <img class="petiteThumb" [src]="'{{pathUpload+ingredient.aliment.photo.id}}' + '-thumb.png'" />
+                  </td>
+                  <ng-template #pasDePhoto>
+                    <td rowspan="2" width="40px" padding="5px" class="celluleThumbs">
+                      <img [src]="photoThumbPathDefaultIngredient" class="petiteThumb" />
+                    </td>
+                  </ng-template>
+                  <td width="50%">&nbsp;{{ingredient.aliment.nom}}&nbsp;
+                    <span *ngIf="ingredient.quantite > 0">{{ingredient.quantite}}&nbsp;</span>
+                    <span *ngIf="ingredient.unite && ingredient.quantite > 0">{{ingredient.unite.nom}}<span *ngIf="ingredient.quantite > 1">s</span></span>
+                  </td>
+                  <td>
+                    <app-modal-ingredient (confirmExit)="confirmExit=$event" [editIngredient]=true [ingredient]="ingredient" [ingredients]="ingredients"></app-modal-ingredient>
+                  </td>
+                  <td><button class="btn btn-outline-dark font-weight-medium" (click)="spliceIngredient(ingredient)" type="button">Supprimer</button></td>
+                  <td><button class="btn btn-outline-dark font-weight-medium" type="button"><fa-icon [icon]="faArrowsAltV"></fa-icon></button></td>
+                </tr>
+                <tr>
+                  <td width="100%" ><em>&nbsp;{{ingredient.commentaire}}</em></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-12 mx-auto text-center">
+            <app-modal-ingredient (confirmExit)="confirmExit=$event" [editIngredient]=false [ingredient]="ingredient" [ingredients]="ingredients"></app-modal-ingredient>
+          </div>
+        </div>
+      </div>
+      <div class="fleche-etapes">
+        <button class="btn etape-precedente" mat-button matStepperPrevious>
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <button class="btn etape-suivante" mat-button matStepperNext>
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+    </mat-step>
+
+
+
+
+    <mat-step label="Etapes">
+
+      <div class="col-12 col-md-10 mx-auto">
+        <div class="auth-form-dark text-start">
+          <div cdkDropList class="example-list" cdkDropListDropped="dropEtape($event: CdkDragDrop<Etape[]>)">
+            <div *ngFor="let etape of etapes " width="100%" class="tableEtapes example-box" cdkDrag>
+
+              <table style="width:100%">
+                <tr>
+                  <td *ngIf="etape.photo != null else elseBlock" class="celluleThumbs"><img class="petiteThumb" [src]="pathUpload+etape.photo.id+'-thumb.png'" /></td>
+                  <ng-template #elseBlock>
+                    <td class="celluleThumbs"><img class="petiteThumb" [src]="photoThumbPathDefaultEtape" /></td>
+                  </ng-template>
+                  <td width="80%">
+                    <h5>{{etape.titre}}</h5>
+                    <p [innerText]="etape.descriptif"></p>
+                  </td>
+                  <td>
+                    <app-modal-etapes (confirmExit)="confirmExit=$event" [editEtape]="true" [etape]="etape" [etapes]="etapes"></app-modal-etapes>
+                  </td>
+                  <td><button class="btn btn-outline-dark font-weight-medium" (click)="spliceEtape(etape)" type="button">Supprimer</button></td>
+                  <td><button class="btn btn-outline-dark font-weight-medium" type="button"><fa-icon [icon]="faArrowsAltV"></fa-icon></button></td>
+                </tr>
+              </table>
+
+            </div>
+          </div>
+          <div class="col-12 mx-auto text-center">
+            <app-modal-etapes (confirmExit)="confirmExit=$event" [editEtape]="false" [etape]="newEtape" [etapes]="etapes"></app-modal-etapes>
+          </div>
+
+         
+        </div>
+      </div>
+      <div class="fleche-etapes">
+        <button class="btn etape-precedente" mat-button matStepperPrevious>
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</div>
+<br>
+
+<div class="container-fluid page-body-wrapper" mx-auto>
+
+  <div class="row mb-2">
+    <div class="col-lg-4">
+      <div *ngIf="formErrors.titre" class="help-block">{{formErrors.titre}}</div>
+      <div *ngIf="formErrors.categorie" class="help-block">{{formErrors.categorie}}</div>
+      <div *ngIf="formErrors.descriptif" class="help-block">{{formErrors.descriptif}}</div>
+    </div>
+    <div class="col-lg-4 mb-2">
+      <button *ngIf="(!confirmExit && recette.id) else elseBlock" class="btn btn-success btn-lg btn-block font-weight-medium" type="button" [routerLink]="['/recette/'+recette.id]" >Visualiser la recette</button>
+      <ng-template #elseBlock>
+        <button class="btn btn-warning btn-lg btn-block font-weight-medium" type="submit" (click)="onSubmit(formRecette)">Enregistrer la recette</button>
+      </ng-template>
+    </div>
+    <div class="col-lg-4 mb-2" *ngIf="recette.id">
+      <button class="btn btn-lg btn-danger btn-block font-weight-medium" type="button"
+        (click)="supprimerRecette(recette.id)">Supprimer la recette</button>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+</div>

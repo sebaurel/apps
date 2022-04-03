@@ -1,0 +1,49 @@
+<div class="sidebar">
+  <!--<h5 class="title-bg">Recherche</h5>
+    
+  <input formControlName="search" placeholder="Search by name">-->
+
+  Recherche
+  <!--<h5 class="title-bg">Categories</h5>-->
+  <ng-select [(ngModel)]="categoriesSelected" bindLabel="nom" bindValue="id" placeholder="Catégories" [multiple]=true [hideSelected]=true name="categorieSelecteur" (change)="categorieChanged()">
+    <ng-option [value]="item.id" *ngFor="let item of (categories$ | async)">
+      {{item.nom}}
+    </ng-option>
+  </ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
+  
+  <!--Frigo-->
+    <table class="my-2">
+      <tbody>
+        <tr>
+          <td>
+      <div class="d-inline-block">
+      <label class="switch" >
+        <input type="checkbox" [(ngModel)]="utiliserFrigo" (click)="FrigoSwitch()">
+        <span class="slider"></span>
+      </label>
+      Mon frigo</div> &nbsp; <div class="d-inline-block my-2"><app-modal-frigo (change)="FrigoChanged($event)" (close)="FrigoModalClose()" [alimentsSelectedModal]="alimentsSelected" [loggedIn]="loggedIn"></app-modal-frigo>
+      </div>
+    </td></tr>
+  </tbody>
+  </table>
+  <div id="frigo" [className]="frigoActifOk">
+    <table style="width:100%">
+              
+      <tr *ngFor="let alimentSelected of alimentsSelected">
+        <td *ngIf="alimentSelected.photo != null else elseBlock"><img class="petiteThumb" [src]="pathUpload + alimentSelected.photo.id.toString() + '-thumb.png'"/>
+          <div class="agrandissement-photo">
+            <div class="photoAliment"><img [src]="pathUpload + alimentSelected.photo.id.toString() + '.png'"/></div>
+          </div>
+        </td>
+        <ng-template #elseBlock ><td><img [src]="photoThumbPathFrigo" class="petiteThumb"/></td></ng-template>
+        <td>{{alimentSelected.nom}}</td>
+        <td><button class="btn btn-outline-dark font-weight-medium" (click)="spliceAliment(alimentSelected)" type="button">-</button></td>
+      </tr>
+    </table> 
+    <!--<div (click)="seulementLesAlimentsChanged()">
+      <input type="checkbox" id="seulementLesAliments" name="seulementLesAliments" [(ngModel)]="seulementLesAliments"> 
+      <label for="seulementLesAliments">Cuisiner seulement ces aliments ?</label>
+    </div>-->
+    
+  </div>
+</div>
