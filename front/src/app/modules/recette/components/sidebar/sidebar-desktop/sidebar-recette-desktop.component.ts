@@ -13,8 +13,11 @@ export class SidebarRecetteDesktopComponent{
   @Output() alimentsIdChange: EventEmitter<number[]> = new EventEmitter<number[]>();
   @Input() seulementLesAliments: boolean = false;
   @Output() seulementLesAlimentsChange:  EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() brouillons: boolean = false;
+  @Output() brouillonsChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input() loggedIn:boolean;
+  @Input() inPageMesRecettes:boolean;
 
   constructor() { }
 
@@ -29,4 +32,9 @@ export class SidebarRecetteDesktopComponent{
   alimentsIdFonction(alimentsId: number[]){
     this.alimentsIdChange.emit(alimentsId);
   }
+
+  brouillonsFonction(brouillons: boolean){
+    this.brouillonsChange.emit(brouillons);
+  };
+
 }

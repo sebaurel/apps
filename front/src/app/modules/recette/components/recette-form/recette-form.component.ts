@@ -1,4 +1,4 @@
-import { Component, NgIterable, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,13 +33,13 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
 
   recette: Recette = new Recette();
   publier: boolean = false;
-  titrePage: String = "Nouvelle Recette"
+  titrePage: String = "";
   ingredients: Ingredient[] = [];
   ingredient: Ingredient = new Ingredient();
 
-  categories:  Observable<NgIterable<Categorie>>;
+  categories$:  Observable<Categorie[]>;
   categorieSelected: Categorie;
-  unites$: Observable<Unite>;
+  unites$: Observable<Unite[]>;
   etapes: Etape[] = [];
   newEtape: Etape = new Etape;
 
@@ -92,13 +92,17 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
     private formBuilder: FormBuilder,
     private enumService: EnumService,
     private previousRouteService: PreviousRouteService,
-  ) { 
-    
+  ) {
+
   }
 
   
   ngOnInit() {
-    
+    this.categories$ = this.enumService.getCategories().pipe(map((data) => {data.sort((a, b) => {return a.nom < b.nom ? -1 : 1;}); return data;}));
+    this.unites$ = this.enumService.getUnites().pipe(map((data) => {data.sort((a, b) => {return a.nom < b.nom ? -1 : 1;}); return data;}));
+
+    this.categorieSelected = new Categorie();
+
     if (this.currentUser.role == "ADMIN") this.admin = true;
     this.ingredient.aliment = new Aliment();
     this.ingredient.quantite = null;
@@ -130,7 +134,6 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
             });
 
             this.categorieSelected = recetteReceive.categorie;
-            
             this.etapes = recetteReceive.etapes;
 
             this.ingredients = recetteReceive.ingredients;
@@ -142,10 +145,6 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
               //console.log(JSON.stringify(this.recette.photo));
               this.photoThumbPath = environment.PATH_UPLOAD + recetteReceive.photo.id + "-thumb.png";
             }
-          }else{
-            this.recette.utilisateur = this.currentUser;
-            this.recette.date = new Date();
-            this.photoThumbPath = environment.PATH_UPLOAD + "default-thumb.png";
           }
 
         })).subscribe(() => {
@@ -155,6 +154,8 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
         
       }
       else{
+          this.recette.utilisateur = this.currentUser;
+          this.recette.date = new Date();
           this.photoThumbPath = environment.PATH_UPLOAD + "default-thumb.png";
       }
     }); 
@@ -173,12 +174,9 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
       this.confirmExit = true;
     })  
 
-    this.categories = this.enumService.getCategories();
-    this.unites$ = this.enumService.getUnites();
-
     this.returnUrls = this.previousRouteService.getPreviousUrl();
     this.returnUrlslength = this.previousRouteService.getPreviousUrl().length;
-
+  
   }
 
   onSubmit(formRecette): void {
@@ -193,6 +191,7 @@ export class RecetteFormComponent implements OnInit, CanComponentDeactivate {
       //if (this.photo) this.recette.photo = this.photo;
       this.recette.etapes = this.etapes;
       this.recette.publier = this.publier;
+      console.log(this.recette);
       if (this.recette.id == null) {
         this.recetteService.postRecette(this.recette).subscribe(recetteSaved => {
           //this.router.navigate(['/recette/'+data.id]);

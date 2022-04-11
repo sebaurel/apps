@@ -38,7 +38,7 @@ public class ArticleCtrl {
     }
 	
 	@GetMapping("/{id}")
-    public  ResponseEntity<Article> findArticle(@PathVariable(value = "id") Long idArticle) {
+    public  ResponseEntity<Article> findArticle(@PathVariable(value = "id") long idArticle) {
     	return new ResponseEntity<Article>(articleSrv.findOneById(idArticle), HttpStatus.ACCEPTED);
     }
     
@@ -54,7 +54,7 @@ public class ArticleCtrl {
     }
 
  	@DeleteMapping("/{id}")
-    public void delete( @PathVariable(value = "id") Long id) {
+    public void delete( @PathVariable(value = "id") long id) {
         articleSrv.delete(id);
     }
  	

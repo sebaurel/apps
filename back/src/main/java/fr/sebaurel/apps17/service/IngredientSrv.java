@@ -18,7 +18,7 @@ public class IngredientSrv {
 	@Autowired(required=false)
 	IngredientRepo ingredientRepo;
 	
-	public Ingredient find(Long id) {
+	public Ingredient find(long id) {
 		return ingredientRepo.findOneById(id);
 	}
 

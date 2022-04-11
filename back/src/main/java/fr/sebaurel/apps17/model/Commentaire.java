@@ -27,7 +27,7 @@ public class Commentaire implements Serializable {
 
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	@NotNull
 	private String title;
@@ -41,9 +41,9 @@ public class Commentaire implements Serializable {
 	@OneToOne(cascade = CascadeType.DETACH)
 	private Utilisateur redacteur;
 	
-	private Long idRecette;
+	private long idRecette;
 
-	private Long idUtilisateur;
+	private long idUtilisateur;
 	
 	private boolean valide;
 	
@@ -56,7 +56,7 @@ public class Commentaire implements Serializable {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -92,19 +92,19 @@ public class Commentaire implements Serializable {
 		this.redacteur = redacteur;
 	}
 
-	public Long getIdRecette() {
+	public long getIdRecette() {
 		return idRecette;
 	}
 
-	public void setIdRecette(Long idRecette) {
+	public void setIdRecette(long idRecette) {
 		this.idRecette = idRecette;
 	}
 
-	public Long getIdUtilisateur() {
+	public long getIdUtilisateur() {
 		return idUtilisateur;
 	}
 
-	public void setIdUtilisateur(Long idUtilisateur) {
+	public void setIdUtilisateur(long idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
 

@@ -8,5 +8,5 @@ import fr.sebaurel.apps17.model.Aliment;
 @Repository
 public interface AlimentRepo extends JpaRepository<Aliment, Long>{
 
-	Aliment findOneById(Long id);
+	Aliment findOneById(long id);
 }

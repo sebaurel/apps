@@ -36,11 +36,11 @@ public class ArticleSrv {
 		return article;
 	}*/
 	
-	public Article findOneById(Long idArticle) {
+	public Article findOneById(long idArticle) {
 		return articleRepo.findOneById(idArticle);
 	}
 	
-	public void delete(Long idArticle) {
+	public void delete(long idArticle) {
 		Article article = findOneById(idArticle);
 		Photo photo = article.getPhoto();
 		photoSrv.invalidatePhoto(photo.getId());// invalide la photo qui sera supprimer lors de la prochaine purge

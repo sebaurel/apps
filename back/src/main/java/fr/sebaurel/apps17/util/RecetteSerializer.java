@@ -16,7 +16,7 @@ public class RecetteSerializer extends JsonSerializer<Recette>{
 		if (recette != null) {
 
 				jsonGenerator.writeStartObject();
-				jsonGenerator.writeStringField("id", recette.getId().toString());
+				jsonGenerator.writeStringField("id", String.valueOf(recette.getId()));
 				jsonGenerator.writeEndObject();
 		}
 	}

@@ -28,7 +28,7 @@ public class PhotoCtrl {
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deletePhoto(@PathVariable(value = "id") Long id) {
+	public void deletePhoto(@PathVariable(value = "id") long id) {
 		photoSrv.invalidatePhoto(id);
 	}
 	

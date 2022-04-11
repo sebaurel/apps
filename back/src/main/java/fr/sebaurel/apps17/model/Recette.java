@@ -1,6 +1,7 @@
 package fr.sebaurel.apps17.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -42,8 +43,8 @@ public class Recette implements Serializable {
 	private List<Etape> etapes;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recette", orphanRemoval = true)
-	private List<Ingredient> ingredients;
-	
+	private Collection<Ingredient> ingredients;
+		
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecette", fetch = FetchType.LAZY)
 	private List<Commentaire> commentaires;
 	
@@ -56,7 +57,7 @@ public class Recette implements Serializable {
 	
 	public Recette() {}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -104,11 +105,11 @@ public class Recette implements Serializable {
 		this.etapes = etapes;
 	}
 
-	public List<Ingredient> getIngredients() {
+	public Collection<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(List<Ingredient> ingredients) {
+	public void setIngredients(Collection<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
 

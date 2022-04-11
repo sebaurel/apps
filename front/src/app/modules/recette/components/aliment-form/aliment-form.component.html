@@ -31,7 +31,7 @@
           <h2>Liste des aliments</h2>
           <div class="form-group">
             <label for="aliment">Aliment : </label>
-            <ng-select [items]="aliments$ | async" bindLabel="nom" [(ngModel)]="aliment" placeholder="Séléctionner un aliment" [hideSelected]="true" name="stand" class="col-12" (change)="onSelect()"></ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
+            <ng-select [items]="aliments$ | async" bindLabel="nom" placeholder="Séléctionner un aliment" [hideSelected]=true name="aliment" class="col-12" (change)="onSelect($event)"></ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
           </div>
           <div class="mt-3">
               <button class="btn btn-lg btn-danger btn-block font-weight-medium" (click)="deleteAliment()" type="button" [disabled]="!alimentSelected">Supprimer</button>

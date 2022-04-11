@@ -20,7 +20,7 @@ public class Aliment implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	@Column(columnDefinition = "VARCHAR(40)", unique=true)
 	private String nom;
@@ -33,7 +33,7 @@ public class Aliment implements Serializable {
 	
 	public Aliment() {}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 

@@ -33,7 +33,7 @@ public class CommentaireCtrl {
 	Controle controle;
 	
     @GetMapping("/recette/{id}")
-    public List<Commentaire> findCommentairesRecette(@PathVariable(value = "id") Long idRecette) {
+    public List<Commentaire> findCommentairesRecette(@PathVariable(value = "id") long idRecette) {
     	return commentaireSrv.findAllByIdRecetteOrderByDate(idRecette);
     }
     
@@ -49,7 +49,7 @@ public class CommentaireCtrl {
     }
 
  	@DeleteMapping("/{id}")
-    public void delete( @PathVariable(value = "id") Long id) {
+    public void delete( @PathVariable(value = "id") long id) {
         commentaireSrv.delete(id);
     }
  	

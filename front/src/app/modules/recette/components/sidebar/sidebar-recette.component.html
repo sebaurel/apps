@@ -1,16 +1,15 @@
 <div class="sidebar">
-  <!--<h5 class="title-bg">Recherche</h5>
+  <h5 class="title-bg"><fa-icon [icon]="faSearch"></fa-icon> Recherche</h5>
     
-  <input formControlName="search" placeholder="Search by name">-->
+  <!--<input formControlName="search" placeholder="Search by name">-->
 
-  Recherche
+  <div (click)="brouillonsChanged()" *ngIf="inPageMesRecettes">
+    <input type="checkbox" id="brouillons" name="brouillons" [(ngModel)]="brouillons"> 
+    <label for="brouillons">Brouillon(s)</label>
+  </div>
   <!--<h5 class="title-bg">Categories</h5>-->
-  <ng-select [(ngModel)]="categoriesSelected" bindLabel="nom" bindValue="id" placeholder="Catégories" [multiple]=true [hideSelected]=true name="categorieSelecteur" (change)="categorieChanged()">
-    <ng-option [value]="item.id" *ngFor="let item of (categories$ | async)">
-      {{item.nom}}
-    </ng-option>
-  </ng-select> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
-  
+  <ng-select [(ngModel)]="categoriesSelected" [items]="categories$ | async" bindLabel="nom" bindValue="id" placeholder="Séléctionner une categorie" name="categorieSelecteur" [multiple]=true [hideSelected]=true (change)="categorieChanged()"></ng-select><!--formControlName="categorieSelecteur" -->
+
   <!--Frigo-->
     <table class="my-2">
       <tbody>

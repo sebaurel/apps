@@ -14,7 +14,7 @@ export class Page<T> {
   }
 
   
-export function queryPaginated<T>(http: HttpClient, baseUrl: string, emailUtilisateur?: string, categories?: number[], alimentsId?: number[], favori?: boolean, seulementLesAliments?:boolean, urlOrFilter?: string | object): Observable<Page<T>> {
+export function queryPaginated<T>(http: HttpClient, baseUrl: string, emailUtilisateur?: string, categories?: number[], alimentsId?: number[], publier?: boolean, favori?: boolean, seulementLesAliments?:boolean, urlOrFilter?: string | object): Observable<Page<T>> {
   let params = new HttpParams();
   let url = baseUrl;
 
@@ -33,6 +33,7 @@ export function queryPaginated<T>(http: HttpClient, baseUrl: string, emailUtilis
   params = params.set('email',emailUtilisateur);
   params = params.set('categories',JSON.stringify(categories));
   params = params.set('aliments',JSON.stringify(alimentsId));
+  params = params.set('publiees',publier.valueOf());
   params = params.set('favori',favori.valueOf());
   params = params.set('seulementLesAliments',JSON.stringify(seulementLesAliments));
 

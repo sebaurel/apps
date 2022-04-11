@@ -50,7 +50,7 @@ public class RecetteCtrl {
 	PhotoSrv photoSrv;
 	
     @GetMapping("/{id}")
-    public Recette findRecette(@PathVariable(value = "id") Long id) throws CustomException {
+    public Recette findRecette(@PathVariable(value = "id") long id) throws CustomException {
     	return recetteSrv.find(id);
     }
     
@@ -80,7 +80,7 @@ public class RecetteCtrl {
     }
     
     @GetMapping("/list")
-   	public Page<Recette> recettesPageableCategories(@PageableDefault(size = 5) Pageable pageable, @RequestParam("categories") String categoriesId, @RequestParam("email") String emailUtilisateur, @RequestParam("aliments") String alimentsId, @RequestParam("favori") String favori, @RequestParam("seulementLesAliments") String seulementLesAliments ) {
+   	public Page<Recette> recettesPageableCategories(@PageableDefault(size = 5) Pageable pageable, @RequestParam("categories") String categoriesId, @RequestParam("email") String emailUtilisateur, @RequestParam("aliments") String alimentsId, @RequestParam("publiees") String publiees,  @RequestParam("favori") String favori, @RequestParam("seulementLesAliments") String seulementLesAliments ) {
  
     	Collection<Categorie> categoriesSelected = categorieSrv.findAllById(categoriesId); 
     	
@@ -91,6 +91,8 @@ public class RecetteCtrl {
 				utilisateur = utilisateurSrv.find(emailUtilisateur);
 		}
 		
+		boolean demandePubliees = Boolean.parseBoolean(publiees);
+		
 		Collection<Recette> favoris = new ArrayList<Recette>();
 		boolean demandeFavori = Boolean.parseBoolean(favori);
 		if (demandeFavori) {
@@ -99,7 +101,7 @@ public class RecetteCtrl {
 		
 		boolean demandeSeulementLesAliments = Boolean.parseBoolean(seulementLesAliments);
 		
-    	return recetteSrv.findByCriteria(pageable, categoriesSelected, alimentsSelected, utilisateur, favoris, demandeFavori, demandeSeulementLesAliments);
+		return recetteSrv.findByCriteria(pageable, categoriesSelected, alimentsSelected, utilisateur, demandePubliees, favoris, demandeFavori, demandeSeulementLesAliments);
    	}
 
     @PostMapping("")
@@ -123,7 +125,7 @@ public class RecetteCtrl {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete( @PathVariable(value = "id") Long id) throws CustomException {
+    public ResponseEntity<Object> delete( @PathVariable(value = "id") long id) throws CustomException {
     	Recette recette = recetteSrv.find(id);
     	if (recette.getPhoto() != null) {
 			photoSrv.invalidatePhoto(recette.getPhoto().getId());// invalide la photo qui sera supprimer lors de la prochaine purge

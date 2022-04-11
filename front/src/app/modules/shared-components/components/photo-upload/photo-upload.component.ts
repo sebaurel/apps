@@ -30,7 +30,7 @@ export class PhotoUploadComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngOnChanges(){
+  changes(){
     if (this.photo && this.photo.id) this.defaultPhoto = false;
     else {
       this.defaultPhoto = true;

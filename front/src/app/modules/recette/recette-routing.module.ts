@@ -38,14 +38,14 @@ export const routes: Routes = [
     children: [{ path: '', component: RecetteFormComponent, canDeactivate: [ConfirmationGuard], outlet: 'connected' }]
   },
   {
-    path: 'recette/aliment',
-    component: ContainerComponent, canActivate: [UrlPermission],
-    children: [{ path: '', component: AlimentFormComponent, outlet: 'connected' }]
-  },
-  {
     path: 'recette/:id',
     component: ContainerComponent,
     children: [{ path: '', component: RecetteComponent, outlet: 'connected' }]
+  },
+  {
+    path: 'aliment',
+    component: ContainerComponent, canActivate: [UrlPermission],
+    children: [{ path: '', component: AlimentFormComponent, outlet: 'connected' }]
   },
   { 
     path: 'print/:id',

@@ -22,7 +22,7 @@ public class AlimentCtrl {
     AlimentSrv alimentSrv;
 
     @GetMapping("/{id}")
-    public Aliment findaliment(@PathVariable(value = "id") Long id) {
+    public Aliment findaliment(@PathVariable(value = "id") long id) {
     	return alimentSrv.find(id);
     }
     
@@ -43,7 +43,7 @@ public class AlimentCtrl {
     
  	
 	@DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") Long id) {
+    public void delete(@PathVariable(value = "id") long id) {
 		Aliment aliment = alimentSrv.find(id);
     	alimentSrv.deleteAliment(aliment);
     } 

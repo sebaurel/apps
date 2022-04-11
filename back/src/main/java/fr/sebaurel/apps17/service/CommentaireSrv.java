@@ -20,7 +20,7 @@ public class CommentaireSrv {
 	@Autowired
 	PhotoSrv photoSrv;
 	
-	public List<Commentaire> findAllByIdRecetteOrderByDate(Long idRecette) {
+	public List<Commentaire> findAllByIdRecetteOrderByDate(long idRecette) {
 		return commentaireRepo.findAllByIdRecetteOrderByDate(idRecette);
 	}
 
@@ -40,11 +40,11 @@ public class CommentaireSrv {
 		return commentaire;
 	}
 	
-	public Commentaire findOneById(Long idCommentaire) {
+	public Commentaire findOneById(long idCommentaire) {
 		return commentaireRepo.findOneById(idCommentaire);
 	}
 	
-	public void delete(Long idCommentaire) {
+	public void delete(long idCommentaire) {
 		Commentaire commentaire = findOneById(idCommentaire);
 		List<Photo> Photos = commentaire.getPhotos();
 		if (!Photos.isEmpty()) {

@@ -61,7 +61,7 @@ export class ModalMotdepassComponent implements OnInit {
     this.authService.ChangePassword(this.utilisateur.email, this.passwordOld, this.password)
     .subscribe(data =>{ 
       alert("Votre mot de passe a bien été changé.\nVous allez recevoir un mail de confirmation.");
-      console.log(JSON.stringify(data));
+      //console.log(JSON.stringify(data));
     }, (err: any) => {
       alert(err);
     });

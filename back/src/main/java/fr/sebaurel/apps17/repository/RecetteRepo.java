@@ -15,7 +15,7 @@ import fr.sebaurel.apps17.model.Utilisateur;
 @Repository
 public interface RecetteRepo extends JpaRepository<Recette, Long>, JpaSpecificationExecutor<Recette>{
 
-	Recette findOneById(Long id);
+	Recette findOneById(long id);
 	
 	List<Recette> findTop2ByPublierOrderByIdDesc(Boolean publier);
 	

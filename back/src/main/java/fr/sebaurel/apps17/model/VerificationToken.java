@@ -19,7 +19,7 @@ public class VerificationToken {
  
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
      
     private String token;
    
@@ -53,7 +53,7 @@ public class VerificationToken {
 		setExpiryDate(calculateExpiryDate(EXPIRATION));
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 

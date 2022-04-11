@@ -6,12 +6,18 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Order;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Selection;
+import jakarta.persistence.criteria.Subquery;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +57,10 @@ public class RecetteSrv {
 	
 	@Autowired
 	PhotoSrv photoSrv;
-	
+
+	@Autowired
+	EntityManager entityManager;
+
 	public List<Recette> findAll() {
 		return recetteRepo.findAll();
 	}
@@ -83,13 +92,13 @@ public class RecetteSrv {
 		return recetteRepo.findAll(pageable);
 	}
 
-	public Recette find(Long id) throws CustomException {
+	public Recette find(long id) throws CustomException {
 		Recette recette = recetteRepo.findOneById(id);
 		try {
 			if (recette.getEtapes() != null)
 				recette.getEtapes().sort(Comparator.comparing(Etape::getOrdre));
-			if (recette.getIngredients() != null)
-				recette.getIngredients().sort(Comparator.comparing(Ingredient::getOrdre));
+			//if (recette.getIngredients() != null)
+			//	recette.getIngredients().sort(Comparator.comparing(Ingredient::getOrdre));
 			if (recette.getCommentaires() != null)
 				recette.getCommentaires().sort(Comparator.comparing(Commentaire::getDate));
 		}
@@ -108,38 +117,43 @@ public class RecetteSrv {
 		recetteRepo.delete(recette);
 	}
 	
-	public Page<Recette> findByCriteria(Pageable pageable, Collection<Categorie> categories, Collection<Aliment> aliments, Utilisateur utilisateur, Collection<Recette> favoris, boolean demandeFavori, boolean exclusiveAlimentsWanted){
+	public Page<Recette> findByCriteria(Pageable pageable, Collection<Categorie> categories, Collection<Aliment> aliments, Utilisateur utilisateur, boolean demandePublier, Collection<Recette> favoris, boolean demandeFavori, boolean exclusiveAlimentsWanted){
 		Page<Recette> page = recetteRepo.findAll(new Specification<Recette>() {
             /**
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
-
+			
 			@Override
             public Predicate toPredicate(Root<Recette> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
             	
-		        query.orderBy(criteriaBuilder.asc(root.get("titre"))).distinct(true);
-
+		        
+		        
                 List<Predicate> predicates = new ArrayList<>();
                 
-                if (!categories.isEmpty()) {
+                if (!categories.isEmpty()) { // Categories filter
                 	predicates.add(
                 		root.get("categorie").in(categories)
                 	);
                 }
                 
                 
-		        if (utilisateur != null && !demandeFavori ) {
+		        if (utilisateur != null && !demandeFavori ) { // User Pages
 		        	predicates.add(
 		        		criteriaBuilder.equal(root.get("utilisateur"), utilisateur)
 		        	);
-		        }else {
+		        	if (demandePublier) {
+		        		predicates.add(
+		        			criteriaBuilder.equal(root.get("publier"),false)
+			            );
+		        	}
+		        }else { // Page all recettes
 		        	predicates.add(
 	                	criteriaBuilder.equal(root.get("publier"),true)
 	                );
 		        }
 		        
-		        if (utilisateur != null && demandeFavori) {
+		        if (utilisateur != null && demandeFavori) { // filtre sur les favoris
 	                
 		        	List<Predicate> predicatesFavoris = new ArrayList<>();
 	                if (!favoris.isEmpty()) {
@@ -155,36 +169,47 @@ public class RecetteSrv {
 			        predicates.add(buildFavoris);
 		        }
 		        
-		        if (!aliments.isEmpty()) {
-                	Join<Recette, Ingredient> joinIngredients = root.join("ingredients", JoinType.INNER);
-                    
-                	if (exclusiveAlimentsWanted) {
-                		/*TODO trouver la solution pour filtrer seulement les aliments de la liste
-                		 * Pour l'instant cela permet de retrouver l'inverse !!
-                		 */
-                		
-	            		/*Collection<Aliment> alimentsNotWanted = alimentSrv.findAll();
-			            for(Aliment aliment : aliments) {
-			            	alimentsNotWanted.remove(aliment);
-			            }*/
-			            Predicate buildAliment = criteriaBuilder.and(joinIngredients.get("aliment").in(aliments).not());
+		        if (!aliments.isEmpty()) { // filtre sur les aliments
+		            Join<Ingredient, Recette> joinIngredients = root.join("ingredients", JoinType.LEFT);
+                	Predicate ingredientSelect = joinIngredients.get("aliment").in(aliments);
 
-			            predicates.add(buildAliment);
-                	}else{
-            	   		predicates.add(
-            	   			joinIngredients.get("aliment").in(aliments)
-            			);
-                	};
+                    predicates.add(
+                    		ingredientSelect
+            		);
+                    
+                    //query.orderBy(criteriaBuilder.asc(criteriaBuilder.countDistinct(root.get("ingredients"))));                  
+		        	
+		        	//("select r.titre as ingredient, count(al.id) as total from ingredient i left join recette r on r.id = i.id_recette left join Aliment al on al.id = i.id_aliment where al.id in (6,9,17,30) group by r.id order by COUNT(al.id) desc").getResultList().;
+		        } else {
+    		        query.orderBy(criteriaBuilder.asc(root.get("titre")));
                 }
+		        query.distinct(true);
 		        
-		        return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()])) ;
+		        return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
 
 		}, pageable);
 	 page.getTotalElements();
      page.getTotalPages();
+     //Sort.by("titre").descending();
      return page;
-    }
+    }	
+	
+	public List<Order> testquery( Collection<Aliment> aliments) {
+        CriteriaBuilder ingredientBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Ingredient> queryIngredients = ingredientBuilder.createQuery(Ingredient.class);
+        
+    	Root<Ingredient> rootIngredient = queryIngredients.from(Ingredient.class);
+    	
+	    // Join to the other tables we can filter on.
+    	Join<Ingredient, Aliment> joinAliment = rootIngredient.join("aliment", JoinType.INNER);
+    	Join<Ingredient, Recette> joinRecette = rootIngredient.join("recette", JoinType.INNER);
+    	
+    	//queryIngredients.select(joinRecette.get("titre")).where(joinAliment.get("nom")).groupBy(rootIngredient.get("recette"));//.orderBy(ingredientBuilder.asc(ingredientBuilder.countDistinct(joinAliment)));
+    	queryIngredients.orderBy(ingredientBuilder.asc(ingredientBuilder.countDistinct(joinAliment.get("nom"))));
+    	return queryIngredients.getOrderList();
+	};
+	
 	
 	public Recette preSaveRecette(Recette recette) throws CustomException {
 		Recette newRecette = save(recette);
@@ -215,5 +240,5 @@ public class RecetteSrv {
     	return newRecette;
 		
 	}
-
+	
 }

@@ -8,5 +8,5 @@ import fr.sebaurel.apps17.model.Unite;
 @Repository
 public interface UniteRepo extends JpaRepository<Unite, Long> {
 	
-	Unite findOneById(Long id);
+	Unite findOneById(long id);
 }

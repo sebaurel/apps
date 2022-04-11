@@ -1,7 +1,7 @@
 <h1>{{nbRecette}} Recettes</h1>
 
-<app-sidebar-recette-mobile (alimentsIdChange)="alimentsIdChange($event)" (categoriesSelectedChange)="categoriesSelectedChange($event)" (seulementLesAlimentsChange)="seulementLesAlimentsChange($event)" [(categoriesSelected)]="categoriesSelected" [(alimentsId)]="alimentsId" [loggedIn]="loggedIn" class="d-ms-block d-md-none"></app-sidebar-recette-mobile>
-<app-sidebar-recette-desktop (alimentsIdChange)="alimentsIdChange($event)" (categoriesSelectedChange)="categoriesSelectedChange($event)" (seulementLesAlimentsChange)="seulementLesAlimentsChange($event)" [(categoriesSelected)]="categoriesSelected" [(alimentsId)]="alimentsId" [loggedIn]="loggedIn" class="d-none d-sm-none d-md-block"></app-sidebar-recette-desktop>
+<app-sidebar-recette-mobile (alimentsIdChange)="alimentsIdChange($event)" (categoriesSelectedChange)="categoriesSelectedChange($event)" (brouillonsChange)="brouillonsChange($event)" (seulementLesAlimentsChange)="seulementLesAlimentsChange($event)" [(categoriesSelected)]="categoriesSelected" [(alimentsId)]="alimentsId" [loggedIn]="loggedIn" [inPageMesRecettes]="inPageMesRecettes" class="d-ms-block d-md-none"></app-sidebar-recette-mobile>
+<app-sidebar-recette-desktop (alimentsIdChange)="alimentsIdChange($event)" (categoriesSelectedChange)="categoriesSelectedChange($event)" (brouillonsChange)="brouillonsChange($event)" (seulementLesAlimentsChange)="seulementLesAlimentsChange($event)" [(categoriesSelected)]="categoriesSelected" [(alimentsId)]="alimentsId" [loggedIn]="loggedIn" [inPageMesRecettes]="inPageMesRecettes" class="d-none d-sm-none d-md-block"></app-sidebar-recette-desktop>
 
 <div class="container main-container-recette">
   <div class="row">

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, NgIterable } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { faEdit, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faHeart, faSearch, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 import { EnumService } from 'src/app/services/enum.service';
 import { environment } from 'src/environments/environment';
@@ -14,22 +14,24 @@ import { AlimentService } from '../../services/aliment.service';
   styleUrls: ['./sidebar-recette.component.scss']
 })
 export class SidebarRecetteComponent implements OnInit {
-  faEdit = faEdit;
-  faHeart = faHeart;
+  faSearch: IconDefinition = faSearch;
   pathUpload: string = environment.PATH_UPLOAD;
   photoPath: string = environment.PATH_UPLOAD + "default.png";
   @Input() loggedIn: boolean;
+  @Input() inPageMesRecettes:boolean;
 
   @Input() categoriesSelected: number[];
   @Output() categoriesSelectedChange: EventEmitter<number[]> = new EventEmitter<number[]>();
 
-  categories$: Observable<NgIterable<Categorie>>;//  on recupere toutes les categories en base
+  categories$: Observable<Categorie[]>;//  on recupere toutes les categories en base
 
   alimentsSelected: Aliment[] = new Array<Aliment>();
   @Input() alimentsId: number[];
   @Output() alimentsIdChange: EventEmitter<number[]> = new EventEmitter<number[]>();
   @Input() seulementLesAliments: boolean = false;
   @Output() seulementLesAlimentsChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() brouillons: boolean = false;
+  @Output() brouillonsChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   utiliserFrigo: boolean = false;
   frigoActifOk: string = "frigoNonActif";
   photoThumbPathFrigo: String = environment.PATH_UPLOAD + "default-aliment.png";
@@ -40,11 +42,12 @@ export class SidebarRecetteComponent implements OnInit {
     private categorieService: EnumService
   ) {
 
-    this.categories$ = this.categorieService.getCategories();
     
   }
 
-  ngOnInit() { }
+  ngOnInit() {    
+    this.categories$ = this.categorieService.getCategories();
+  }
 
   categorieChanged() {
     this.categoriesSelectedChange.emit(this.categoriesSelected);
@@ -70,8 +73,14 @@ export class SidebarRecetteComponent implements OnInit {
     this.seulementLesAlimentsChange.emit(this.seulementLesAliments);
   };
 
+  brouillonsChanged() {
+    if (this.brouillons) this.brouillons = false;
+    else this.brouillons = true; //permet de ne pas inverser la selection des le premier click
+    this.brouillonsChange.emit(this.brouillons);
+  };
+
   FrigoSwitch() {
-    console.log("switch");
+    //console.log("switch");
     this.alimentsId = [];
     if (!this.utiliserFrigo) {//lorsque l'on click sur la fonction, le frigo est à actif, il faut donc l'inverser
       this.utiliserFrigo = true;

@@ -14,7 +14,7 @@ import { AlimentService } from '../../services/aliment.service';
   templateUrl: './aliment-form.component.html',
   styleUrls: ['./aliment-form.component.scss']
 })
-export class AlimentFormComponent implements OnInit {
+export class AlimentFormComponent {
 
   aliment: Aliment = new Aliment;
   
@@ -26,16 +26,13 @@ export class AlimentFormComponent implements OnInit {
 
   constructor(
     private alimentService: AlimentService,
-  ) {}
-  
-
-  ngOnInit() {
+  ) {
     this.aliments$ = this.alimentService.getAliments().pipe(map((data) => {data.sort((a, b) => {return a.nom < b.nom ? -1 : 1;}); return data;}));
   }
-
-  onSelect(){
+  
+  onSelect(aliment:Aliment){
     this.alimentSelected = true;
-
+    this.aliment = aliment;
     if (this.aliment.photo) {
       this.photo = this.aliment.photo;
       this.photoThumbPath = environment.PATH_UPLOAD + this.photo.id+"-thumb.png";
@@ -59,7 +56,6 @@ export class AlimentFormComponent implements OnInit {
   resetFormAliment(){
     this.aliment = new Aliment(); 
     this.photo = new Photo();
-    this.ngOnInit();
     this.progress.percentage = 0;
   }
 
@@ -69,7 +65,6 @@ export class AlimentFormComponent implements OnInit {
         () => {
           alert(this.aliment.nom+" supprimé");
           this.aliment = new Aliment();
-          this.ngOnInit()
         },
         error => {
           alert("Impossible de supprimer "+this.aliment.nom+". Il est utilisé dans au moins une recette");

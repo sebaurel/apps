@@ -2,6 +2,9 @@ package fr.sebaurel.apps17.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -35,7 +38,7 @@ public class Ingredient extends ElementCollectionsRecette {
 	
 	public Ingredient() {
 	}
-
+	
 	public float getQuantite() {
 		return quantite;
 	}

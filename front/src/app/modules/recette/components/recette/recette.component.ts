@@ -6,7 +6,7 @@ import { Recette } from '../../models/recette.model';
 
 import { environment } from "../../../../../environments/environment";
 import { EnumService } from 'src/app/services/enum.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { PrintService } from 'src/app/services/print.service';
 import { Unite } from '../../models/unite.model';
 import { Utilisateur } from 'src/app/modules/authentication/models/utilisateur.model';
@@ -33,7 +33,7 @@ export class RecetteComponent implements OnInit {
   photoPath: string;
   photoPathThumb: string;
   isLoading: boolean = false;
-  unites$: Observable<Unite>;
+  unites$: Observable<Unite[]>;
   currentUser: Utilisateur = JSON.parse(localStorage.getItem('currentUser'));
   loggedIn: boolean = false;
   admin: boolean = false;
@@ -82,7 +82,7 @@ export class RecetteComponent implements OnInit {
     this.photoPath = environment.PATH_UPLOAD + "default.png";
     this.photoPathThumb = environment.PATH_UPLOAD + "default-thumb.png";
     this.recette.utilisateur = new Utilisateur;
-    this.unites$ = this.enumService.getUnites();
+    this.unites$ = this.enumService.getUnites().pipe(map((data) => {data.sort((a, b) => {return a.nom < b.nom ? -1 : 1;}); return data;}));
   }
 
   addDeleteFavori(recette: Recette){

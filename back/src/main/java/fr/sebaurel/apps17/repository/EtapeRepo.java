@@ -8,5 +8,5 @@ import fr.sebaurel.apps17.model.Etape;
 @Repository
 public interface EtapeRepo extends JpaRepository<Etape, Long>{
 
-	Etape findOneById(Long id);
+	Etape findOneById(long id);
 }

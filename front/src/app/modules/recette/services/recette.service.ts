@@ -47,8 +47,8 @@ export class RecetteService {
     return this.http.delete(environment.API_URL+'rest/recette/'+ idRecette);
   }
 
-  list(emailUtilisateur?: string, categories?: number[], alimentsId?: number[], favori?: boolean, seulementLesAliments?:boolean, urlOrFilter?: string | object): Observable<Page<Recette>> {
-    return queryPaginated<Recette>(this.http, environment.API_URL+'rest/recette/list', emailUtilisateur, categories, alimentsId, favori, seulementLesAliments, urlOrFilter);
+  list(emailUtilisateur?: string, categories?: number[], alimentsId?: number[], publier?: boolean, favori?: boolean, seulementLesAliments?:boolean, urlOrFilter?: string | object): Observable<Page<Recette>> {
+    return queryPaginated<Recette>(this.http, environment.API_URL+'rest/recette/list', emailUtilisateur, categories, alimentsId, publier, favori, seulementLesAliments, urlOrFilter);
   }
   
   ordonneCollection(collection){

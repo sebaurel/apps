@@ -18,7 +18,7 @@ public class Photo implements Serializable{
 
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	private Date date;
 	
@@ -30,7 +30,7 @@ public class Photo implements Serializable{
 		
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 

@@ -30,12 +30,7 @@
             </div>
             <div>
               <label for="categorie">Categorie&nbsp;</label>
-              <!--<ng-select [items: Categorie]="categories | async" bindLabel="nom" placeholder="Séléctionner une categorie" [hideSelected]="true" formControlName="categorie" class="col-12"></ng-select>--> <!--(add)="addNewAlimentSelected($event)" (remove)="spliceAlimentSelected($event)"> </ng-select>-->
-              <ng-select bindLabel="nom" placeholder="Séléctionner une categorie" [hideSelected]=true name="categorieSelecteur" formControlName="categorie" >
-                <ng-option [value]="item.id" *ngFor="let item of (categories | async)">
-                  {{item.nom}}
-                </ng-option>
-              </ng-select>
+              <ng-select [(ngModel)]="categorieSelected"  [items]="categories$ | async" bindLabel="nom" placeholder="Séléctionner une categorie" [hideSelected]=true formControlName="categorie" name="categorie" class="col-12"></ng-select>
             </div>
             <div>
               <label for="descriptif">Description</label>

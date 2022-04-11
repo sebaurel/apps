@@ -14,12 +14,12 @@ export class EnumService {
     private http: HttpClient
   ) { }
 
-  public getCategories(): Observable<NgIterable<Categorie>>{
-    return  this.http.get<NgIterable<Categorie>>(environment.API_URL+'rest/categorie', {observe: "body"});
+  public getCategories(): Observable<Categorie[]>{
+    return  this.http.get<Categorie[]>(environment.API_URL+'rest/categorie', {observe: "body"});
   }
 
-  public getUnites(): Observable<Unite>{
-    return  this.http.get<Unite>(environment.API_URL+'rest/unite', {observe: "body"});
+  public getUnites(): Observable<Unite[]>{
+    return  this.http.get<Unite[]>(environment.API_URL+'rest/unite', {observe: "body"});
   }
 
 }

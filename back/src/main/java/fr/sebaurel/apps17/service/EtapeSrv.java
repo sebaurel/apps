@@ -19,7 +19,7 @@ public class EtapeSrv {
 	@Autowired
 	PhotoSrv photoSrv;
 	
-	public Etape find(Long id) {
+	public Etape find(long id) {
 		return etapeRepo.findOneById(id);
 	}
 

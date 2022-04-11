@@ -53,7 +53,7 @@ export class ContactComponent implements OnInit {
   envoie(): void {
 
     FormValidator(this.formContact, this.formErrors, this.validationMessage);
-    console.log(this.formContact.valid);
+    //console.log(this.formContact.valid);
     if (this.formContact.valid) {
 
       this.emailService.sendEmail({

@@ -13,21 +13,28 @@ export class SidebarRecetteMobileComponent {
   @Output() alimentsIdChange: EventEmitter<number[]> = new EventEmitter<number[]>();
   @Input() seulementLesAliments: boolean = false;
   @Output() seulementLesAlimentsChange:  EventEmitter<boolean> = new EventEmitter<boolean>();
-  
+  @Input() brouillons: boolean = false;
+  @Output() brouillonsChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   activateSidebar: boolean;
   @Input() loggedIn:boolean;
+  @Input() inPageMesRecettes:boolean;
 
   constructor() { }
 
-  categoriesSelectedFonction(categoriesSelected){
+  categoriesSelectedFonction(categoriesSelected: number[]){
     this.categoriesSelectedChange.emit(categoriesSelected);
   };
 
-  seulementLesAlimentsFonction(seulementLesAliments){
+  seulementLesAlimentsFonction(seulementLesAliments: boolean){
     this.seulementLesAlimentsChange.emit(seulementLesAliments);
   };
 
-  alimentsIdFonction(alimentsId){
+  brouillonsFonction(brouillons: boolean){
+    this.brouillonsChange.emit(brouillons);
+  };
+
+  alimentsIdFonction(alimentsId: number[]){
     this.alimentsIdChange.emit(alimentsId);
   }
 

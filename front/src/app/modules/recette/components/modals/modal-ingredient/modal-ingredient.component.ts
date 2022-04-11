@@ -1,7 +1,7 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, NgIterable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { EnumService } from 'src/app/services/enum.service';
 import { Aliment } from '../../../models/aliment.model';
 import { Ingredient } from '../../../models/ingredient.model';
@@ -22,7 +22,7 @@ export class ModalIngredientComponent implements OnInit {
   
   formIngredient: FormGroup;
 
-  unites$: Observable<Unite>;
+  unites$: Observable<Unite[]>;
   aliments: Aliment[] = [];
   
   constructor(
@@ -58,7 +58,7 @@ export class ModalIngredientComponent implements OnInit {
       });
     });
     
-    this.unites$ = this.enumService.getUnites();
+    this.unites$ = this.enumService.getUnites().pipe(map((data) => {data.sort((a, b) => {return a.nom < b.nom ? -1 : 1;}); return data;}));
 
   }
   open(content) {

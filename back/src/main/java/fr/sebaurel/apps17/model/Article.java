@@ -25,7 +25,7 @@ public class Article implements Serializable {
 
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	@NotNull
 	private String title;
@@ -47,11 +47,11 @@ public class Article implements Serializable {
 	
 	public Article() {}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

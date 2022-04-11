@@ -20,7 +20,7 @@ public class UniteSrv {
 		return uniteRepo.findAll();
 	}
 
-	public Unite find(Long id) {
+	public Unite find(long id) {
 	    return uniteRepo.findOneById(id);
 	}
 

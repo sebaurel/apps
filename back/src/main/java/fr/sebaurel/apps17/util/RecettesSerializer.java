@@ -18,7 +18,7 @@ public class RecettesSerializer extends JsonSerializer<Collection<Recette>>{
 		if (recettes != null && !recettes.isEmpty()) {
 			for(Recette recette: recettes) {
 				jsonGenerator.writeStartObject();
-				jsonGenerator.writeStringField("id", recette.getId().toString());
+				jsonGenerator.writeStringField("id", String.valueOf(recette.getId()));
 				jsonGenerator.writeStringField("titre", recette.getTitre());
 				jsonGenerator.writeEndObject();
 			}

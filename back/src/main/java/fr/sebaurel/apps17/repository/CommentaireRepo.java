@@ -12,6 +12,6 @@ import fr.sebaurel.apps17.model.Commentaire;
 public interface CommentaireRepo extends JpaRepository<Commentaire, Long>, JpaSpecificationExecutor<Commentaire> {
 
 	List<Commentaire> findTop3ByValideOrderByIdDesc(boolean Valide);
-	List<Commentaire> findAllByIdRecetteOrderByDate(Long idRecette);
-	Commentaire findOneById(Long id);
+	List<Commentaire> findAllByIdRecetteOrderByDate(long idRecette);
+	Commentaire findOneById(long id);
 }

@@ -13,5 +13,5 @@ public interface ArticleRepo extends JpaRepository<Article, Long>, JpaSpecificat
 
 	List<Article> findTop3ByValideOrderByIdDesc(boolean Valide);
 	List<Article> findAll();
-	Article findOneById(Long id);
+	Article findOneById(long id);
 }

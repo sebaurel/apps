@@ -16,11 +16,11 @@ public class UtilisateurSerializer extends JsonSerializer<Utilisateur>{
 		if (utilisateur != null) {
 
 				jsonGenerator.writeStartObject();
-				jsonGenerator.writeStringField("id", utilisateur.getId().toString());
+				jsonGenerator.writeStringField("id", String.valueOf(utilisateur.getId()));
 				jsonGenerator.writeStringField("pseudo", utilisateur.getPseudo());
 				//jsonGenerator.writeStringField("email", utilisateur.getEmail());
 				if (utilisateur.getPhoto() != null) {
-					jsonGenerator.writeStringField("idPhoto", utilisateur.getPhoto().getId().toString());					
+					jsonGenerator.writeStringField("idPhoto", String.valueOf(utilisateur.getPhoto().getId()));					
 				}
 				jsonGenerator.writeEndObject();
 		}

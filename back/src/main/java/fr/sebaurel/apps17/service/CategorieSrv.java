@@ -22,7 +22,7 @@ public class CategorieSrv {
 		return categorieRepo.findAll();
 	}
 
-	public Categorie find(Long id) {
+	public Categorie find(long id) {
 	    return categorieRepo.findOneById(id);
 	}
 

@@ -29,7 +29,7 @@ public class AlimentSrv {
 		return alimentRepo.findAll();
 	}
 
-	public Aliment find(Long id) {
+	public Aliment find(long id) {
 	    return alimentRepo.findOneById(id);
 	}
 

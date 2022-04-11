@@ -18,7 +18,7 @@ public class Categorie implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	@Column(columnDefinition = "VARCHAR(50)", unique=true)
 	private String nom;
@@ -31,7 +31,7 @@ public class Categorie implements Serializable {
 	public Categorie() {
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 	

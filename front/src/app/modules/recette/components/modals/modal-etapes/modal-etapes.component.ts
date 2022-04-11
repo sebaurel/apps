@@ -15,8 +15,8 @@ import { Photo } from 'src/app/modules/shared-components/models/photo.model';
 export class ModalEtapesComponent implements OnInit {
 
   photo: Photo;
-  photoThumbPath: String = environment.PATH_UPLOAD + "default-thumb.png";
-  photoThumbPathDefault: string = environment.PATH_UPLOAD + "default-thumb.png";
+  photoThumbPath: String;
+  //photoThumbPathDefault: string = environment.PATH_UPLOAD + "default-thumb.png";
   progress: { percentage: number } = { percentage: 0 };
   photoOld: Photo;
 
@@ -36,7 +36,7 @@ export class ModalEtapesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    //console.log(JSON.stringify(this.etape));
     this.formEtape = this.formBuilder.group({
       titreEtape: ['', Validators.required],
       descriptifEtape: ['']
@@ -50,8 +50,9 @@ export class ModalEtapesComponent implements OnInit {
       })
       
       if (this.etape.photo) {
-        this.etape.photo = this.etape.photo;
         this.photoThumbPath = environment.PATH_UPLOAD + this.etape.photo.id + "-thumb.png";
+      }else{
+        this.photoThumbPath = environment.PATH_UPLOAD + "default-thumb.png";
       }
     }
   

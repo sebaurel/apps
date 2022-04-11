@@ -37,7 +37,7 @@ export class RecettesComponent implements OnInit {
   pageNavigate: number;
 
   categoriesSelected: number[] = [];
-  categories$:  Observable<NgIterable<Categorie>>;// on recupere toutes les categories en base
+  categories$:  Observable<Categorie>;// on recupere toutes les categories en base
 
   urls: UrlSegment[];
   url1er: string = "";
@@ -50,8 +50,9 @@ export class RecettesComponent implements OnInit {
   currentUserEmail: string = null;
   loggedIn: boolean = false;
   isLoading: boolean = false;
+  inPageMesRecettes:boolean = false;
 
-  //alimentsSelected : Aliment[] = new Array<Aliment>();
+  publier: boolean = false;
   alimentsId: number[] = [];
   seulementLesAliments: boolean = false;
 
@@ -60,19 +61,17 @@ export class RecettesComponent implements OnInit {
     private recetteService: RecetteService,
     private utilisateurService: UtilisateurService,
     private pageableService: PageableService,
-    private categorieService: EnumService
   ) {
     this.isLoading = true;
     this.filterForm = new FormGroup({
       search: new FormControl()
     });
 
-    this.categories$ = this.categorieService.getCategories();
     this.pages = this.filterForm.valueChanges.pipe(
       debounceTime(200),
       startWith(this.filterForm.value),
       mergeWith(this.pageUrl),
-      switchMap(urlOrFilter => this.recetteService.list(this.currentUserEmail, this.categoriesSelected, this.alimentsId, this.favori, this.seulementLesAliments, urlOrFilter)),
+      switchMap(urlOrFilter => this.recetteService.list(this.currentUserEmail, this.categoriesSelected, this.alimentsId, this.publier, this.favori, this.seulementLesAliments, urlOrFilter)),
       share()
     );    
   }
@@ -84,6 +83,7 @@ export class RecettesComponent implements OnInit {
     if (this.urls[1]) this.url2nd = this.urls[1].path;
 
     if (this.url1er == "mesrecettes"){
+      this.inPageMesRecettes = true;
       this.currentUserEmail = this.currentUser.email;
     } 
     if (this.url1er == "mesfavoris") {
@@ -164,6 +164,11 @@ export class RecettesComponent implements OnInit {
 
   seulementLesAlimentsChange(seulementLesAliments: boolean){
     this.seulementLesAliments = seulementLesAliments;
+    this.pageableService.rechargement(this.pageUrl, 0, this.pageSize);
+  }
+  
+  brouillonsChange(brouillons: boolean){
+    this.publier = brouillons;
     this.pageableService.rechargement(this.pageUrl, 0, this.pageSize);
   }
   
