@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@angular-devkit/build-angular": "13.1.2",
+    "@angular-devkit/build-angular": "13.3.10",
     "@types/jest": "27.4.0"
   },
   "dependencies": {
